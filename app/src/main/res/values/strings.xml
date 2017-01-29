@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OilBlocks</string>
+    <string name="info_text">En massa bra information</string>
+    <string name="info_header">Info</string>
+    <string name="level_header">Select Level</string>
+    <string name="play_button">Play</string>
+
+</resources>

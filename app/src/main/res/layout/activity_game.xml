@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:background="#1c3d6e"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="com.example.jonasfrank.oilblocks.Game">
+    <View
+        android:id="@+id/game_header"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="#aa4aaa"/>
+    <View
+        android:id="@+id/game_panel"
+        android:layout_width="fill_parent"
+        android:layout_height="200px"
+        android:layout_above="@+id/game_footer"
+         />
+    <GridLayout
+        android:id="@+id/game_game"
+        android:layout_below="@+id/game_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/game_panel" />
+
+    <RelativeLayout
+        android:id="@+id/game_ball_layout"
+        android:layout_below="@+id/game_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/game_panel">
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/game_footer"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/panelbackgound"
+        android:layout_alignParentBottom="true"
+        />
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="restartBall"/>
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="stopBall"/>
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/buttonplay"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="playBall"/>
+
+
+
+
+
+
+
+
+</RelativeLayout>

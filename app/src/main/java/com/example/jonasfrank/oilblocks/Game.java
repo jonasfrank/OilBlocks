@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class Game extends AppCompatActivity {
 
@@ -44,6 +45,9 @@ public class Game extends AppCompatActivity {
     public void drawBoard() {
         GridLayout gridLayoutGame = (GridLayout) findViewById(R.id.game_game);
         RelativeLayout relativeLayoutGame = (RelativeLayout) findViewById(R.id.game_ball_layout);
+
+        TextView levelTextViewGame = (TextView) findViewById(R.id.game_level);
+        levelTextViewGame.setText("Level " + levelNumber);
 
         board = new Board(this);          //skapar bordet
         blockNumberInRow = board.blockNumberInRow;

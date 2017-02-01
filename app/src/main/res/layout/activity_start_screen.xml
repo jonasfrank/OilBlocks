@@ -6,18 +6,27 @@
     android:background="#1c3d6e"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.jonasfrank.oilblocks.StartScreen">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/backgrund1"
+        android:alpha="0.1"
+        android:scaleType="centerCrop"
+        />
+
+
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
+
+        android:src="@drawable/logo5_3"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 
     <Button
         android:theme="@style/playButton"
@@ -38,10 +47,14 @@
 
 
     <ImageButton
-        android:layout_width="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:scaleType="centerCrop"
-        android:layout_height="50dp"
-        android:src="@drawable/button"
+
+        android:src="@drawable/button_custom_info"
+        android:background="@android:color/transparent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:onClick="goToInfo"/>

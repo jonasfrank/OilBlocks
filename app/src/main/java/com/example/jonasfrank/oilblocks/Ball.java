@@ -297,17 +297,41 @@ public class Ball extends ImageView {
 
     public boolean boundaryCheck(float x, float y){
 
-        //Träff av boundaries vänster och höger
-        if(x + blockSize > screenWidth  || x < 0 ){
-            Log.d("tag", "ball boundaries vänster och höger");
-            moveX = moveX * -1;
-            collisionBoundaries = true;
+        //Träff av boundaries vänster
+        if(x <= 0 ){
+            if(moveX < 0) {
+                Log.d("tag", "ball boundaries vänster");
+                moveX = moveX * -1;
+                moveX = moveX * 2;
+                collisionBoundaries = true;
+            }
         }
-        //Träff av boundaries uppe och nere
-        if (y < 0 || y + blockSize > screenWidth ) {
-            Log.d("tag", "ball boundaries uppe och nere");
-            moveY = moveY * -1;
-            collisionBoundaries = true;
+        //Träff av boundaries höger
+        if(x + blockSize >= screenWidth){
+            if(moveX > 0) {
+                Log.d("tag", "ball boundaries höger");
+                moveX = moveX * -1;
+                moveX = moveX * 2;
+                collisionBoundaries = true;
+            }
+        }
+        //Träff av boundaries uppe
+        if (y <= 0) {
+            if(moveY < 0) {
+                Log.d("tag", "ball boundaries uppe");
+                moveY = moveY * -1;
+                collisionBoundaries = true;
+            }
+        }
+        //Träff av boundaries nere
+        if (y + blockSize >= screenWidth ) {
+            if(moveY > 0) {
+                Log.d("tag", "ball boundaries nere");
+                //moveY = moveY * -1;
+                moveY = 0;
+                moveX = moveX * 2;
+                collisionBoundaries = true;
+            }
         }
         return collisionBoundaries;
     }

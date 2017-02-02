@@ -71,7 +71,7 @@ public class Ball extends ImageView {
         /**
          * Loop som loppar igenom alla blocken i blockList.
          */
-        outerLopp:
+        outerLoop:
         for(int i = 0; i < board.blockList.size(); i++) {
             Block thisBlock = board.blockList.get(i);
 
@@ -82,13 +82,18 @@ public class Ball extends ImageView {
             collisionRamp = rampCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
             collisionBooster = boosterCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
             collisionBlock = blockCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
-            //Log.d("tag", " kant koll" + collisionBoundaries);
+
             if (collisionBlock == false && collisionBoundaries == false) {
                 //Log.d("tag", " kant koll");
                 collisionBoundaries = boundaryCheck(ballX, ballY);
             }
-        }
+            // OM kollision hittas, avbryt loopen för blocks
+            if (collisionBlock == true || collisionBooster == true || collisionBoundaries == true || collisionRamp == true) {
+                Log.d("Broken", "Loop");
+                break outerLoop;
+            }
 
+        }
         Log.d("tag", " moveX " + moveX );
         Log.d("tag", " moveY " + moveY );
 
@@ -112,6 +117,7 @@ public class Ball extends ImageView {
     /**
      *Todo
      * Ramp bakifrån
+     * Ta bort hörnen?
      * olika hastigheter på olika block
      * minskande hastighet på x axeln olika på empty och rullandes på block
      */
@@ -256,7 +262,7 @@ public class Ball extends ImageView {
             else if (bollDX >= blockAX && bollDY == blockAY   &&    bollCX <= blockBX && bollCY == blockBY   &&   bollCY <= blockCY){           //   && ballXNextMove <= thisBlockX + blockSize && ballYNextMove >= thisBlockY + blockSize && ballXNextMove <= thisBlockX + blockSize) {
                 //Träff på block uppefrån
                 Log.d("tag", "ball block uppe");
-                moveY = moveY *-1;
+                moveY = 0;
                 collisionBlock = true;
 
             }else if(bollBX >= blockCX && bollBY == blockCY   &&    bollAX <= blockDX && bollAY == blockDY   &&   bollAY >= blockAY) {
@@ -284,6 +290,7 @@ public class Ball extends ImageView {
             else {
                 collisionBlock = false;
             }
+
         }
         return collisionBlock;
     }

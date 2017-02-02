@@ -19,7 +19,7 @@ public class LevelSelect extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.jonasfrank.oilblocks.MESSAGE";
     int levelsInRow = 4;
-    int levelsInCol = 7;
+    int levelsInCol = 5;
     int clearedStages = 4;
 
     @Override
@@ -43,9 +43,9 @@ public class LevelSelect extends AppCompatActivity {
         double tempDouble = ((600 / displayMetrics.density) + 0.5);
         float gridMarginTop = (float) tempDouble;
 
-        //RelativeLayout rLayout = (RelativeLayout) findViewById(R.id.activity_level_select);
-        RelativeLayout rLayout = (RelativeLayout) findViewById(R.id.level_wraper);
-        rLayout.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,(levelsInCol * section) + section));
+        RelativeLayout rLayout = (RelativeLayout) findViewById(R.id.activity_level_select);
+        //RelativeLayout rLayout = (RelativeLayout) findViewById(R.id.level_wraper);
+        //rLayout.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,(levelsInCol * section) + section));
 
         GridLayout grid = new GridLayout(this);
         grid.setColumnCount(levelsInRow);

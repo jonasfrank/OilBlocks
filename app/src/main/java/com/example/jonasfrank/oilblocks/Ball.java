@@ -215,7 +215,7 @@ public class Ball extends ImageView {
             /**
              * Träff på block på hörnen. När bollen ligger precis i rutan ett steg diagonalt från ett block.
              */
-            if(bollDX == blockAX && bollDY == blockAY){
+            /*if(bollDX == blockAX && bollDY == blockAY){
                 //Träff på block diagonalt uppe vänster
                 if(moveX > 0 && moveY > 0){
                     Log.d("tag", "ball block uppe vänster");
@@ -255,13 +255,16 @@ public class Ball extends ImageView {
                     moveY = tempX;
                     collisionBlock = true;
                 }
-            }
+            }*/
+
+
             /**
              * Träff på blocken 4 sidor uppe, nere, vänster eller höger.
              */
-            else if (bollDX >= blockAX && bollDY == blockAY   &&    bollCX <= blockBX && bollCY == blockBY   &&   bollCY <= blockCY){           //   && ballXNextMove <= thisBlockX + blockSize && ballYNextMove >= thisBlockY + blockSize && ballXNextMove <= thisBlockX + blockSize) {
+            if (bollDX >= blockAX && bollDY == blockAY   &&    bollCX <= blockBX && bollCY == blockBY   &&   bollCY <= blockCY){           //   && ballXNextMove <= thisBlockX + blockSize && ballYNextMove >= thisBlockY + blockSize && ballXNextMove <= thisBlockX + blockSize) {
                 //Träff på block uppefrån
                 Log.d("tag", "ball block uppe");
+                moveX = moveX * 2;
                 moveY = 0;
                 collisionBlock = true;
 
@@ -274,12 +277,14 @@ public class Ball extends ImageView {
             }else if(bollDX == blockAX && bollDY >= blockAY   &&    bollBX == blockCX && bollBY <= blockCY   &&   bollDX <= blockDX) {
                 //Träff på block från vänster
                 Log.d("tag", "ball block vänster");
+                moveX = moveX * 2;
                 moveX = moveX *-1;
                 collisionBlock = true;
 
             }else if(bollCX == blockBX && bollCY >= blockBY   &&    bollAX == blockDX && bollAY <= blockDY   &&   bollBX >= blockBX){
                 //Träff på block från höger
                 Log.d("tag", "ball block höger");
+                moveX = moveX * 2;
                 moveX = moveX *-1;
                 collisionBlock = true;
 
@@ -328,8 +333,8 @@ public class Ball extends ImageView {
             if(moveY > 0) {
                 Log.d("tag", "ball boundaries nere");
                 //moveY = moveY * -1;
-                moveY = 0;
                 moveX = moveX * 2;
+                moveY = 0;
                 collisionBoundaries = true;
             }
         }

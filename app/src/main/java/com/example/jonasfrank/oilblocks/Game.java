@@ -23,7 +23,8 @@ public class Game extends AppCompatActivity {
     public Board board;
     public Ball ball;
     public BallLoop ballLoop;
-    public ballThread ballRun;
+    public Thread threadX;
+    public Thread threadY;
     private boolean running = false;
 
     @Override
@@ -53,7 +54,8 @@ public class Game extends AppCompatActivity {
         blockNumberInRow = board.blockNumberInRow;
         blockSize = screenWidth / blockNumberInRow;
         ball = new Ball(this);          //skapar bollen
-        ballRun = new ballThread(143);
+        //ballRunX = new ballThreadX(143);
+        //ballRunY = new ballThreadY(143);
 
         board.setBoard(this, screenWidth, levelNumber, ball);       //skickar screen bredden till bord
         ball.setBall(screenWidth, blockNumberInRow, board);
@@ -66,12 +68,15 @@ public class Game extends AppCompatActivity {
         relativeLayoutGame.startAnimation(anim);*/
 
         relativeLayoutGame.addView(ball);
+
+        threads();
     }
 
 
     public void playBall(View view){
         Log.d("tag", "game startBall");
-        ballRun.start();
+        threadX.start();
+        threadY.start();
         running = true;
     }
     public void restartBall(View view){
@@ -85,9 +90,57 @@ public class Game extends AppCompatActivity {
        running = false;
     }
 
-    class ballThread extends Thread {
+
+    public void threads() {
+        //class ballThreadX extends Thread {
+        //long minPrime;
+        /*ballThreadX(long minPrime) {
+            this.minPrime = minPrime;
+        }*/
+        threadX = new Thread() {
+            public void run() {
+                while (running) {
+                    //ball.moveY = ball.moveY * (float)1.1;
+
+
+                    ball.ballMoveX();
+                    try {
+                        float sleedSpeedX = ball.getSpeedX();
+                        Thread.sleep((long) sleedSpeedX);
+
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        };
+
+
+        //long minPrime;
+        /*ballThreadY(long minPrime) {
+            this.minPrime = minPrime;
+        }*/
+
+        threadY = new Thread() {
+            public void run() {
+                while (running) {
+                    //ball.moveY = ball.moveY * (float)1.1;
+
+
+                    ball.ballMoveY();
+                    try {
+                        float sleedSpeedY = ball.getSpeedY();
+                        Thread.sleep((long) sleedSpeedY);
+
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        };
+        //}
+    }
+    /*class ballThreadY extends Thread {
         long minPrime;
-        ballThread(long minPrime) {
+        ballThreadY(long minPrime) {
             this.minPrime = minPrime;
         }
 
@@ -96,17 +149,16 @@ public class Game extends AppCompatActivity {
                 //ball.moveY = ball.moveY * (float)1.1;
 
 
-                ball.ballMove();
+                ball.ballMoveY();
                 try {
-                    Thread.sleep(20);
+                    float sleedSpeedY = ball.getSpeedY();
+                    Thread.sleep((long)sleedSpeedY);
 
                 } catch (InterruptedException e){
                 }
             }
         }
-    }
-
-
+    }*/
 
 
 }

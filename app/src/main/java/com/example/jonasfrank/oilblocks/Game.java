@@ -88,12 +88,21 @@ public class Game extends AppCompatActivity {
             public void run() {
             while (running) {
 
+<<<<<<< Updated upstream
                 ball.ballMoveX();
                 try {
                     Log.d("X", "Running");
                     float sleedSpeedX = ball.getSpeedX();
                     Log.d("X", "Sleepspeed:" + sleedSpeedX);
                     Thread.sleep((long) sleedSpeedX);
+=======
+                    ball.ballMoveX();
+                    try {
+                        //Log.d("X", "Running");
+                        float sleedSpeedX = ball.getSpeedX();
+                        //Log.d("X", "Sleepspeed:" + sleedSpeedX);
+                        Thread.sleep((long) sleedSpeedX);
+>>>>>>> Stashed changes
 
                 } catch (InterruptedException e) {
                 }
@@ -103,6 +112,34 @@ public class Game extends AppCompatActivity {
 
         threadY = new Thread() {
             public void run() {
+<<<<<<< Updated upstream
+=======
+                while (running) {
+                    //ball.moveY = ball.moveY * (float)1.1;
+
+
+                    ball.ballMoveY();
+                    try {
+                        //Log.d("Y", "Running");
+                        float sleedSpeedY = ball.getSpeedY();
+                        //Log.d("Y", "Sleepspeed:" + sleedSpeedY);
+                        Thread.sleep((long) sleedSpeedY);
+
+                    } catch (InterruptedException e) {
+                    }
+                }
+            }
+        };
+        //}
+    }
+    /*class ballThreadY extends Thread {
+        long minPrime;
+        ballThreadY(long minPrime) {
+            this.minPrime = minPrime;
+        }
+
+        public void run() {
+>>>>>>> Stashed changes
             while (running) {
 
                 ball.ballMoveY();

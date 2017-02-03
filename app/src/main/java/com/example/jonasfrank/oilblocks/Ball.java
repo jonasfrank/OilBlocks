@@ -37,6 +37,8 @@ public class Ball extends ImageView {
     public float speedY = 20;
 
 
+
+
     public Ball(Context context){
         super(context);
         setImageResource(R.drawable.ball);
@@ -181,14 +183,16 @@ public class Ball extends ImageView {
 
 
     public boolean boosterCheck(float x, float y, Level.B thisBlockType, float thisBlockX, float thisBlockY, int i){
+        float ballCenterX = x + (blockSize / 2);
+        float ballCenterY = y + (blockSize / 2);
+
         Block thisBlock = board.blockList.get(i);
 
         if(thisBlockType == Level.B.BOOSTR) {
-            if (x >= thisBlockX && x  <= thisBlockX && y >= thisBlockY && y <= thisBlockY) {
-
+            if (ballCenterX > thisBlockX && ballCenterX < thisBlockX + blockSize && ballCenterY > thisBlockY && ballCenterY < thisBlockY + blockSize) {
                 Log.d("tag", "ball boost");
                 moveX =  thisBlock.getBallChangeDirection();
-                speedX = (thisBlock.getBallChangeDirection() / 2);
+                speedX = 5;
                 collisionBooster = true;
             }else {
                 collisionBooster = false;

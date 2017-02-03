@@ -97,6 +97,8 @@ public class Game extends AppCompatActivity {
         /*ballThreadX(long minPrime) {
             this.minPrime = minPrime;
         }*/
+
+        Log.d("Threads", "Test");
         threadX = new Thread() {
             public void run() {
                 while (running) {
@@ -105,7 +107,9 @@ public class Game extends AppCompatActivity {
 
                     ball.ballMoveX();
                     try {
+                        Log.d("X", "Running");
                         float sleedSpeedX = ball.getSpeedX();
+                        Log.d("X", "Sleepspeed:" + sleedSpeedX);
                         Thread.sleep((long) sleedSpeedX);
 
                     } catch (InterruptedException e) {
@@ -128,7 +132,9 @@ public class Game extends AppCompatActivity {
 
                     ball.ballMoveY();
                     try {
+                        Log.d("Y", "Running");
                         float sleedSpeedY = ball.getSpeedY();
+                        Log.d("Y", "Sleepspeed:" + sleedSpeedY);
                         Thread.sleep((long) sleedSpeedY);
 
                     } catch (InterruptedException e) {

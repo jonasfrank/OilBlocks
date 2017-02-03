@@ -54,24 +54,15 @@ public class Game extends AppCompatActivity {
         blockNumberInRow = board.blockNumberInRow;
         blockSize = screenWidth / blockNumberInRow;
         ball = new Ball(this);          //skapar bollen
-        //ballRunX = new ballThreadX(143);
-        //ballRunY = new ballThreadY(143);
 
         board.setBoard(this, screenWidth, levelNumber, ball);       //skickar screen bredden till bord
         ball.setBall(screenWidth, blockNumberInRow, board);
 
         gridLayoutGame.addView(board);
-
-        /*TranslateAnimation anim = new TranslateAnimation( 0, 400 , 00, 400);
-        anim.setDuration(1000);
-        anim.setFillAfter( true );
-        relativeLayoutGame.startAnimation(anim);*/
-
         relativeLayoutGame.addView(ball);
 
         threads();
     }
-
 
     public void playBall(View view){
         Log.d("tag", "game startBall");
@@ -90,81 +81,41 @@ public class Game extends AppCompatActivity {
        running = false;
     }
 
-
     public void threads() {
-        //class ballThreadX extends Thread {
-        //long minPrime;
-        /*ballThreadX(long minPrime) {
-            this.minPrime = minPrime;
-        }*/
 
         Log.d("Threads", "Test");
         threadX = new Thread() {
             public void run() {
-                while (running) {
-                    //ball.moveY = ball.moveY * (float)1.1;
+            while (running) {
 
+                ball.ballMoveX();
+                try {
+                    Log.d("X", "Running");
+                    float sleedSpeedX = ball.getSpeedX();
+                    Log.d("X", "Sleepspeed:" + sleedSpeedX);
+                    Thread.sleep((long) sleedSpeedX);
 
-                    ball.ballMoveX();
-                    try {
-                        Log.d("X", "Running");
-                        float sleedSpeedX = ball.getSpeedX();
-                        Log.d("X", "Sleepspeed:" + sleedSpeedX);
-                        Thread.sleep((long) sleedSpeedX);
-
-                    } catch (InterruptedException e) {
-                    }
+                } catch (InterruptedException e) {
                 }
             }
+            }
         };
-
-
-        //long minPrime;
-        /*ballThreadY(long minPrime) {
-            this.minPrime = minPrime;
-        }*/
 
         threadY = new Thread() {
             public void run() {
-                while (running) {
-                    //ball.moveY = ball.moveY * (float)1.1;
-
-
-                    ball.ballMoveY();
-                    try {
-                        Log.d("Y", "Running");
-                        float sleedSpeedY = ball.getSpeedY();
-                        Log.d("Y", "Sleepspeed:" + sleedSpeedY);
-                        Thread.sleep((long) sleedSpeedY);
-
-                    } catch (InterruptedException e) {
-                    }
-                }
-            }
-        };
-        //}
-    }
-    /*class ballThreadY extends Thread {
-        long minPrime;
-        ballThreadY(long minPrime) {
-            this.minPrime = minPrime;
-        }
-
-        public void run() {
             while (running) {
-                //ball.moveY = ball.moveY * (float)1.1;
-
 
                 ball.ballMoveY();
                 try {
+                    Log.d("Y", "Running");
                     float sleedSpeedY = ball.getSpeedY();
-                    Thread.sleep((long)sleedSpeedY);
+                    Log.d("Y", "Sleepspeed:" + sleedSpeedY);
+                    Thread.sleep((long) sleedSpeedY);
 
-                } catch (InterruptedException e){
+                } catch (InterruptedException e) {
                 }
             }
-        }
-    }*/
-
-
+            }
+        };
+    }
 }

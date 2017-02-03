@@ -63,41 +63,17 @@ public class Level {
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.SOFT,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
                     {B.GOAL,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+            },
+            {
+                    {B.EMPTY,B.EMPTY,B.START,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.RAMPDR,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.BOOSTR,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.RAMPUL,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.SOFT,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.RAMPDL,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.GOAL,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
             }
     };
-
-    /*String[][][] gameLavel = {
-            {
-                    {"empty","empty","empty","empty","soft","empty","empty","empty"},
-                    {"empty","start","empty","empty","empty","empty","empty","empty"},
-                    {"empty","empty","empty","empty","empty","empty","empty","goal"},
-                    {"empty","empty","solid","solid","empty","empty","empty","empty"},
-                    {"soft","soft","solid","solid","soft","soft","soft","soft"},
-                    {"soft","soft","soft","soft","soft","soft","soft","soft"},
-                    {"soft","soft","soft","soft","soft","soft","soft","soft"},
-                    {"soft","soft","soft","soft","soft","soft","soft","soft"},
-            },
-            {
-                    {"soft","soft","solid","solid","soft","empty","empty","empty"},
-                    {"empty","empty","solid","solid","empty","empty","empty","empty"},
-                    {"empty","empty","empty","empty","empty","empty","empty","empty"},
-                    {"soft","soft","soft","solid","empty","empty","empty","empty"},
-                    {"soft","soft","solid","solid","soft","soft","soft","soft"},
-                    {"soft","soft","solid","solid","soft","soft","soft","soft"},
-                    {"soft","soft","solid","solid","soft","soft","soft","soft"},
-                    {"start","soft","solid","solid","soft","soft","soft","goal"},
-            },
-            {
-                    {"soft","soft","soft","soft","soft","empty","empty","empty"},
-                    {"soft","empty","empty","empty","empty","empty","empty","empty"},
-                    {"soft","soft","soft","soft","empty","empty","empty","empty"},
-                    {"solid","solid","solid","solid","empty","empty","empty","empty"},
-                    {"solid","solid","solid","solid","soft","start","soft","soft"},
-                    {"solid","empty","empty","empty","empty","empty","soft","soft"},
-                    {"soft","soft","soft","soft","soft","soft","soft","soft"},
-                    {"goal","soft","soft","soft","soft","soft","soft","soft"},
-            }
-    };*/
-
 
 }

@@ -20,7 +20,7 @@ public class LevelSelect extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.jonasfrank.oilblocks.MESSAGE";
     int levelsInRow = 4;
     int levelsInCol = 5;
-    int clearedStages = 4;
+    int clearedStages = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

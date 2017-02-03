@@ -84,16 +84,16 @@ public class Game extends AppCompatActivity {
 
     public void threads() {
 
-        Log.d("Threads", "Test");
+        //Log.d("Threads", "Test");
         threadX = new Thread() {
             public void run() {
                 while (running) {
 
                     ball.ballMoveX();
                     try {
-                        Log.d("X", "Running");
+                        //Log.d("X", "Running");
                         float sleepSpeedX = ball.getSpeedX();
-                        Log.d("X", "Sleepspeed:" + sleepSpeedX);
+                        //Log.d("X", "Sleepspeed:" + sleepSpeedX);
                         Thread.sleep((long) sleepSpeedX);
 
 
@@ -107,8 +107,6 @@ public class Game extends AppCompatActivity {
             public void run() {
 
                 while (running) {
-                    //ball.moveY = ball.moveY * (float)1.1;
-
 
                     ball.ballMoveY();
                     try {

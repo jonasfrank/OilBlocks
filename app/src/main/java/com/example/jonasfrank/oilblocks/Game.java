@@ -25,7 +25,7 @@ public class Game extends AppCompatActivity {
     public BallLoop ballLoop;
     public Thread threadX;
     public Thread threadY;
-    private boolean running = false;
+    public boolean running = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class Game extends AppCompatActivity {
         ball = new Ball(this);          //skapar bollen
 
         board.setBoard(this, screenWidth, levelNumber, ball);       //skickar screen bredden till bord
-        ball.setBall(screenWidth, blockNumberInRow, board);
+        ball.setBall(screenWidth, blockNumberInRow, board, this);
 
         gridLayoutGame.addView(board);
         relativeLayoutGame.addView(ball);
@@ -82,42 +82,49 @@ public class Game extends AppCompatActivity {
         running = false;
     }
 
+    public void checkGameOver(){
+        running = false;
+        ball.restartBall();
+    }
+
     public void threads() {
 
         //Log.d("Threads", "Test");
         threadX = new Thread() {
             public void run() {
-                while (running) {
+            while (running) {
 
-                    ball.ballMoveX();
-                    try {
-                        //Log.d("X", "Running");
-                        float sleepSpeedX = ball.getSpeedX();
-                        //Log.d("X", "Sleepspeed:" + sleepSpeedX);
-                        Thread.sleep((long) sleepSpeedX);
+                ball.ballMoveX();
+                try {
+                    //Log.d("X", "Running");
+                    float sleepSpeedX = ball.getSpeedX();
+                    //Log.d("X", "Sleepspeed:" + sleepSpeedX);
+                    Thread.sleep((long) sleepSpeedX);
 
 
-                    } catch (InterruptedException e) {
-                    }
+                } catch (InterruptedException e) {
+                    Log.d("game", "tråd X");
                 }
+            }
             }
         };
 
         threadY = new Thread() {
             public void run() {
 
-                while (running) {
+            while (running) {
 
-                    ball.ballMoveY();
-                    try {
-                        //Log.d("Y", "Running");
-                        float sleepSpeedY = ball.getSpeedY();
-                        //Log.d("Y", "Sleepspeed:" + sleepSpeedY);
-                        Thread.sleep((long) sleepSpeedY);
+                ball.ballMoveY();
+                try {
+                    //Log.d("Y", "Running");
+                    float sleepSpeedY = ball.getSpeedY();
+                    //Log.d("Y", "Sleepspeed:" + sleepSpeedY);
+                    Thread.sleep((long) sleepSpeedY);
 
-                    } catch (InterruptedException e) {
-                    }
+                } catch (InterruptedException e) {
+                    Log.d("game", "tråd Y");
                 }
+            }
             }
         };
     }

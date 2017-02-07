@@ -95,11 +95,9 @@ public class Game extends AppCompatActivity {
 
                 // colletion
                 ball.ballMove();
-                Log.d("tag", "game tråd status" + threadMove.getState());
+                //Log.d("tag", "game tråd status" + threadMove.getState());
                 try {
-                    Thread.sleep(20);
-                    
-
+                    Thread.sleep(10);
 
                 } catch (InterruptedException e) {
                     Log.d("game", "tråd X");
@@ -121,8 +119,6 @@ public class Game extends AppCompatActivity {
 
     public void restartBall(View view) {
         Log.d("tag", "game restartBall");
-        //Log.d("tag", "game tråd statusX " + threadX.getState());
-        //Log.d("tag", "game tråd statusY " + threadY.getState());
         running = false;
         ball.restartBall();
     }
@@ -131,13 +127,5 @@ public class Game extends AppCompatActivity {
         Log.d("tag", "game stopBall");
         running = false;
     }
-
-    public void checkGameOver(){
-        running = false;
-        ball.restartBall();
-
-
-    }
-
 }
 

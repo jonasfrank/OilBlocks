@@ -22,10 +22,9 @@ public class Game extends AppCompatActivity {
     public int blockSize;
     public Board board;
     public Ball ball;
-    public BallLoop ballLoop;
-    public Thread threadX;
-    public Thread threadY;
-    public boolean running = false;
+    public Thread threadMove;
+    public boolean running = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +61,68 @@ public class Game extends AppCompatActivity {
         relativeLayoutGame.addView(ball);
 
         threads();
+
     }
+
+
+
+    public void threads() {
+
+
+        /*new Thread(new Runnable() {
+            public void run() {
+
+
+                while (running) {
+
+                    try {
+                        float sleepSpeedX = ball.getSpeedX();
+                        Thread.sleep((long) sleepSpeedX);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("game", "tråd  test test test test test v test");
+                    ball.ballMoveX();
+                }
+            }
+        }).start();*/
+
+
+
+        threadMove = new Thread() {
+            public void run() {
+            while (running) {
+
+                // colletion
+                ball.ballMove();
+                Log.d("tag", "game tråd status" + threadMove.getState());
+                try {
+                    Thread.sleep(20);
+                    
+
+
+                } catch (InterruptedException e) {
+                    Log.d("game", "tråd X");
+                }
+                // move
+            }
+            }
+        };
+    }
+
+
 
     public void playBall(View view) {
         Log.d("tag", "game startBall");
-        threadX.start();
-        threadY.start();
         running = true;
+        threadMove.start();
+
     }
 
     public void restartBall(View view) {
         Log.d("tag", "game restartBall");
+        //Log.d("tag", "game tråd statusX " + threadX.getState());
+        //Log.d("tag", "game tråd statusY " + threadY.getState());
         running = false;
         ball.restartBall();
     }
@@ -85,48 +135,9 @@ public class Game extends AppCompatActivity {
     public void checkGameOver(){
         running = false;
         ball.restartBall();
+
+
     }
 
-    public void threads() {
-
-        //Log.d("Threads", "Test");
-        threadX = new Thread() {
-            public void run() {
-            while (running) {
-
-                ball.ballMoveX();
-                try {
-                    //Log.d("X", "Running");
-                    float sleepSpeedX = ball.getSpeedX();
-                    //Log.d("X", "Sleepspeed:" + sleepSpeedX);
-                    Thread.sleep((long) sleepSpeedX);
-
-
-                } catch (InterruptedException e) {
-                    Log.d("game", "tråd X");
-                }
-            }
-            }
-        };
-
-        threadY = new Thread() {
-            public void run() {
-
-            while (running) {
-
-                ball.ballMoveY();
-                try {
-                    //Log.d("Y", "Running");
-                    float sleepSpeedY = ball.getSpeedY();
-                    //Log.d("Y", "Sleepspeed:" + sleepSpeedY);
-                    Thread.sleep((long) sleepSpeedY);
-
-                } catch (InterruptedException e) {
-                    Log.d("game", "tråd Y");
-                }
-            }
-            }
-        };
-    }
 }
 

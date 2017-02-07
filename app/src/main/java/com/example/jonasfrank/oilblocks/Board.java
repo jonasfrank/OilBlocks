@@ -64,6 +64,9 @@ public class Board extends RelativeLayout{
                     case BOOSTR:
                         block = new BlockBoostR(context);
                         break;
+                    case BOOSTL:
+                        block = new BlockBoostL(context);
+                        break;
                     case RAMPUL:
                         block = new BlockRampUL(context);
                         break;

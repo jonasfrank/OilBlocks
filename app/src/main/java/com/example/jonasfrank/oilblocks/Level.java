@@ -16,6 +16,7 @@ public class Level {
         START,
         GOAL,
         BOOSTR,
+        BOOSTL,
         RAMPUL,
         RAMPUR,
         RAMPDL,
@@ -67,7 +68,7 @@ public class Level {
             {
                     {B.EMPTY,B.EMPTY,B.START,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
-                    {B.EMPTY,B.EMPTY,B.BOOSTR,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.BOOSTL,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.SOFT,B.EMPTY,B.EMPTY},

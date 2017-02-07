@@ -45,13 +45,13 @@ public class Ball extends ImageView {
         setImageResource(R.drawable.ball);
     }
 
-    public float getSpeedX(){
+    /*public float getSpeedX(){
         return speedX;
     }
 
     public float getSpeedY(){
         return speedY;
-    }
+    }*/
 
     public void setBall(int startScreenWidth, int blockNumberInRow, Board startBoard, Game startGame){
 
@@ -61,8 +61,6 @@ public class Ball extends ImageView {
         game = startGame;
         moveX = 0;
         moveY = startMoveY;
-        speedX = 20;
-        speedY = 20;
 
         setLayoutParams(new FrameLayout.LayoutParams((int)blockSize, (int) blockSize));
 
@@ -70,6 +68,7 @@ public class Ball extends ImageView {
         startBallY = board.startPosY;
         setX(startBallX);
         setY(startBallY);
+
     }
 
     public void restartBall(){
@@ -77,15 +76,13 @@ public class Ball extends ImageView {
         setY(startBallY);
         moveX = 0;
         moveY = startMoveY;
-        speedX = 20;
-        speedY = 20;
     }
 
 
-    public void ballMoveX() {
-        if(moveX != 0) {
+    public void ballMove() {
+        //if(moveX != 0) {
             collisionCheck();
-        }
+       // }
 
         float ballX = getX();
         float ballY = getY();
@@ -93,7 +90,17 @@ public class Ball extends ImageView {
         /**
          * Bollförflyttning
          */
-        int stopNumber = 150;
+
+        if(moveX != 0) {
+            setX(ballX + (blockSize / moveX));
+        }
+        if(moveY != 0) {
+            setY(ballY + (blockSize / moveY));
+        }
+
+
+
+        /*int stopNumber = 150;
         if (speedX > stopNumber || speedX < -stopNumber) {
             moveX = 0;
             speedX = 20;
@@ -103,10 +110,10 @@ public class Ball extends ImageView {
         }
         if (moveX == 0 && moveY == 0 ) {
             gameOverCheck();
-        }
+        }*/
     }
 
-    public void ballMoveY() {
+    /*public void ballMoveY() {
         if(moveY != 0) {
             collisionCheck();
         }
@@ -117,7 +124,7 @@ public class Ball extends ImageView {
         /**
          * Bollförflyttning
          */
-        int stopNumber = 150;
+        /*int stopNumber = 150;
         if (speedY > stopNumber || speedY < -stopNumber) {
             moveY = 0;
             speedY = 20;
@@ -129,9 +136,11 @@ public class Ball extends ImageView {
             gameOverCheck();
 
         }
-    }
+    }*/
 
     public void gameOverCheck(){
+        speedX = 20;
+        speedY = 20;
         if(moveX == 0 && moveY == 0) {
             Log.d("Game", "Over");
             game.checkGameOver();
@@ -182,8 +191,7 @@ public class Ball extends ImageView {
 
             if(i == board.blockList.size() - 1 && (collisionBlock == false && collisionBooster == false && collisionBoundaries == false && collisionRamp == false)){
 
-                speedX = speedX * (float) 1.01;
-                Log.d("tag", "ball inte colltion1 " + speedX);
+               /* speedX = speedX * (float) 1.01;
 
 
                 if(moveY == 0) {
@@ -209,20 +217,10 @@ public class Ball extends ImageView {
                             //Log.d("tag", "ball inte colltion4 " + speedY);
                         }
                     }
-                }
+                }*/
             }
         }
     }
-
-
-
-    /**
-     *Todo
-     * Ramp bakifrån
-     * Ta bort hörnen?
-     * olika hastigheter på olika block
-     * minskande hastighet på x axeln olika på empty och rullandes på block
-     */
 
 
     public boolean boosterCheck(float x, float y, Level.B thisBlockType, float thisBlockX, float thisBlockY, int i){
@@ -231,14 +229,12 @@ public class Ball extends ImageView {
 
         Block thisBlock = board.blockList.get(i);
 
-        if(thisBlockType == Level.B.BOOSTR) {
+        if(thisBlockType == Level.B.BOOSTR || thisBlockType == Level.B.BOOSTL ){
             if (ballCenterX > thisBlockX && ballCenterX < thisBlockX + blockSize && ballCenterY > thisBlockY && ballCenterY < thisBlockY + blockSize) {
                 Log.d("tag", "ball boost");
                 moveX =  thisBlock.getBallChangeDirection();
                 speedX = 10;
                 collisionBooster = true;
-            }else {
-                collisionBooster = false;
             }
         }
         return collisionBooster;

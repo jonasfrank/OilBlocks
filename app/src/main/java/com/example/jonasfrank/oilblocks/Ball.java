@@ -175,7 +175,9 @@ public class Ball extends ImageView {
 
 
             collisionBooster = boosterCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
-            if (collisionBooster == false) {
+            collisionRamp = rampCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
+            collisionBlock = blockCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
+            /*if (collisionBooster == false) {
                 //Log.d("tag", "ball test1 ");
                 collisionRamp = rampCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
                 //slope
@@ -189,9 +191,9 @@ public class Ball extends ImageView {
                 //Log.d("tag", "ball test3 ");
                 //Log.d("tag", " kant koll");
                 //collisionBoundaries = boundaryCheck(ballX, ballY, i);
-            }
+            }*/
             // OM kollision hittas, avbryt loopen för blocks
-            if (collisionBlock == true || collisionBooster == true  || collisionRamp == true) {
+           if (collisionBlock == true || collisionRamp == true) {
                 //Log.d("Broken", "Loop" + i);
                 break outerLoop;
             }
@@ -215,7 +217,7 @@ public class Ball extends ImageView {
                         lapY = 0;
                         moveY = -20;
                         lapGravity = -15;
-                        if (speedY > 1) {
+                        if (speedY >= 1) {
                             speedY++;
                         }
                     }
@@ -383,11 +385,13 @@ public class Ball extends ImageView {
                         Log.d("tag", "ball ramp RAMPUR mitt i 1");
                         moveX = 0;
                         moveY = -20;
+                        speedX = speedY;
                     }
                     else if (moveY > 0){
                         Log.d("tag", "ball ramp RAMPUR mitt i 2");
                         moveX = 20;
                         moveY = 0;
+                        speedY = speedX;
                     }
                 }else {
                     if (bollAX == blockAX && bollCY >= blockAY && bollCY <= blockCY) {
@@ -696,32 +700,31 @@ public class Ball extends ImageView {
                 game.stopBall(this);
 
             }
-            else if (bollDX >= blockAX && bollDY == blockAY   &&    bollCX <= blockBX && bollCY == blockBY   &&   bollCY <= blockCY){           //   && ballXNextMove <= thisBlockX + blockSize && ballYNextMove >= thisBlockY + blockSize && ballXNextMove <= thisBlockX + blockSize) {
-                //Träff på block uppefrån
+            else if (bollDX > blockAX && bollDY == blockAY   &&    bollCX < blockBX && bollCY == blockBY   &&   bollCY <= blockCY){           //   && ballXNextMove <= thisBlockX + blockSize && ballYNextMove >= thisBlockY + blockSize && ballXNextMove <= thisBlockX + blockSize) {
                if(moveY >= 0) {
-                    if (board.blockList.get(i - 8).getBlockType() == Level.B.EMPTY) {
-                        Log.d("tag", "ball block uppefrån");
-                        moveY = 0;
 
-                        if(thisBlockType == Level.B.GOAL){
-                            if(bollAX == blockAX){
-                                Log.d("tag", "ball mål");
+                    Log.d("tag", "ball block uppefrån");
+                    moveY = 0;
+
+                    if(thisBlockType == Level.B.GOAL){
+                        if(bollAX == blockAX){
+                            Log.d("tag", "ball mål");
+                            moveX = 0;
+                            moveY = 20;
+                            /*if(bollAY == blockAY){
+                                Log.d("tag", "ball mål2");
                                 moveX = 0;
-                                moveY = 20;
-                                /*if(bollAY == blockAY){
-                                    Log.d("tag", "ball mål2");
-                                    moveX = 0;
-                                    moveY = 0;
-                                }*/
-                            }
+                                moveY = 0;
+                            }*/
                         }
-                        //speedX = speedX * (float)groundFriction;
-                        collisionBlock = true;
                     }
+                        //speedX = speedX * (float)groundFriction;
 
+
+                   collisionBlock = true;
                 }
 
-            }else if(bollBX >= blockCX && bollBY == blockCY   &&    bollAX <= blockDX && bollAY == blockDY   &&   bollAY >= blockAY) {
+            }else if(bollBX > blockCX && bollBY == blockCY   &&    bollAX < blockDX && bollAY == blockDY   &&   bollAY >= blockAY) {
                 //Träff på block underifrån
                 if(moveY < 0) {
                     if (board.blockList.get(i + 8).getBlockType() == Level.B.EMPTY) {
@@ -731,7 +734,7 @@ public class Ball extends ImageView {
                     }
                 }
 
-            }else if(bollDX == blockAX && bollDY >= blockAY   &&    bollBX == blockCX && bollBY <= blockCY   &&   bollDX <= blockDX) {
+            }else if(bollDX == blockAX && bollDY >= blockAY   &&    bollBX == blockCX && bollBY < blockCY   &&   bollDX <= blockDX) {
                 //Träff på block från vänster
                 if(moveX > 0) {
                     if (board.blockList.get(i - 1).getBlockType() == Level.B.EMPTY) {
@@ -743,7 +746,7 @@ public class Ball extends ImageView {
                     }
                 }
 
-            }else if(bollCX == blockBX && bollCY >= blockBY   &&    bollAX == blockDX && bollAY <= blockDY   &&   bollBX >= blockBX){
+            }else if(bollCX == blockBX && bollCY >= blockBY   &&    bollAX == blockDX && bollAY < blockDY   &&   bollBX >= blockBX){
                 //Träff på block från höger
                 if(moveX < 0) {
                     if (board.blockList.get(i + 1).getBlockType() == Level.B.EMPTY) {

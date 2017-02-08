@@ -97,7 +97,7 @@ public class Game extends AppCompatActivity {
                 ball.ballMove();
                 //Log.d("tag", "game tråd status" + threadMove.getState());
                 try {
-                    Thread.sleep(20);
+                    Thread.sleep(10);
 
                 } catch (InterruptedException e) {
                     Log.d("game", "tråd X");

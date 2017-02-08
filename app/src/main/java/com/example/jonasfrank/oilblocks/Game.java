@@ -82,7 +82,7 @@ public class Game extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Log.d("game", "tråd  test test test test test v test");
-                    ball.ballMoveX();
+                    ball.>////////ballMoveX();
                 }
             }
         }).start();*/
@@ -97,7 +97,7 @@ public class Game extends AppCompatActivity {
                 ball.ballMove();
                 //Log.d("tag", "game tråd status" + threadMove.getState());
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(20);
 
                 } catch (InterruptedException e) {
                     Log.d("game", "tråd X");

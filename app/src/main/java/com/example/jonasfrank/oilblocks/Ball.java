@@ -196,7 +196,9 @@ public class Ball extends ImageView {
                 break outerLoop;
             }
 
+            //Om det inte är någon kolletion
             if(i == board.blockList.size() - 1 && (collisionBlock == false && collisionBooster == false && collisionBoundaries == false && collisionRamp == false)){
+                Log.d("tag", "ball ingen kolletion");
                 if(moveY > 0 || moveY == 0) {
                     lapGravity++;
                     if (lapGravity == 5) {
@@ -221,9 +223,9 @@ public class Ball extends ImageView {
             }
         }
 
-        if (collisionBlock == false && collisionBoundaries == false && collisionRamp == false) {
+        //if (collisionBlock == false && collisionBoundaries == false && collisionRamp == false) {
             collisionBoundaries = boundaryCheck(ballX, ballY);
-        }
+        //}
     }
 
 
@@ -609,7 +611,7 @@ public class Ball extends ImageView {
 
     public boolean blockCheck(float x, float y, Level.B thisBlockType, float thisBlockX, float thisBlockY, int i){
 
-        if(thisBlockType == Level.B.SOFT || thisBlockType == Level.B.SOLID) {
+        if(thisBlockType == Level.B.SOFT || thisBlockType == Level.B.SOLID || thisBlockType == Level.B.GOAL) {
 
             // A,B,C,D representerar ett hörn. A = uppe vänster , B = uppe höger, C = nere vänster, D = nere höger
             float bollAX = x;
@@ -687,17 +689,36 @@ public class Ball extends ImageView {
             /**
              * Träff på blocken 4 sidor uppe, nere, vänster eller höger.
              */
-            if (bollDX >= blockAX && bollDY == blockAY   &&    bollCX <= blockBX && bollCY == blockBY   &&   bollCY <= blockCY){           //   && ballXNextMove <= thisBlockX + blockSize && ballYNextMove >= thisBlockY + blockSize && ballXNextMove <= thisBlockX + blockSize) {
+            if(bollAX == blockAX && bollAY == blockAY){
+                Log.d("tag", "ball mål2");
+                moveX = 0;
+                moveY = 0;
+                game.stopBall(this);
+
+            }
+            else if (bollDX >= blockAX && bollDY == blockAY   &&    bollCX <= blockBX && bollCY == blockBY   &&   bollCY <= blockCY){           //   && ballXNextMove <= thisBlockX + blockSize && ballYNextMove >= thisBlockY + blockSize && ballXNextMove <= thisBlockX + blockSize) {
                 //Träff på block uppefrån
-               if(moveY > 0) {
+               if(moveY >= 0) {
                     if (board.blockList.get(i - 8).getBlockType() == Level.B.EMPTY) {
-                        //if(moveY > 0) {
-                            Log.d("tag", "ball block uppefrån test");
-                            moveY = 0;
-                            //speedX = speedX * (float)groundFriction;
-                            collisionBlock = true;
-                        //}
+                        Log.d("tag", "ball block uppefrån");
+                        moveY = 0;
+
+                        if(thisBlockType == Level.B.GOAL){
+                            if(bollAX == blockAX){
+                                Log.d("tag", "ball mål");
+                                moveX = 0;
+                                moveY = 20;
+                                /*if(bollAY == blockAY){
+                                    Log.d("tag", "ball mål2");
+                                    moveX = 0;
+                                    moveY = 0;
+                                }*/
+                            }
+                        }
+                        //speedX = speedX * (float)groundFriction;
+                        collisionBlock = true;
                     }
+
                 }
 
             }else if(bollBX >= blockCX && bollBY == blockCY   &&    bollAX <= blockDX && bollAY == blockDY   &&   bollAY >= blockAY) {

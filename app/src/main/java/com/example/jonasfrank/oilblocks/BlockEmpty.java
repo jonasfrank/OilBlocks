@@ -13,7 +13,7 @@ public class BlockEmpty extends Block {
     public BlockEmpty(Context context){
         super(context);
 
-        setImageResource(R.drawable.groundemptyedge);
+        setImageResource(R.drawable.groundempty);
     }
 
     public void blockKlicked(){

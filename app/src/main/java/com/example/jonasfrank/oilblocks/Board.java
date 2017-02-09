@@ -104,7 +104,7 @@ public class Board extends RelativeLayout{
             *Bakgunds bilder
              */
             ImageView thisBlockImg = new ImageView(getContext());
-            thisBlockImg.setImageResource(R.drawable.groundemptyedge);
+            thisBlockImg.setImageResource(R.drawable.groundbackgound);
 
             /**
              * Räknar ut start position på blocken utifrån indexnummer

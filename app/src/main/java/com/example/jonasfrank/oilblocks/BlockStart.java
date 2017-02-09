@@ -2,6 +2,7 @@ package com.example.jonasfrank.oilblocks;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.MotionEvent;
 
 
 public class BlockStart extends Block {
@@ -44,6 +45,12 @@ public class BlockStart extends Block {
     public Level.B getBlockType(){
         return blockType;
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return false;
+    }
+
 
 
 }

@@ -307,7 +307,7 @@ public class Ball extends ImageView {
                     if (thisBlockType == Level.B.RAMPDR || thisBlockType == Level.B.RAMPUR) {
                         Log.d("tag", "ball ramp vänster");
                         //speedX = speedX * (float) wallFriction;
-                        moveX = 3;
+                        moveX = moveX * -1;
                         speedX++;
                         collisionBlock = true;
                     }

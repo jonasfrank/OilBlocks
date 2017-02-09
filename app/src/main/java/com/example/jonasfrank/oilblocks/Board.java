@@ -1,6 +1,7 @@
 package com.example.jonasfrank.oilblocks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -25,6 +26,7 @@ public class Board extends RelativeLayout{
     public float startPosX;
     public float startPosY;
     ArrayList<Block> blockList = new ArrayList<Block>();
+    ArrayList<Integer> backgrundList = new ArrayList<Integer>();
 
     public Board(Context context){
         super(context);
@@ -88,14 +90,21 @@ public class Board extends RelativeLayout{
                 block.setBlock(screenWidth, blockNumberInRow, this);       //"ritar" blocket
             }
         }
+
+
+
         drawBoard();
     }
 
     public void drawBoard(){
         removeAllViews();
+
         for (int i = 0; i < blockList.size(); i++) {
-            Block thisBlock = blockList.get(i);
-            thisBlock.setIndexNumber(i);     //ger blocket ett index nummer
+            /*
+            *Bakgunds bilder
+             */
+            ImageView thisBlockImg = new ImageView(getContext());
+            thisBlockImg.setImageResource(R.drawable.groundemptyedge);
 
             /**
              * Räknar ut start position på blocken utifrån indexnummer
@@ -105,6 +114,20 @@ public class Board extends RelativeLayout{
             int startY = (int)Math.ceil(startYDouble);
             int startX = startIPosAll - ((startY - 1) * blockNumberInRow);
             blockSize = screenWidth / blockNumberInRow;
+
+            thisBlockImg.setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
+
+            thisBlockImg.setX(((startX - 1) * blockSize));
+            thisBlockImg.setY(((startY - 1) * blockSize));
+
+            addView(thisBlockImg);
+
+
+            /*
+            *Blocken
+            */
+            Block thisBlock = blockList.get(i);
+            thisBlock.setIndexNumber(i);     //ger blocket ett index nummer
 
             thisBlock.setX(((startX - 1) * blockSize));
             thisBlock.setY(((startY - 1) * blockSize));

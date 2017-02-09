@@ -69,6 +69,15 @@
         android:layout_below="@+id/game_game"
         />
 
+    <RelativeLayout
+        android:id="@+id/game_utility"
+        android:layout_below="@+id/game_boundaries_bottom"
+        android:layout_above="@+id/game_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#af0e7c"
+        android:layout_centerHorizontal="true">
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/game_footer"

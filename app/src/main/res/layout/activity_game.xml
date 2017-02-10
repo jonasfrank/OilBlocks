@@ -75,7 +75,6 @@
         android:layout_above="@+id/game_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#af0e7c"
         android:layout_centerHorizontal="true">
     </RelativeLayout>
 

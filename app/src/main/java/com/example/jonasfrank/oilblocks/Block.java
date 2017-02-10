@@ -24,14 +24,16 @@ abstract class Block extends ImageView {
     public int blockNumberInRow;
     public int blockSize;
     public int levelNumber;
-    public float blockX;
-    public float blockY;
+    public float pressX;
+    public float pressY;
     public float dx;
     public float dy;
     public Level level;
     public ArrayList blockList;
     public int indexNumber;
     public Board board;
+    public float x;
+    public float y;
 
     public float ballChangeDirection;
 
@@ -46,6 +48,7 @@ abstract class Block extends ImageView {
 
         blockSize = startScreenWidth / blockNumberInRow;
         setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
+
         //AbsoluteLayout.LayoutParams param = new AbsoluteLayout.LayoutParams(blockSize, blockSize, x, y);
         //Log.d("tag", "test" + x + " x " + y);
         //setLayoutParams(param);
@@ -70,49 +73,21 @@ abstract class Block extends ImageView {
         switch (action) {
 
             case (MotionEvent.ACTION_DOWN):
-                //setImageResource(onDownImgId);
-                blockX = event.getRawX();
-                blockY = event.getRawY();
-                dx = blockX - getX();
-                dy = blockY - getY();
-
-
+                pressX = event.getRawX();
+                pressY = event.getRawY();
+                dx = pressX - getX();
+                dy = pressY - getY();
 
                 return true;
             case (MotionEvent.ACTION_MOVE):
                 setX(event.getRawX() - dx);
                 setY(event.getRawY() - dy);
+
                 return true;
             case (MotionEvent.ACTION_UP):
-
-                float pressX = event.getRawX();
-                float pressY = event.getRawY();
-
-                outerLoop:
-                for (int i = 0; i < board.blockList.size() ; i++) {
-
-                    int[] location = new int[2];
-                    board.blockList.get(i).getLocationInWindow(location);
-
-                    if(pressX > location[0] && pressX < location[0] + blockSize && pressY  > location[1] && pressY < location[1] + blockSize ){
-                        Log.d("tag", "block denna pos " + i);
-
-                        //board.blockList.remove(indexNumber);
-                        //board.blockList.remove(i);
-                        //board.blockList.set(indexNumber, board.blockList.get(i));
-                        //board.blockList.set(i, this);
-
-                        Collections.swap(board.blockList, i, indexNumber);
-
-
-                        board.drawBoard();
-                        break outerLoop;
-
-
-                    }
-
-
-                }
+                float releaseX = event.getRawX();
+                float releaseY = event.getRawY();
+                board.swapBlock(releaseX, releaseY, indexNumber);
 
                 return true;
             default:

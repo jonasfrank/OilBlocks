@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Board extends RelativeLayout{
@@ -28,6 +29,8 @@ public class Board extends RelativeLayout{
     ArrayList<Block> blockList = new ArrayList<Block>();
     ArrayList<Integer> backgrundList = new ArrayList<Integer>();
 
+    public ArrayList location;
+
     public Board(Context context){
         super(context);
     }
@@ -37,6 +40,7 @@ public class Board extends RelativeLayout{
         screenWidth = startScreenWidth;
 
         setLayoutParams(new FrameLayout.LayoutParams(screenWidth,screenWidth));
+
         //setColumnCount(blockNumberInRow);
         //setRowCount(blockNumberInRow);
 
@@ -132,6 +136,11 @@ public class Board extends RelativeLayout{
             thisBlock.setX(((startX - 1) * blockSize));
             thisBlock.setY(((startY - 1) * blockSize));
 
+            //thisBlock.setXPos(((startX - 1) * blockSize));
+            //thisBlock.setYPos(((startY - 1) * blockSize));
+            //Log.d("tag", "board blockX " + ((startX - 1) * blockSize));
+            //Log.d("tag", "board blockY " + ((startY - 1) * blockSize));
+
             addView(thisBlock);
 
             Level.B blockType = thisBlock.getBlockType();
@@ -172,6 +181,28 @@ public class Board extends RelativeLayout{
 
             block.setBlock(screenWidth, blockNumberInRow, this);       //"ritar" blocket
             blockList.set(indexNumber, block);
+        }
+    }
+
+    public void swapBlock(float releaseX, float releaseY, int indexNumber){
+
+        outerLoop:
+        for (int i = 0; i < blockList.size() ; i++) {
+
+            int[] location = new int[2];
+            blockList.get(i).getLocationInWindow(location);
+
+            if(i != indexNumber && blockList.get(i).getBlockType() == Level.B.EMPTY) {
+                if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
+                    Log.d("tag", "block denna pos " + i);
+                    Collections.swap(blockList, indexNumber, i);
+
+                    drawBoard();
+                    break outerLoop;
+                }
+            }else if(i == indexNumber){
+                drawBoard();
+            }
         }
     }
 }

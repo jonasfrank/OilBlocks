@@ -1,16 +1,22 @@
 package com.example.jonasfrank.oilblocks;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -64,6 +70,46 @@ public class Game extends AppCompatActivity {
 
     }
 
+    public void wonGame(View view) {
+
+        if ()
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("game", "won");
+                AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
+                builder.setCancelable(false);
+                View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog, null);
+                TextView textView = (TextView) diaView.findViewById(R.id.gz);
+                textView.setText("You just beat level " + levelNumber + "!");
+                Button leftButton = (Button) diaView.findViewById(R.id.leftButton);
+                Button rightButton = (Button) diaView.findViewById(R.id.rightButton);
+
+                leftButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                rightButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Gör något
+                    }
+                });
+
+                builder.setView(diaView);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+
+
+    }
+
 
 
     public void threads() {
@@ -94,6 +140,7 @@ public class Game extends AppCompatActivity {
             while (running) {
 
                 // colletion
+
                 ball.ballMove();
                 //Log.d("tag", "game tråd status" + threadMove.getState());
                 try {

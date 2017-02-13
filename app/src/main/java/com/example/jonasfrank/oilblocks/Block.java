@@ -57,6 +57,10 @@ abstract class Block extends ImageView {
             @Override
             public void onClick(View v) {
 
+                for (int i = 0; i < blockList.size(); i++) {
+
+                }
+
                 board.changeDrawBoard(indexNumber);
                 board.drawBoard();
                 //Log.d("tag", "klick" + getX());

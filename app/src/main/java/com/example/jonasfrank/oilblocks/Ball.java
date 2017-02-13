@@ -317,13 +317,14 @@ public class Ball extends ImageView {
                 //Träff på ramp från höger
                 if (moveX < 0) {
                     if (thisBlockType == Level.B.RAMPDL || thisBlockType == Level.B.RAMPUL) {
-                        Log.d("tag", "ball ramp höger");
-                        //speedX = speedX * (float) wallFriction;
-                        moveX = moveX * -1;
-                        speedX++;
-                        collisionBlock = true;
+                        if (board.blockList.get(i + 1).getBlockType() == Level.B.EMPTY) {
+                            Log.d("tag", "ball ramp höger");
+                            //speedX = speedX * (float) wallFriction;
+                            moveX = moveX * -1;
+                            speedX++;
+                            collisionBlock = true;
+                        }
                     }
-
                 }
             }
 
@@ -637,6 +638,7 @@ public class Ball extends ImageView {
                 moveX = 0;
                 moveY = 0;
                 game.stopBall(this);
+                game.wonGame(this);
 
             }
             else if (bollDX > blockAX && bollDY == blockAY   &&    bollCX < blockBX && bollCY == blockBY   &&   bollCY <= blockCY){           //   && ballXNextMove <= thisBlockX + blockSize && ballYNextMove >= thisBlockY + blockSize && ballXNextMove <= thisBlockX + blockSize) {
@@ -655,6 +657,7 @@ public class Ball extends ImageView {
                                 moveX = 0;
                                 moveY = 0;
                             }*/
+                            //game.wonGame();
                         }
                     }
                         //speedX = speedX * (float)groundFriction;

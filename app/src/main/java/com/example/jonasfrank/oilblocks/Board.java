@@ -19,7 +19,9 @@ public class Board extends RelativeLayout{
 
     public int screenWidth;
     public int blockNumberInRow = 8;
+    public int utilityNumberInRow = 6;
     public int blockSize;
+    public float boundariesHeightDP;
     public int levelNumber;
     public Level level;
     public Block block;
@@ -97,6 +99,39 @@ public class Board extends RelativeLayout{
         }
 
 
+        for (int i = 0; i < level.gameUtility[levelNumber - 1].length; i++) {
+
+            Level.B thisUtility = level.gameUtility[levelNumber - 1][i];
+            switch (thisUtility){
+                case SOFT:
+                    block = new BlockSoft(context);
+                    break;
+                case BOOSTR:
+                    block = new BlockBoostR(context);
+                    break;
+                case BOOSTL:
+                    block = new BlockBoostL(context);
+                    break;
+                case RAMPUL:
+                    block = new BlockRampUL(context);
+                    break;
+                case RAMPUR:
+                    block = new BlockRampUR(context);
+                    break;
+                case RAMPDL:
+                    block = new BlockRampDL(context);
+                    break;
+                case RAMPDR:
+                    block = new BlockRampDR(context);
+                    break;
+            }
+
+            utilityList.add(block);       //lägger till blocket i arraylisten
+            block.setBlock(screenWidth, blockNumberInRow, this);       //"ritar" blocket
+
+        }
+
+
         drawBoard();
     }
 
@@ -152,7 +187,7 @@ public class Board extends RelativeLayout{
         }
 
         float density = getContext().getResources().getDisplayMetrics().density;
-        float boundariesHeightDP = 10 * density;
+        boundariesHeightDP = 10 * density;
         //float dp = 10 / density;
 
         ImageView bottomBoundaries = new ImageView(getContext());
@@ -164,10 +199,119 @@ public class Board extends RelativeLayout{
 
         addView(bottomBoundaries);
 
+        int utilCounter = 0;
+        int softCounter = 0;
+        int boostRCounter = 0;
+        int boostLCounter = 0;
+        int rampULCounter = 0;
+        int rampURCounter = 0;
+        int rampDLCounter = 0;
+        int rampDRCounter = 0;
+
+        for (int i = 0; i < utilityList.size(); i++) {
+            Level.B thisUtility = utilityList.get(i).getBlockType();
+
+            switch (thisUtility){
+                case SOFT:
+                    float[] XY;
+                    if(softCounter == 0){
+
+                        XY = drawUtilityBackground(R.drawable.groundrost1, utilCounter);
+                        utilCounter++;
+                    }
 
 
 
+                    softCounter++;
+                    break;
+                case BOOSTR:
+                    if(boostRCounter == 0){
 
+                        drawUtilityBackground(R.drawable.boostright, utilCounter);
+                        utilCounter++;
+                    }
+
+                    boostRCounter++;
+                    break;
+                case BOOSTL:
+                    if(boostLCounter == 0){
+
+                        drawUtilityBackground(R.drawable.boostleft, utilCounter);
+                        utilCounter++;
+                    }
+
+                    boostLCounter++;
+                    break;
+                case RAMPUL:
+                    if(rampULCounter == 0){
+
+                        drawUtilityBackground(R.drawable.rampupleft, utilCounter);
+                        utilCounter++;
+                    }
+
+                    rampULCounter++;
+                    break;
+                case RAMPUR:
+                    if(rampURCounter == 0){
+
+                        drawUtilityBackground(R.drawable.rampupright, utilCounter);
+                        utilCounter++;
+                    }
+
+                    rampURCounter++;
+                    break;
+                case RAMPDL:
+                    if(rampDLCounter == 0){
+
+                        drawUtilityBackground(R.drawable.rampdownleft, utilCounter);
+                        utilCounter++;
+                    }
+
+                    rampDLCounter++;
+                    break;
+                case RAMPDR:
+                    if(rampDRCounter == 0){
+
+                        drawUtilityBackground(R.drawable.rampdownright, utilCounter);
+                        utilCounter++;
+                    }
+
+                    rampDRCounter++;
+                    break;
+            }
+
+        }
+
+
+    }
+
+    public float[] drawUtilityBackground(int pic, int utilCounter){
+        float x;
+        float y;
+
+        ImageView utilBackground = new ImageView(getContext());
+
+        if(utilCounter <= utilityNumberInRow - 1){
+            x = (((blockSize * 2) / 7) + (blockSize * utilCounter) + (((blockSize * 2) / 7) * utilCounter));
+            y = (((blockSize * 8) + boundariesHeightDP + boundariesHeightDP));
+        }else{
+            x = (((blockSize * 2) / 7) + (blockSize * (utilCounter - 6)) + (((blockSize * 2) / 7) * (utilCounter - 6)));
+            y = (((blockSize * 8) + boundariesHeightDP + boundariesHeightDP) + blockSize + boundariesHeightDP );
+        }
+
+        utilBackground.setX(x);
+        utilBackground.setY(y);
+        utilBackground.setImageResource(pic);
+        utilBackground.setAlpha((float)0.7);
+        utilBackground.setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
+
+        addView(utilBackground);
+
+        float[] XY = new float[2];
+        XY[0] = x;
+        XY[1] = y;
+
+        return XY;
 
     }
 

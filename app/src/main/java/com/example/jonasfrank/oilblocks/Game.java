@@ -20,6 +20,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import static android.R.attr.onClick;
+
 public class Game extends AppCompatActivity {
 
     public int levelNumber;
@@ -89,6 +91,8 @@ public class Game extends AppCompatActivity {
                 leftButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent = new Intent(Game.this, LevelSelect.class);
+                        startActivity(intent);
 
                     }
                 });

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
@@ -27,7 +28,7 @@ public class Board extends RelativeLayout{
     public float startPosX;
     public float startPosY;
     ArrayList<Block> blockList = new ArrayList<Block>();
-    ArrayList<Integer> backgrundList = new ArrayList<Integer>();
+    ArrayList<Block> utilityList = new ArrayList<Block>();
 
     public ArrayList location;
 
@@ -39,7 +40,7 @@ public class Board extends RelativeLayout{
         ball = startBall;
         screenWidth = startScreenWidth;
 
-        setLayoutParams(new FrameLayout.LayoutParams(screenWidth,screenWidth));
+        setLayoutParams(new FrameLayout.LayoutParams(screenWidth, ViewGroup.LayoutParams.MATCH_PARENT));
 
         //setColumnCount(blockNumberInRow);
         //setRowCount(blockNumberInRow);
@@ -96,7 +97,6 @@ public class Board extends RelativeLayout{
         }
 
 
-
         drawBoard();
     }
 
@@ -150,6 +150,25 @@ public class Board extends RelativeLayout{
                 startPosY = thisBlock.getY();
             }
         }
+
+        float density = getContext().getResources().getDisplayMetrics().density;
+        float boundariesHeightDP = 10 * density;
+        //float dp = 10 / density;
+
+        ImageView bottomBoundaries = new ImageView(getContext());
+        bottomBoundaries.setImageResource(R.drawable.boundaries);
+        bottomBoundaries.setY(blockSize * blockNumberInRow);
+        bottomBoundaries.setAlpha((float)0.7);
+        bottomBoundaries.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int)boundariesHeightDP));
+        bottomBoundaries.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+        addView(bottomBoundaries);
+
+
+
+
+
+
     }
 
     public void changeDrawBoard(int indexNumber){

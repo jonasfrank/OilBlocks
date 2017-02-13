@@ -9,6 +9,9 @@ import java.util.ArrayList;
 public class Level {
 
 
+
+
+
     public enum B {
         EMPTY,
         SOFT,

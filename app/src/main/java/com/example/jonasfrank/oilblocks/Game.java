@@ -72,7 +72,7 @@ public class Game extends AppCompatActivity {
 
     public void wonGame(View view) {
 
-        if ()
+
 
         runOnUiThread(new Runnable() {
             @Override

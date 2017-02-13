@@ -12,23 +12,47 @@
 
 
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="52dp">
+        android:layout_height="142dp">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/leftButton"
-            android:layout_weight="1" />
+        <ImageView
+            android:id="@+id/won_picture"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/blockgoal"
+            android:layout_centerHorizontal="true"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/rightButton"
-            android:layout_weight="1" />
-    </LinearLayout>
+        <ImageButton
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/button_custom_game_reverse"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/selectButton" />
+
+
+        <ImageButton
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/selectButton"
+            android:src="@drawable/button_custom_game_reverse"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/leftButton" />
+
+        <ImageButton
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/selectButton"
+            android:src="@drawable/button_custom_game_stop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/rightButton" />
+
+    </RelativeLayout>
 </LinearLayout>

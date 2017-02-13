@@ -302,7 +302,7 @@ public class Board extends RelativeLayout{
         utilBackground.setX(x);
         utilBackground.setY(y);
         utilBackground.setImageResource(pic);
-        utilBackground.setAlpha((float)0.7);
+        utilBackground.setAlpha((float)0.5);
         utilBackground.setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
 
         addView(utilBackground);

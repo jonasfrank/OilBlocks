@@ -71,8 +71,10 @@
         android:text="game_level"
         android:textSize="20sp"
         android:layout_toRightOf="@id/game_reverse"
+        android:layout_marginLeft="15dp"
         android:layout_alignParentBottom="true"
-        android:textColor="#998653"/>
+        android:layout_marginBottom="10dp"
+        android:textColor="#252525"/>
 
     <ImageButton
         android:id="@+id/game_stop"

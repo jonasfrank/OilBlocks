@@ -84,6 +84,7 @@ abstract class Block extends ImageView {
 
                 return true;
             case (MotionEvent.ACTION_MOVE):
+                bringToFront();
                 setX(event.getRawX() - dx);
                 setY(event.getRawY() - dy);
 
@@ -92,10 +93,9 @@ abstract class Block extends ImageView {
                 float releaseX = event.getRawX();
                 float releaseY = event.getRawY();
                 Log.d("index: ", "" + indexNumber);
-                if (indexNumber < blockNumberInRow * blockNumberInRow) {
+                if (indexNumber < 64) {
                     board.swapBlock(releaseX, releaseY, indexNumber);
-                }
-                if (indexNumber > blockNumberInRow * blockNumberInRow){
+                }else{
                     board.swapBlockArray(releaseX, releaseY, this);
                     Log.d("utility", "dras");
                 }

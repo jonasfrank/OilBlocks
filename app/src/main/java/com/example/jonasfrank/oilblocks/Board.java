@@ -30,6 +30,7 @@ public class Board extends RelativeLayout{
     public float startPosX;
     public float startPosY;
     ArrayList<Block> blockList = new ArrayList<Block>();
+    ArrayList<Integer> startUtilityList = new ArrayList<Integer>();
     ArrayList<Block> utilityList = new ArrayList<Block>();
 
     public ArrayList location;
@@ -102,30 +103,43 @@ public class Board extends RelativeLayout{
         for (int i = 0; i < level.gameUtility[levelNumber - 1].length; i++) {
 
             Level.B thisUtility = level.gameUtility[levelNumber - 1][i];
+
+
+
             switch (thisUtility){
                 case SOFT:
                     block = new BlockSoft(context);
+                    setUtilityBackgroundList(R.drawable.groundrost1, i);
+
                     break;
                 case BOOSTR:
                     block = new BlockBoostR(context);
+                    setUtilityBackgroundList(R.drawable.boostright, i);
                     break;
                 case BOOSTL:
                     block = new BlockBoostL(context);
+                    setUtilityBackgroundList(R.drawable.boostleft, i);
                     break;
                 case RAMPUL:
                     block = new BlockRampUL(context);
+                    setUtilityBackgroundList(R.drawable.rampupleft, i);
                     break;
                 case RAMPUR:
                     block = new BlockRampUR(context);
+                    setUtilityBackgroundList(R.drawable.rampupright, i);
                     break;
                 case RAMPDL:
                     block = new BlockRampDL(context);
+                    setUtilityBackgroundList(R.drawable.rampdownleft, i);
                     break;
                 case RAMPDR:
                     block = new BlockRampDR(context);
+                    setUtilityBackgroundList(R.drawable.rampdownright, i);
                     break;
             }
 
+
+            Log.d("tag", "board list storlek" + startUtilityList.size());
             utilityList.add(block);       //lägger till blocket i arraylisten
             block.setBlock(screenWidth, blockNumberInRow, this);       //"ritar" blocket
 
@@ -133,6 +147,26 @@ public class Board extends RelativeLayout{
 
 
         drawBoard();
+    }
+
+    public void setUtilityBackgroundList(int pic, int i){
+        boolean picExist = false;
+
+        if(i == 0){
+            startUtilityList.add(pic);       //lägger till blocket i arraylisten
+        }else{
+            for (int j = 0; j < startUtilityList.size(); j++) {
+                if(startUtilityList.get(j) == pic){
+                    picExist = true ;
+                }
+
+            }
+            if(picExist == false){
+                startUtilityList.add(pic);       //lägger till blocket i arraylisten
+            }
+        }
+
+        Log.d("tag", "board startUtilitylist " + startUtilityList.size());
     }
 
     public void drawBoard(){
@@ -199,6 +233,7 @@ public class Board extends RelativeLayout{
 
         addView(bottomBoundaries);
 
+
         int utilCounter = 0;
         int softCounter = 0;
         int boostRCounter = 0;
@@ -209,6 +244,41 @@ public class Board extends RelativeLayout{
         int rampDRCounter = 0;
         float[] softXY = new float[2];
         float[] boostRXY = new float[2];
+        float[] boostLXY = new float[2];
+        float[] rampULXY = new float[2];
+        float[] rampURXY = new float[2];
+        float[] rampDLXY = new float[2];
+        float[] rampDRXY = new float[2];
+
+
+        for (int i = 0; i < startUtilityList.size() ; i++) {
+            int pic = startUtilityList.get(i);
+            float[] XY = drawUtilityBackground(pic, i);
+
+            switch (pic){
+                case R.drawable.groundrost1:
+                    softXY = XY;
+                    break;
+                case R.drawable.boostright:
+                    boostRXY = XY;
+                    break;
+                case R.drawable.boostleft:
+                    boostLXY = XY;
+                    break;
+                case R.drawable.rampupleft:
+                    rampULXY = XY;
+                    break;
+                case R.drawable.rampupright:
+                    rampURXY = XY;
+                    break;
+                case R.drawable.rampdownleft:
+                    rampDLXY = XY;
+                    break;
+                case R.drawable.rampdownright:
+                    rampDRXY = XY;
+                    break;
+            }
+        }
 
 
         for (int i = 0; i < utilityList.size(); i++) {
@@ -217,13 +287,6 @@ public class Board extends RelativeLayout{
 
             switch (thisUtilityType){
                 case SOFT:
-                    if(softCounter == 0){
-
-                        softXY = drawUtilityBackground(R.drawable.groundrost1, utilCounter);
-                        /*x = softXY[0];
-                        y = softXY[1];*/
-                        utilCounter++;
-                    }
                     thisUtility.setX(softXY[0]);
                     thisUtility.setY(softXY[1]);
                     thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
@@ -232,11 +295,6 @@ public class Board extends RelativeLayout{
                     softCounter++;
                     break;
                 case BOOSTR:
-                    if(boostRCounter == 0){
-
-                        boostRXY = drawUtilityBackground(R.drawable.boostright, utilCounter);
-                        utilCounter++;
-                    }
                     thisUtility.setX(boostRXY[0]);
                     thisUtility.setY(boostRXY[1]);
                     thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
@@ -245,54 +303,48 @@ public class Board extends RelativeLayout{
                     boostRCounter++;
                     break;
                 case BOOSTL:
-                    if(boostLCounter == 0){
-
-                        drawUtilityBackground(R.drawable.boostleft, utilCounter);
-                        utilCounter++;
-                    }
+                    thisUtility.setX(boostLXY[0]);
+                    thisUtility.setY(boostLXY[1]);
+                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                    addView(thisUtility);
 
                     boostLCounter++;
                     break;
                 case RAMPUL:
-                    if(rampULCounter == 0){
-
-                        drawUtilityBackground(R.drawable.rampupleft, utilCounter);
-                        utilCounter++;
-                    }
+                    thisUtility.setX(rampULXY[0]);
+                    thisUtility.setY(rampULXY[1]);
+                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                    addView(thisUtility);
 
                     rampULCounter++;
                     break;
                 case RAMPUR:
-                    if(rampURCounter == 0){
-
-                        drawUtilityBackground(R.drawable.rampupright, utilCounter);
-                        utilCounter++;
-                    }
+                    thisUtility.setX(rampURXY[0]);
+                    thisUtility.setY(rampURXY[1]);
+                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                    addView(thisUtility);
 
                     rampURCounter++;
                     break;
                 case RAMPDL:
-                    if(rampDLCounter == 0){
-
-                        drawUtilityBackground(R.drawable.rampdownleft, utilCounter);
-                        utilCounter++;
-                    }
+                    thisUtility.setX(rampDLXY[0]);
+                    thisUtility.setY(rampDLXY[1]);
+                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                    addView(thisUtility);
 
                     rampDLCounter++;
                     break;
                 case RAMPDR:
-                    if(rampDRCounter == 0){
-
-                        drawUtilityBackground(R.drawable.rampdownright, utilCounter);
-                        utilCounter++;
-                    }
+                    thisUtility.setX(rampDRXY[0]);
+                    thisUtility.setY(rampDRXY[1]);
+                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                    addView(thisUtility);
 
                     rampDRCounter++;
                     break;
             }
 
         }
-
 
     }
 
@@ -325,6 +377,8 @@ public class Board extends RelativeLayout{
         return XY;
 
     }
+
+
 
     public void changeDrawBoard(int indexNumber){
 
@@ -360,21 +414,27 @@ public class Board extends RelativeLayout{
 
     public void swapBlock(float releaseX, float releaseY, int indexNumber){
 
-        outerLoop:
         for (int i = 0; i < blockList.size() ; i++) {
 
             int[] location = new int[2];
             blockList.get(i).getLocationInWindow(location);
 
-            if(i != indexNumber && blockList.get(i).getBlockType() == Level.B.EMPTY) {
-                if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
+
+            if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
+                if(i != indexNumber && blockList.get(i).getBlockType() == Level.B.EMPTY) {
                     Log.d("tag", "block denna pos " + i);
                     Collections.swap(blockList, indexNumber, i);
 
                     drawBoard();
-                    break outerLoop;
+                    break;
                 }
-            }else if(i == indexNumber){
+
+            }else if (releaseY > (blockSize * 8) + boundariesHeightDP){
+                utilityList.add(blockList.get(indexNumber));
+                Block newEmptyBlock = new BlockEmpty(getContext());
+                blockList.set(indexNumber, newEmptyBlock);
+                drawBoard();
+            }else{
                 drawBoard();
             }
         }
@@ -386,15 +446,18 @@ public class Board extends RelativeLayout{
             int[] location = new int[2];
             blockList.get(i).getLocationInWindow(location);
 
-            if (blockList.get(i).getBlockType() == Level.B.EMPTY) {
-                if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
+            if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
+                if (blockList.get(i).getBlockType() == Level.B.EMPTY) {
                     blockList.set(i, utilityBlock);
                     
                     utilityList.remove(utilityBlock);
                     drawBoard();
                     break;
                 }
+            }else{
+                drawBoard();
             }
+
         }
     }
 }

@@ -91,8 +91,14 @@ abstract class Block extends ImageView {
             case (MotionEvent.ACTION_UP):
                 float releaseX = event.getRawX();
                 float releaseY = event.getRawY();
-                board.swapBlock(releaseX, releaseY, indexNumber);
-
+                Log.d("index: ", "" + indexNumber);
+                if (indexNumber < blockNumberInRow * blockNumberInRow) {
+                    board.swapBlock(releaseX, releaseY, indexNumber);
+                }
+                if (indexNumber > blockNumberInRow * blockNumberInRow){
+                    board.swapBlockArray(releaseX, releaseY, this);
+                    Log.d("utility", "dras");
+                }
                 return true;
             default:
                 return super.onTouchEvent(event);

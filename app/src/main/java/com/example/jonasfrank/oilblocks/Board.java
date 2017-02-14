@@ -207,29 +207,40 @@ public class Board extends RelativeLayout{
         int rampURCounter = 0;
         int rampDLCounter = 0;
         int rampDRCounter = 0;
+        float[] softXY = new float[2];
+        float[] boostRXY = new float[2];
+
 
         for (int i = 0; i < utilityList.size(); i++) {
-            Level.B thisUtility = utilityList.get(i).getBlockType();
+            Level.B thisUtilityType = utilityList.get(i).getBlockType();
+            Block thisUtility = utilityList.get(i);
 
-            switch (thisUtility){
+            switch (thisUtilityType){
                 case SOFT:
-                    float[] XY;
                     if(softCounter == 0){
 
-                        XY = drawUtilityBackground(R.drawable.groundrost1, utilCounter);
+                        softXY = drawUtilityBackground(R.drawable.groundrost1, utilCounter);
+                        /*x = softXY[0];
+                        y = softXY[1];*/
                         utilCounter++;
                     }
-
-
+                    thisUtility.setX(softXY[0]);
+                    thisUtility.setY(softXY[1]);
+                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                    addView(thisUtility);
 
                     softCounter++;
                     break;
                 case BOOSTR:
                     if(boostRCounter == 0){
 
-                        drawUtilityBackground(R.drawable.boostright, utilCounter);
+                        boostRXY = drawUtilityBackground(R.drawable.boostright, utilCounter);
                         utilCounter++;
                     }
+                    thisUtility.setX(boostRXY[0]);
+                    thisUtility.setY(boostRXY[1]);
+                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                    addView(thisUtility);
 
                     boostRCounter++;
                     break;
@@ -365,6 +376,24 @@ public class Board extends RelativeLayout{
                 }
             }else if(i == indexNumber){
                 drawBoard();
+            }
+        }
+    }
+
+    public void swapBlockArray(float releaseX, float releaseY, Block utilityBlock) {
+
+        for (int i = 0; i < blockList.size(); i++) {
+            int[] location = new int[2];
+            blockList.get(i).getLocationInWindow(location);
+
+            if (blockList.get(i).getBlockType() == Level.B.EMPTY) {
+                if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
+                    blockList.set(i, utilityBlock);
+                    
+                    utilityList.remove(utilityBlock);
+                    drawBoard();
+                    break;
+                }
             }
         }
     }

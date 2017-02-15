@@ -35,6 +35,11 @@ abstract class Block extends ImageView {
     public float x;
     public float y;
 
+    public boolean sideU;
+    public boolean sideR;
+    public boolean sideD;
+    public boolean sideL;
+
     public float ballChangeDirection;
 
 
@@ -126,8 +131,23 @@ abstract class Block extends ImageView {
         return ballChangeDirection;
     }
 
+    /*public boolean getSideU(){
+        return sideU;
+    }
+    public boolean getSideR(){
+        return sideR;
+    }
+    public boolean getSideD() { return sideD; }
+    public boolean getSideL(){
+        return sideL;
+    }*/
+
     abstract void blockKlicked();
     abstract Level.B getBlockType();
+    abstract boolean getSideU();
+    abstract boolean getSideR();
+    abstract boolean getSideD();
+    abstract boolean getSideL();
     //abstract float getBallChangeDirection();
 
 }

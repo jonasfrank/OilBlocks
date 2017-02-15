@@ -43,23 +43,26 @@ public class BlockSoft extends Block {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
+        if (indexNumber <= 63) {
         int action = MotionEventCompat.getActionMasked(event);
 
-        switch (action) {
+            switch (action) {
 
-            case (MotionEvent.ACTION_DOWN):
-                return true;
-            case (MotionEvent.ACTION_MOVE):
-                return true;
-            case (MotionEvent.ACTION_UP):
-                Log.d("tag", "Blocksoft tryck");
-                board.changeDrawBoard(indexNumber);
-                board.drawBoard();
-                return true;
-            default:
-                return super.onTouchEvent(event);
+                case (MotionEvent.ACTION_DOWN):
+                    return true;
+                case (MotionEvent.ACTION_MOVE):
+                    return true;
+                case (MotionEvent.ACTION_UP):
+                    Log.d("tag", "Blocksoft tryck");
+                    board.changeDrawBoard(indexNumber);
+                    board.drawBoard();
+                    return true;
+
+                default:
+                    return super.onTouchEvent(event);
+            }
         }
+        return true;
     }
 
 

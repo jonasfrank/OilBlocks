@@ -27,7 +27,7 @@ public class Level {
 
     }
 
-    B[][][] gameLavel = {
+    B[][][] gameLevel = {
             {
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.SOFT,B.RAMPDR,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.SOFT,B.RAMPDR,B.EMPTY,B.EMPTY},

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.Random;
 import java.util.logging.Handler;
@@ -143,13 +144,14 @@ public class Ball extends ImageView {
             }
         }
 
-        //gameOverCheck();
+        gameOverCheck();
     }
 
 
     public void gameOverCheck(){
         if(moveX == 0 && moveY == 0) {
             Log.d("Game", "Over");
+
             game.running = false;
             restartBall();
         }
@@ -731,7 +733,6 @@ public class Ball extends ImageView {
                                 moveX = 0;
                                 moveY = 0;
                             }*/
-                            //game.wonGame();
                         }
                     }
 
@@ -755,10 +756,12 @@ public class Ball extends ImageView {
                 //Träff på block från vänster
                 if(moveX > 0) {
                     if (board.blockList.get(i - 1).getSideR() == true) {
-                        Log.d("tag", "ball block vänster" + i);
-                        moveX = moveX * -1;
-                        speedX++;
-                        collisionBlock = true;
+                        if (i - 1 - blockInRowSize >= 0 && board.blockList.get(i - 1 - blockInRowSize).getBlockType() != Level.B.BOOSTR) {
+                            Log.d("tag", "ball block vänster" + i);
+                            moveX = moveX * -1;
+                            speedX++;
+                            collisionBlock = true;
+                        }
                     }
                 }
 
@@ -767,10 +770,12 @@ public class Ball extends ImageView {
                 //Träff på block från höger
                 if(moveX < 0) {
                     if (board.blockList.get(i + 1).getSideL() == true) {
-                        Log.d("tag", "ball block höger" + i);
-                        moveX = moveX * -1;
-                        speedX++;
-                        collisionBlock = true;
+                        if (i + 1 - blockInRowSize >= 0 && board.blockList.get(i + 1 - blockInRowSize).getBlockType() != Level.B.BOOSTL) {
+                            Log.d("tag", "ball block höger" + i);
+                            moveX = moveX * -1;
+                            speedX++;
+                            collisionBlock = true;
+                        }
                     }
                 }
             }
@@ -785,7 +790,7 @@ public class Ball extends ImageView {
             if(moveX < 0) {
                 Log.d("tag", "ball boundaries vänster");
                 moveX = moveX * -1;
-                //speedX++;
+                speedX++;
                 //speedX = speedX * (float)wallFriction;
                 collisionBoundaries = true;
             }

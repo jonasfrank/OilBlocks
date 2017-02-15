@@ -20,7 +20,7 @@ public class LevelSelect extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.jonasfrank.oilblocks.MESSAGE";
     int levelsInRow = 4;
     int levelsInCol = 5;
-    int clearedStages = 5;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class LevelSelect extends AppCompatActivity {
 
         for (int i = 0; i < (levelsInRow * levelsInCol); i++) {
             final Button button = new Button(this);
-            if (i < clearedStages) {
+            if (i < MainActivity.clearedStages) {
                 button.setBackgroundResource(R.drawable.button_custom_level);
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -39,7 +39,7 @@ public class Board extends RelativeLayout{
         super(context);
     }
 
-    public void setBoard(Context context, int startScreenWidth, int levelNumber, Ball startBall){
+    public void setBoard(Context context, int startScreenWidth, int levelNumber, Ball startBall, Level inLevel){
         ball = startBall;
         screenWidth = startScreenWidth;
 
@@ -48,13 +48,14 @@ public class Board extends RelativeLayout{
         //setColumnCount(blockNumberInRow);
         //setRowCount(blockNumberInRow);
 
-        Level level = new Level();
+        level = inLevel;
+        //Level level = new Level();
 
         for (int i = 0; i < blockNumberInRow; i++) {
 
             for (int j = 0; j < blockNumberInRow; j++) {
 
-                Level.B blockType = level.gameLavel[levelNumber - 1][i][j];
+                Level.B blockType = level.gameLevel[levelNumber - 1][i][j];
                 switch (blockType){
                     case EMPTY:
                         block = new BlockEmpty(context);

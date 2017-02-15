@@ -3,6 +3,7 @@ package com.example.jonasfrank.oilblocks;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import static android.R.attr.level;
 import static android.R.attr.onClick;
 
 public class Game extends AppCompatActivity {
@@ -31,6 +33,7 @@ public class Game extends AppCompatActivity {
     public int blockNumberInRow;
     public int blockSize;
     public Board board;
+    public Level level;
     public Ball ball;
     public Thread threadMove;
     public boolean running = true;
@@ -63,8 +66,8 @@ public class Game extends AppCompatActivity {
         blockNumberInRow = board.blockNumberInRow;
         blockSize = screenWidth / blockNumberInRow;
         ball = new Ball(this);          //skapar bollen
-
-        board.setBoard(this, screenWidth, levelNumber, ball);       //skickar screen bredden till bord
+        level = new Level();
+        board.setBoard(this, screenWidth, levelNumber, ball, level);       //skickar screen bredden till bord
         ball.setBall(screenWidth, blockNumberInRow, board, this);
 
         gridLayoutGame.addView(board);
@@ -152,6 +155,17 @@ public class Game extends AppCompatActivity {
     public void wonGame(View view) {
 
 
+        if (MainActivity.clearedStages == levelNumber && MainActivity.clearedStages < level.gameLevel.length) {
+            MainActivity.clearedStages++;
+
+            SharedPreferences.Editor editor = MainActivity.sharedPreferences.edit();
+            editor.putInt(MainActivity.CLEARED_STAGES_KEY, MainActivity.clearedStages);
+            editor.commit();
+        } else if (MainActivity.clearedStages == level.gameLevel.length) {
+
+            //Lägg till annan overlay
+            Log.d("YOU", "WON");
+        }
 
         runOnUiThread(new Runnable() {
             @Override

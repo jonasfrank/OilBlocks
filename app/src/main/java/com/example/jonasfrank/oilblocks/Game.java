@@ -174,13 +174,22 @@ public class Game extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
                 builder.setCancelable(false);
                 View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog, null);
-                TextView textView = (TextView) diaView.findViewById(R.id.gz);
-                textView.setText("You just beat level " + levelNumber + "!");
-                ImageButton leftButton = (ImageButton) diaView.findViewById(R.id.leftButton);
-                ImageButton rightButton = (ImageButton) diaView.findViewById(R.id.rightButton);
-                ImageButton centerButton = (ImageButton) diaView.findViewById(R.id.selectButton);
+                TextView textView = (TextView) diaView.findViewById(R.id.wonLevelNum);
+                textView.setText(Integer.toString(levelNumber));
+                ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
+                ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
+                ImageButton nextButton = (ImageButton) diaView.findViewById(R.id.nextButton);
 
-                leftButton.setOnClickListener(new View.OnClickListener() {
+                menyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //LevelSelect
+                        Intent intent = new Intent(Game.this, LevelSelect.class);
+                        startActivity(intent);
+                    }
+                });
+
+                reversButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(Game.this, Game.class);
@@ -190,25 +199,20 @@ public class Game extends AppCompatActivity {
                     }
                 });
 
-                centerButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //LevelSelect
-                        Intent intent = new Intent(Game.this, LevelSelect.class);
-                        startActivity(intent);
-                    }
-                });
-
-                rightButton.setOnClickListener(new View.OnClickListener() {
+                nextButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //Next
-                        Intent intent = new Intent(Game.this, Game.class);
-                        intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber + 1));
-                        startActivity(intent);
+                        if(levelNumber < MainActivity.clearedStages) {
+                            Intent intent = new Intent(Game.this, Game.class);
+                            intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber + 1));
+                            startActivity(intent);
+                        }
 
                     }
                 });
+
+
 
                 builder.setView(diaView);
                 AlertDialog dialog = builder.create();

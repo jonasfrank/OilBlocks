@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_start_screen"
     android:orientation="vertical"
-    android:background="#1c3d6e"
+    android:background="#5e6d6a"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jonasfrank.oilblocks.StartScreen">
@@ -27,16 +27,17 @@
         />
 
     <Button
-        android:theme="@style/playButton"
+        android:background="@drawable/button_custom_startscreen_play"
         android:layout_width="250dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="70dp"
         android:layout_below="@+id/logo"
         android:onClick="selectLevel"
         android:text="@string/play_button"
         android:textSize="50dp"
         android:fontFamily="serif"
+        android:textColor="#333333"
         android:bottomRightRadius="10dp"
         android:bottomLeftRadius="10dp"
         android:topLeftRadius="10dp"

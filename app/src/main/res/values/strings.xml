@@ -5,4 +5,7 @@
     <string name="level_header">Select Level</string>
     <string name="play_button">Play</string>
 
+    <string name="won_levelText">Level </string>
+    <string name="won_clearText"> clear!</string>
+
 </resources>

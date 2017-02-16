@@ -72,21 +72,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:src="@drawable/button_custom_won_reverse"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true"
-            android:background="@android:color/transparent"
-             />
-
-        <ImageButton
-            android:id="@+id/nextButton"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:layout_toRightOf="@+id/reversButton"
-            android:src="@drawable/button_custom_won_next"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerCrop"

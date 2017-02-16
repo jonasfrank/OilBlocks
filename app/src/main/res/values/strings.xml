@@ -7,5 +7,6 @@
 
     <string name="won_levelText">Level </string>
     <string name="won_clearText"> clear!</string>
+    <string name="won_clearAllText">You won the game!</string>
 
 </resources>

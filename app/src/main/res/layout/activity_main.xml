@@ -4,7 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    android:background="#a20b0b"
 
     tools:context="com.example.jonasfrank.oilblocks.MainActivity">
 
@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/splashscreen"
+        android:src="@drawable/icon"
         android:layout_alignParentTop="true"
         />
 

@@ -7,35 +7,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/wonLevelText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/wonLevelNum"
-            android:layout_marginTop="20dp"
-            android:text="@string/won_levelText"
-            android:textSize="20sp"
-            android:fontFamily="serif"
-             />
-        <TextView
-            android:id="@+id/wonLevelNum"
+            android:id="@+id/wonClearAll"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:textSize="40sp"
-            android:fontFamily="serif"
-            />
-        <TextView
-            android:id="@+id/wonClearText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/wonLevelNum"
-            android:layout_marginTop="20dp"
-            android:text="@string/won_clearText"
             android:textSize="20sp"
             android:fontFamily="serif"
+            android:text="@string/won_clearAllText"
             />
     </RelativeLayout>
 
@@ -56,29 +36,31 @@
 
         <ImageButton
             android:id="@+id/menyButton"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:layout_toLeftOf="@+id/reversButton"
+            android:layout_marginBottom="14dp"
             android:src="@drawable/button_custom_won_meny"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true"
             android:background="@android:color/transparent"
-             />
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/won_picture"
+            android:layout_alignStart="@+id/won_picture"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp" />
 
         <ImageButton
             android:id="@+id/reversButton"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="20dp"
             android:src="@drawable/button_custom_won_reverse"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true"
+
             android:background="@android:color/transparent"
-             />
+            android:layout_alignTop="@+id/menyButton"
+            android:layout_alignRight="@+id/won_picture"
+            android:layout_alignEnd="@+id/won_picture"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp" />
 
     </RelativeLayout>
 </LinearLayout>

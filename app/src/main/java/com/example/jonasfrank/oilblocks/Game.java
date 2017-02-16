@@ -185,53 +185,85 @@ public class Game extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Log.d("game", "won");
-                AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
-                builder.setCancelable(false);
-                View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog, null);
-                TextView textView = (TextView) diaView.findViewById(R.id.wonLevelNum);
-                textView.setText(Integer.toString(levelNumber));
-                ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
-                ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
-                ImageButton nextButton = (ImageButton) diaView.findViewById(R.id.nextButton);
+                if(levelNumber == level.gameLevel.length){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
+                    builder.setCancelable(false);
+                    View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog_last_stage, null);
+                    ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
+                    ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
 
-                menyButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //LevelSelect
-                        Intent intent = new Intent(Game.this, LevelSelect.class);
-                        startActivity(intent);
-                    }
-                });
-
-                reversButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Game.this, Game.class);
-                        intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
-                        startActivity(intent);
-
-                    }
-                });
-
-                nextButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Next
-                        if(levelNumber < MainActivity.clearedStages) {
-                            Intent intent = new Intent(Game.this, Game.class);
-                            intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber + 1));
+                    menyButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //LevelSelect
+                            Intent intent = new Intent(Game.this, LevelSelect.class);
                             startActivity(intent);
                         }
+                    });
 
-                    }
-                });
+                    reversButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Game.this, Game.class);
+                            intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
+                            startActivity(intent);
+
+                        }
+                    });
 
 
+                    builder.setView(diaView);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
 
-                builder.setView(diaView);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                }else {
+                    Log.d("game", "won");
+                    AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
+                    builder.setCancelable(false);
+                    View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog, null);
+                    TextView textView = (TextView) diaView.findViewById(R.id.wonLevelNum);
+                    textView.setText(Integer.toString(levelNumber));
+                    ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
+                    ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
+                    ImageButton nextButton = (ImageButton) diaView.findViewById(R.id.nextButton);
+
+                    menyButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //LevelSelect
+                            Intent intent = new Intent(Game.this, LevelSelect.class);
+                            startActivity(intent);
+                        }
+                    });
+
+                    reversButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(Game.this, Game.class);
+                            intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
+                            startActivity(intent);
+
+                        }
+                    });
+
+                    nextButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //Next
+                            if (levelNumber < MainActivity.clearedStages) {
+                                Intent intent = new Intent(Game.this, Game.class);
+                                intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber + 1));
+                                startActivity(intent);
+                            }
+
+                        }
+                    });
+
+
+                    builder.setView(diaView);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
 

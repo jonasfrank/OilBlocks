@@ -24,13 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-
         clearedStages = sharedPreferences.getInt(CLEARED_STAGES_KEY, 0);
         if (clearedStages == 0) {
             clearedStages = 1;
         }
-
-
 
 
         Handler handler = new Handler();

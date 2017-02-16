@@ -2,14 +2,23 @@ package com.example.jonasfrank.oilblocks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.shapes.Shape;
+import android.renderscript.Sampler;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +41,24 @@ public class Board extends RelativeLayout{
     ArrayList<Block> blockList = new ArrayList<Block>();
     ArrayList<Integer> startUtilityList = new ArrayList<Integer>();
     ArrayList<Block> utilityList = new ArrayList<Block>();
+
+
+    TextView softUtilCounter = new TextView(getContext());
+    TextView boostRUtilCounter = new TextView(getContext());
+    TextView boostLUtilCounter = new TextView(getContext());
+    TextView rampULUtilCounter = new TextView(getContext());
+    TextView rampURUtilCounter = new TextView(getContext());
+    TextView rampDLUtilCounter = new TextView(getContext());
+    TextView rampDRUtilCounter = new TextView(getContext());
+
+    float[] softXY = new float[2];
+    float[] boostRXY = new float[2];
+    float[] boostLXY = new float[2];
+    float[] rampULXY = new float[2];
+    float[] rampURXY = new float[2];
+    float[] rampDLXY = new float[2];
+    float[] rampDRXY = new float[2];
+
 
     public ArrayList location;
 
@@ -243,13 +270,7 @@ public class Board extends RelativeLayout{
         int rampURCounter = 0;
         int rampDLCounter = 0;
         int rampDRCounter = 0;
-        float[] softXY = new float[2];
-        float[] boostRXY = new float[2];
-        float[] boostLXY = new float[2];
-        float[] rampULXY = new float[2];
-        float[] rampURXY = new float[2];
-        float[] rampDLXY = new float[2];
-        float[] rampDRXY = new float[2];
+
 
 
         for (int i = 0; i < startUtilityList.size() ; i++) {
@@ -286,6 +307,8 @@ public class Board extends RelativeLayout{
             Level.B thisUtilityType = utilityList.get(i).getBlockType();
             Block thisUtility = utilityList.get(i);
 
+
+
             switch (thisUtilityType){
                 case SOFT:
                     thisUtility.setX(softXY[0]);
@@ -294,6 +317,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     softCounter++;
+                    setUtilityCounterHolder(softUtilCounter, softCounter, softXY);
                     break;
                 case BOOSTR:
                     thisUtility.setX(boostRXY[0]);
@@ -302,6 +326,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     boostRCounter++;
+                    setUtilityCounterHolder(boostRUtilCounter, boostRCounter, boostRXY);
                     break;
                 case BOOSTL:
                     thisUtility.setX(boostLXY[0]);
@@ -310,6 +335,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     boostLCounter++;
+                    setUtilityCounterHolder(boostLUtilCounter, boostLCounter, boostLXY);
                     break;
                 case RAMPUL:
                     thisUtility.setX(rampULXY[0]);
@@ -318,6 +344,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     rampULCounter++;
+                    setUtilityCounterHolder(rampULUtilCounter, rampULCounter, rampULXY);
                     break;
                 case RAMPUR:
                     thisUtility.setX(rampURXY[0]);
@@ -326,6 +353,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     rampURCounter++;
+                    setUtilityCounterHolder(rampURUtilCounter, rampURCounter, rampURXY);
                     break;
                 case RAMPDL:
                     thisUtility.setX(rampDLXY[0]);
@@ -334,6 +362,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     rampDLCounter++;
+                    setUtilityCounterHolder(rampDLUtilCounter, rampDLCounter, rampDLXY);
                     break;
                 case RAMPDR:
                     thisUtility.setX(rampDRXY[0]);
@@ -342,10 +371,45 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     rampDRCounter++;
+                    setUtilityCounterHolder(rampDRUtilCounter, rampDRCounter, rampDRXY);
                     break;
             }
 
         }
+
+
+
+
+        /*TextView textView = new TextView(getContext());
+        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        textView.setText(String.valueOf(boostRCounter));
+        textView.setTextSize(20);
+        textView.setTypeface(null, Typeface.BOLD);
+        textView.setShadowLayer(10, 7, 6, Color.BLACK);
+
+
+        textView.setX(boostRXY[0]);
+        textView.setY(boostRXY[1]);
+        addView(textView);*/
+
+    }
+
+    public void setUtilityCounterHolder(TextView textView, int counter, float[] pos) {
+
+        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        textView.setText(String.valueOf(counter));
+        textView.setTextSize(20);
+
+        textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+        textView.setShadowLayer(10, 7, 6, Color.BLACK);
+
+
+        textView.setX(pos[0]);
+        textView.setY(pos[1]);
+        addView(textView);
+
+
+
 
     }
 
@@ -370,6 +434,19 @@ public class Board extends RelativeLayout{
         utilBackground.setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
 
         addView(utilBackground);
+
+        /*TextView textView = new TextView(getContext());
+        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+        textView.setText(String.valueOf(0));
+        textView.setTextSize(20);
+        textView.setTypeface(null, Typeface.BOLD);
+        textView.setShadowLayer(10, 7, 6, Color.BLACK);
+
+
+        textView.setX(x);
+        textView.setY(y);
+        textView.bringToFront();
+        addView(textView);*/
 
         float[] XY = new float[2];
         XY[0] = x;

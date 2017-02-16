@@ -4,12 +4,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.TranslateAnimation;
@@ -21,7 +23,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import static android.R.attr.centerX;
+import static android.R.attr.gravity;
 import static android.R.attr.level;
 import static android.R.attr.onClick;
 
@@ -37,7 +42,9 @@ public class Game extends AppCompatActivity {
     public Ball ball;
     public Thread threadMove;
     public boolean running = true;
+    public boolean gameIsWon = false;
 
+    private static final int SPLASH_DURATION = 750;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,12 @@ public class Game extends AppCompatActivity {
         levelNumber = Integer.parseInt(temp);
 
         drawBoard();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Game.this, LevelSelect.class);
+        startActivity(intent);
     }
 
     public void drawBoard() {
@@ -129,6 +142,7 @@ public class Game extends AppCompatActivity {
     public void playBall(View view) {
         Log.d("tag", "game startBall");
         running = true;
+        gameIsWon = false;
         threadMove.start();
 
     }
@@ -153,7 +167,8 @@ public class Game extends AppCompatActivity {
     }
 
     public void wonGame(View view) {
-
+        running = false;
+        gameIsWon = true;
 
         if (MainActivity.clearedStages == levelNumber && MainActivity.clearedStages < level.gameLevel.length) {
             MainActivity.clearedStages++;
@@ -221,7 +236,41 @@ public class Game extends AppCompatActivity {
         });
 
 
+    }
 
+    public void lostGame(View view) {
+        if (gameIsWon == false) {
+            running = false;
+
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Game over!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    toast.show();
+
+
+                    Handler handler = new Handler();
+
+                    // run a thread after 2 seconds to start the home screen
+                    handler.postDelayed(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            ball.restartBall();
+                        }
+                    }, SPLASH_DURATION);
+
+                }
+            });
+
+
+        }
     }
 }
 

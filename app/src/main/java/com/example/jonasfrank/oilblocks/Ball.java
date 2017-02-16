@@ -144,7 +144,6 @@ public class Ball extends ImageView {
             }
         }
 
-        gameOverCheck();
     }
 
 
@@ -152,8 +151,7 @@ public class Ball extends ImageView {
         if(moveX == 0 && moveY == 0) {
             Log.d("Game", "Over");
 
-            game.running = false;
-            restartBall();
+            game.lostGame(this);
         }
 
     }
@@ -219,7 +217,10 @@ public class Ball extends ImageView {
             }
         }
 
+
         collisionBoundaries = boundaryCheck(ballX, ballY);
+        gameOverCheck();
+
 
     }
 
@@ -712,8 +713,11 @@ public class Ball extends ImageView {
                 Log.d("tag", "ball mål2");
                 moveX = 0;
                 moveY = 0;
-                game.stopBall(this);
+
                 game.wonGame(this);
+                //game.stopBall(this);
+                collisionBlock = true;
+
 
             }
             //else if (bollDX > blockAX && bollDY == blockAY   &&    bollCX < blockBX && bollCY == blockBY   &&   bollCY <= blockCY){

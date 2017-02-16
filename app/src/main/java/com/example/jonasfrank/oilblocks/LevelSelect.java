@@ -82,7 +82,14 @@ public class LevelSelect extends AppCompatActivity {
         }
         rLayout.addView(grid);
     }
-        public void goToGame(String s) {
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LevelSelect.this, StartScreen.class);
+        startActivity(intent);
+    }
+
+    public void goToGame(String s) {
 
             Intent intent = new Intent(this, Game.class);
             intent.putExtra(EXTRA_MESSAGE, s);

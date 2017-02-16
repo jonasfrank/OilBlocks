@@ -45,6 +45,7 @@ public class Ball extends ImageView {
     public int lapX;
     public int lapY;
     public int lapGravity;
+    public int gameLostDelay;
 
     public int maxMove = 8;
 
@@ -129,6 +130,7 @@ public class Ball extends ImageView {
             lapX = 0;
             if (moveX != 0) {
                 setX(ballX + (blockSize / moveX));
+                gameLostDelay = 0;
             }
         }
 
@@ -141,6 +143,7 @@ public class Ball extends ImageView {
 
             if (moveY != 0) {
                 setY(ballY + (blockSize / moveY));
+                gameLostDelay = 0;
             }
         }
 
@@ -149,9 +152,12 @@ public class Ball extends ImageView {
 
     public void gameOverCheck(){
         if(moveX == 0 && moveY == 0) {
-            Log.d("Game", "Over");
+            gameLostDelay++;
+            if (gameLostDelay >= 20) {
+                Log.d("Game", "Over");
 
-            game.lostGame(this);
+                game.lostGame(this);
+            }
         }
 
     }
@@ -370,6 +376,7 @@ public class Ball extends ImageView {
                         }else{
                             moveX = moveX * -1;
                         }
+                        lapY = 0;
                     } else if (moveY > 0) {
                         if(i + 1 <= 63 && board.blockList.get(i + 1).getSideL() == true) {
                             Log.d("tag", "ball ramp RAMPUR mitt i 2");

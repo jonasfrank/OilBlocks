@@ -50,7 +50,10 @@ public class BlockEmpty extends Block {
                 return true;
             case (MotionEvent.ACTION_UP):
                 Log.d("tag", "Blocksoft tryck");
-                board.changeDrawBoard(indexNumber);
+                if(board.softCounter < board.maxSoftCounter) {
+                    board.changeDrawBoard(indexNumber);
+                    board.softCounter++;
+                }
                 board.drawBoard();
                 return true;
             default:

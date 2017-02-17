@@ -54,7 +54,10 @@ public class BlockSoft extends Block {
                     return true;
                 case (MotionEvent.ACTION_UP):
                     Log.d("tag", "Blocksoft tryck");
-                    board.changeDrawBoard(indexNumber);
+                    if(board.softCounter > 0) {
+                        board.changeDrawBoard(indexNumber);
+                        board.softCounter--;
+                    }
                     board.drawBoard();
                     return true;
 

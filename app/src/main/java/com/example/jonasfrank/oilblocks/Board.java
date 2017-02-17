@@ -43,6 +43,16 @@ public class Board extends RelativeLayout{
     ArrayList<Block> utilityList = new ArrayList<Block>();
 
 
+    int utilCounter;
+    int softCounter;
+    int maxSoftCounter;
+    int boostRCounter;
+    int boostLCounter;
+    int rampULCounter;
+    int rampURCounter;
+    int rampDLCounter;
+    int rampDRCounter;
+
     TextView softUtilCounter = new TextView(getContext());
     TextView boostRUtilCounter = new TextView(getContext());
     TextView boostLUtilCounter = new TextView(getContext());
@@ -138,6 +148,8 @@ public class Board extends RelativeLayout{
                 case SOFT:
                     block = new BlockSoft(context);
                     setUtilityBackgroundList(R.drawable.groundrost1, i);
+                    softCounter = level.softCount[levelNumber - 1][0];
+                    maxSoftCounter = level.softCount[levelNumber - 1][1];
 
                     break;
                 case BOOSTR:
@@ -262,15 +274,15 @@ public class Board extends RelativeLayout{
         addView(bottomBoundaries);
 
 
-        int utilCounter = 0;
-        int softCounter = 0;
-        int maxSoftCounter = 0;
-        int boostRCounter = 0;
-        int boostLCounter = 0;
-        int rampULCounter = 0;
-        int rampURCounter = 0;
-        int rampDLCounter = 0;
-        int rampDRCounter = 0;
+        utilCounter = 0;
+        //softCounter = 0;
+        //maxSoftCounter = 0;
+        boostRCounter = 0;
+        boostLCounter = 0;
+        rampULCounter = 0;
+        rampURCounter = 0;
+        rampDLCounter = 0;
+        rampDRCounter = 0;
 
 
 
@@ -319,13 +331,16 @@ public class Board extends RelativeLayout{
 
             switch (thisUtilityType){
                 case SOFT:
-                    thisUtility.setX(softXY[0]);
-                    thisUtility.setY(softXY[1]);
-                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
-                    addView(thisUtility);
 
-                    maxSoftCounter++;
-                    softCounter++;
+                    if(softCounter > 0) {
+                        thisUtility.setX(softXY[0]);
+                        thisUtility.setY(softXY[1]);
+                        thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                        addView(thisUtility);
+                    }
+
+                    //maxSoftCounter++;
+                    //softCounter++;
                     updateUtilityCounter(softUtilCounter, softCounter, maxSoftCounter);
                     break;
                 case BOOSTR:
@@ -406,6 +421,7 @@ public class Board extends RelativeLayout{
 
     public void updateUtilityCounter(TextView textView, int counter, int max) {
         textView.setText(String.valueOf(counter) + "/" + String.valueOf(max));
+        textView.setTextSize(16);
         textView.bringToFront();
     }
 

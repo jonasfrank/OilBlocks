@@ -15,6 +15,7 @@ public class Level {
     public enum B {
         EMPTY,
         SOFT,
+        SOFTUTIL,
         SOLID,
         START,
         GOAL,
@@ -86,6 +87,14 @@ public class Level {
             {B.SOFT,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL},
             {B.SOFT,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL},
             {B.SOFT,B.BOOSTL,B.BOOSTR,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.BOOSTL}
+    };
+
+    int [][] softCount ={
+            {8,10},
+            {5,20},
+            {0,10},
+            {5,5},
+            {5,15}
     };
 
 }

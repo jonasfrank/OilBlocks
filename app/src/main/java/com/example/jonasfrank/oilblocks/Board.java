@@ -264,6 +264,7 @@ public class Board extends RelativeLayout{
 
         int utilCounter = 0;
         int softCounter = 0;
+        int maxSoftCounter = 0;
         int boostRCounter = 0;
         int boostLCounter = 0;
         int rampULCounter = 0;
@@ -280,24 +281,31 @@ public class Board extends RelativeLayout{
             switch (pic){
                 case R.drawable.groundrost1:
                     softXY = XY;
+                    setUtilityCounterHolder(softUtilCounter, softXY);
                     break;
                 case R.drawable.boostright:
                     boostRXY = XY;
+                    setUtilityCounterHolder(boostRUtilCounter, boostRXY);
                     break;
                 case R.drawable.boostleft:
                     boostLXY = XY;
+                    setUtilityCounterHolder(boostLUtilCounter, boostLXY);
                     break;
                 case R.drawable.rampupleft:
                     rampULXY = XY;
+                    setUtilityCounterHolder(rampULUtilCounter, rampULXY);
                     break;
                 case R.drawable.rampupright:
                     rampURXY = XY;
+                    setUtilityCounterHolder(rampURUtilCounter, rampURXY);
                     break;
                 case R.drawable.rampdownleft:
                     rampDLXY = XY;
+                    setUtilityCounterHolder(rampDLUtilCounter, rampDLXY);
                     break;
                 case R.drawable.rampdownright:
                     rampDRXY = XY;
+                    setUtilityCounterHolder(rampDRUtilCounter, rampDRXY);
                     break;
             }
         }
@@ -316,8 +324,9 @@ public class Board extends RelativeLayout{
                     thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
                     addView(thisUtility);
 
+                    maxSoftCounter++;
                     softCounter++;
-                    setUtilityCounterHolder(softUtilCounter, softCounter, softXY);
+                    updateUtilityCounter(softUtilCounter, softCounter, maxSoftCounter);
                     break;
                 case BOOSTR:
                     thisUtility.setX(boostRXY[0]);
@@ -326,7 +335,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     boostRCounter++;
-                    setUtilityCounterHolder(boostRUtilCounter, boostRCounter, boostRXY);
+                    updateUtilityCounter(boostRUtilCounter, boostRCounter);
                     break;
                 case BOOSTL:
                     thisUtility.setX(boostLXY[0]);
@@ -335,7 +344,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     boostLCounter++;
-                    setUtilityCounterHolder(boostLUtilCounter, boostLCounter, boostLXY);
+                    updateUtilityCounter(boostLUtilCounter, boostLCounter);
                     break;
                 case RAMPUL:
                     thisUtility.setX(rampULXY[0]);
@@ -344,7 +353,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     rampULCounter++;
-                    setUtilityCounterHolder(rampULUtilCounter, rampULCounter, rampULXY);
+                    updateUtilityCounter(rampULUtilCounter, rampULCounter);
                     break;
                 case RAMPUR:
                     thisUtility.setX(rampURXY[0]);
@@ -353,7 +362,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     rampURCounter++;
-                    setUtilityCounterHolder(rampURUtilCounter, rampURCounter, rampURXY);
+                    updateUtilityCounter(rampURUtilCounter, rampURCounter);
                     break;
                 case RAMPDL:
                     thisUtility.setX(rampDLXY[0]);
@@ -362,7 +371,7 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     rampDLCounter++;
-                    setUtilityCounterHolder(rampDLUtilCounter, rampDLCounter, rampDLXY);
+                    updateUtilityCounter(rampDLUtilCounter, rampDLCounter);
                     break;
                 case RAMPDR:
                     thisUtility.setX(rampDRXY[0]);
@@ -371,46 +380,33 @@ public class Board extends RelativeLayout{
                     addView(thisUtility);
 
                     rampDRCounter++;
-                    setUtilityCounterHolder(rampDRUtilCounter, rampDRCounter, rampDRXY);
+                    updateUtilityCounter(rampDRUtilCounter, rampDRCounter);
                     break;
             }
-
         }
-
-
-
-
-        /*TextView textView = new TextView(getContext());
-        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        textView.setText(String.valueOf(boostRCounter));
-        textView.setTextSize(20);
-        textView.setTypeface(null, Typeface.BOLD);
-        textView.setShadowLayer(10, 7, 6, Color.BLACK);
-
-
-        textView.setX(boostRXY[0]);
-        textView.setY(boostRXY[1]);
-        addView(textView);*/
-
     }
 
-    public void setUtilityCounterHolder(TextView textView, int counter, float[] pos) {
+    public void setUtilityCounterHolder(TextView textView, float[] pos) {
 
         textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        textView.setText(String.valueOf(counter));
-        textView.setTextSize(20);
-
-        textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+        textView.setText(String.valueOf(0));
+        textView.setTextSize(21);
+        textView.setTypeface(Typeface.SERIF, Typeface.BOLD);
         textView.setShadowLayer(10, 7, 6, Color.BLACK);
-
-
         textView.setX(pos[0]);
         textView.setY(pos[1]);
+
         addView(textView);
+    }
 
+    public void updateUtilityCounter(TextView textView, int counter) {
+        textView.setText(String.valueOf(counter));
+        textView.bringToFront();
+    }
 
-
-
+    public void updateUtilityCounter(TextView textView, int counter, int max) {
+        textView.setText(String.valueOf(counter) + "/" + String.valueOf(max));
+        textView.bringToFront();
     }
 
     public float[] drawUtilityBackground(int pic, int utilCounter){
@@ -435,18 +431,6 @@ public class Board extends RelativeLayout{
 
         addView(utilBackground);
 
-        /*TextView textView = new TextView(getContext());
-        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-        textView.setText(String.valueOf(0));
-        textView.setTextSize(20);
-        textView.setTypeface(null, Typeface.BOLD);
-        textView.setShadowLayer(10, 7, 6, Color.BLACK);
-
-
-        textView.setX(x);
-        textView.setY(y);
-        textView.bringToFront();
-        addView(textView);*/
 
         float[] XY = new float[2];
         XY[0] = x;

@@ -41,7 +41,7 @@ public class Game extends AppCompatActivity {
     public Level level;
     public Ball ball;
     public Thread threadMove;
-    public boolean running = true;
+    public boolean running = false;
     public boolean gameIsWon = false;
 
     private static final int SPLASH_DURATION = 750;
@@ -268,6 +268,10 @@ public class Game extends AppCompatActivity {
         });
 
 
+    }
+
+    public boolean getRunning() {
+        return running;
     }
 
     public void lostGame(View view) {

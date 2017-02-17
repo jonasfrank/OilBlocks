@@ -43,11 +43,11 @@ abstract class Block extends ImageView {
     public float ballChangeDirection;
 
 
-    public Block(Context context){
+    public Block(Context context) {
         super(context);
     }
 
-    public void setBlock(int startScreenWidth, int blockNumberInRow, final Board startBoard){
+    public void setBlock(int startScreenWidth, int blockNumberInRow, final Board startBoard) {
 
         board = startBoard;
 
@@ -77,38 +77,44 @@ abstract class Block extends ImageView {
 
     public boolean onTouchEvent(MotionEvent event) {
 
-        int action = MotionEventCompat.getActionMasked(event);
+        if (board.ball.game.getRunning() == false) {
+            int action = MotionEventCompat.getActionMasked(event);
 
-        switch (action) {
+            switch (action) {
 
-            case (MotionEvent.ACTION_DOWN):
-                pressX = event.getRawX();
-                pressY = event.getRawY();
-                dx = pressX - getX();
-                dy = pressY - getY();
 
-                return true;
-            case (MotionEvent.ACTION_MOVE):
-                bringToFront();
-                setX(event.getRawX() - dx);
-                setY(event.getRawY() - dy);
+                case (MotionEvent.ACTION_DOWN):
+                    pressX = event.getRawX();
+                    pressY = event.getRawY();
+                    dx = pressX - getX();
+                    dy = pressY - getY();
 
-                return true;
-            case (MotionEvent.ACTION_UP):
-                float releaseX = event.getRawX();
-                float releaseY = event.getRawY();
-                Log.d("index: ", "" + indexNumber);
-                if (indexNumber < 64) {
-                    board.swapBlock(releaseX, releaseY, indexNumber);
-                }else{
-                    board.swapBlockArray(releaseX, releaseY, this);
-                    Log.d("utility", "dras");
-                }
-                return true;
-            default:
-                return super.onTouchEvent(event);
+                    return true;
+                case (MotionEvent.ACTION_MOVE):
+                    bringToFront();
+                    setX(event.getRawX() - dx);
+                    setY(event.getRawY() - dy);
+
+                    return true;
+                case (MotionEvent.ACTION_UP):
+                    float releaseX = event.getRawX();
+                    float releaseY = event.getRawY();
+                    Log.d("index: ", "" + indexNumber);
+                    if (indexNumber < 64) {
+                        board.swapBlock(releaseX, releaseY, indexNumber);
+                    } else {
+                        board.swapBlockArray(releaseX, releaseY, this);
+                        Log.d("utility", "dras");
+                    }
+                    return true;
+                default:
+                    return super.onTouchEvent(event);
+            }
+
         }
+        return true;
     }
+
 
 
     public int getLevelNumber(){

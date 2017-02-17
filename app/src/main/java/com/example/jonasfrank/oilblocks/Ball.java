@@ -261,7 +261,7 @@ public class Ball extends ImageView {
         if(thisBlockType == Level.B.BOOSTR){
             if (ballCenterX > thisBlockX && ballCenterX < thisBlockX + blockSize && ballCenterY > thisBlockY && ballCenterY < thisBlockY + blockSize) {
                 Log.d("tag", "ball boostR");
-                if(bollAY == blockAY && i + 1 >= 0 && board.blockList.get(i + 1).getSideR() == true) {
+                if(bollAY == blockAY && i + 1 >= 0 && board.blockList.get(i + 1).getSideL() == true) {
                     Log.d("tag", "ball boostL 1");
                     moveY = 0;
                     moveX = thisBlock.getBallChangeDirection();

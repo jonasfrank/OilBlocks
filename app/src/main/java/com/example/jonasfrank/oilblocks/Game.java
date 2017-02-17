@@ -64,6 +64,7 @@ public class Game extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        running = false;
         Intent intent = new Intent(Game.this, LevelSelect.class);
         startActivity(intent);
     }

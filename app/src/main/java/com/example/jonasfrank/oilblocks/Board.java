@@ -97,6 +97,9 @@ public class Board extends RelativeLayout{
                     case EMPTY:
                         block = new BlockEmpty(context);
                         break;
+                    case EMPTYDISABLE:
+                        block = new BlockEmptyDisable(context);
+                        break;
                     case SOFT:
                         block = new BlockSoft(context);
                         break;

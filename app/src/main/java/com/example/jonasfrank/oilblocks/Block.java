@@ -77,7 +77,7 @@ abstract class Block extends ImageView {
 
     public boolean onTouchEvent(MotionEvent event) {
 
-        if (board.ball.game.getRunning() == false) {
+        if (board.ball.game.getgameInProgress() == false || board.ball.game.getgameInProgress() == true) {
             int action = MotionEventCompat.getActionMasked(event);
 
             switch (action) {

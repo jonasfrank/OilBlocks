@@ -41,6 +41,7 @@ public class Game extends AppCompatActivity {
     public Level level;
     public Ball ball;
     public Thread threadMove;
+    public boolean gameInProgress = false;
     public boolean running = false;
     public boolean gameIsWon = false;
 
@@ -143,6 +144,7 @@ public class Game extends AppCompatActivity {
     public void playBall(View view) {
         Log.d("tag", "game startBall");
         running = true;
+        gameInProgress = true;
         gameIsWon = false;
         threadMove.start();
 
@@ -151,6 +153,7 @@ public class Game extends AppCompatActivity {
     public void restartBall(View view) {
         Log.d("tag", "game restartBall");
         running = false;
+        gameInProgress = false;
         ball.restartBall();
     }
 
@@ -273,6 +276,9 @@ public class Game extends AppCompatActivity {
 
     public boolean getRunning() {
         return running;
+    }
+    public boolean getgameInProgress() {
+        return gameInProgress;
     }
 
     public void lostGame(View view) {

@@ -191,14 +191,18 @@ public class Ball extends ImageView {
             collisionRamp = rampCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
             collisionBlock = blockCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
 
-           if (collisionBlock == true || collisionRamp == true) {
+            if (collisionBlock == true || collisionRamp == true) {
                 //Log.d("Broken", "Loop" + i);
                 break outerLoop;
+            }
+            if (collisionBlock == true || collisionRamp == true|| collisionBooster == true) {
+                //Log.d("Broken", "Loop" + i);
+                lapGravity = 0;
             }
 
             //Om det inte är någon kolletion
             if(i == board.blockList.size() - 1 && (collisionBlock == false && collisionBooster == false && collisionBoundaries == false && collisionRamp == false)){
-                Log.d("tag", "ball ingen kolletion");
+                Log.d("tag", "ball ingen kolletion" + lapGravity);
                 if(moveY > 0 || moveY == 0) {
                     lapGravity++;
                     if (lapGravity == 5) {
@@ -262,7 +266,9 @@ public class Ball extends ImageView {
             if (ballCenterX > thisBlockX && ballCenterX < thisBlockX + blockSize && ballCenterY > thisBlockY && ballCenterY < thisBlockY + blockSize) {
                 if(bollAY == blockAY && i + 1 >= 0 && board.blockList.get(i + 1).getSideL() == true) {
                     Log.d("tag", "ball boostR");
-                    moveY = 0;
+                    if((moveY > 0) || (moveY < 0 && (board.blockList.get(i - blockInRowSize).getSideD() == false || board.blockList.get(i - blockInRowSize + 1).getSideD() == false))) {
+                        moveY = 0;
+                    }
                     moveX = thisBlock.getBallChangeDirection();
                     lapX = 0;
                     speedX = 1;
@@ -274,7 +280,9 @@ public class Ball extends ImageView {
             if (ballCenterX > thisBlockX && ballCenterX < thisBlockX + blockSize && ballCenterY > thisBlockY && ballCenterY < thisBlockY + blockSize) {
                 if(bollAY == blockAY && i - 1 >= 0 && board.blockList.get(i - 1).getSideR() == true) {
                     Log.d("tag", "ball boostL");
-                    moveY = 0;
+                    if((moveY > 0) || (moveY < 0 && (board.blockList.get(i - blockInRowSize).getSideD() == false || board.blockList.get(i - blockInRowSize - 1).getSideD() == false))) {
+                        moveY = 0;
+                    }
                     moveX = thisBlock.getBallChangeDirection();
                     lapX = 0;
                     speedX = 1;
@@ -381,7 +389,7 @@ public class Ball extends ImageView {
                             moveX = 20;
                             moveY = 0;
                             speedX = speedY;
-                            lapX = 0;
+                            lapGravity = 0;
                         }
                         else{
                             moveY = 0;
@@ -408,32 +416,30 @@ public class Ball extends ImageView {
                 }
             } else if (thisBlockType == Level.B.RAMPDL) {
                 if (bollAX == blockAX && bollAY == blockAY) {
-                   // if() {
-                        Log.d("tag", "ball ramp RAMPDL mitt i");
-                        if (moveX > 0) {
-                            if(i + blockInRowSize <= blockListSize && board.blockList.get(i + blockInRowSize).getSideU() == true) {
-                                Log.d("tag", "ball ramp RAMPDL mitt i 1");
-                                moveX = 0;
-                                moveY = 20;
-                                speedY = speedX;
-                            }else{
-                                moveX = moveX * -1;
-                            }
-                        } else if (moveY < 0) {
-                            if(i - 1 >= 0 && board.blockList.get(i - 1).getSideR() == true) {
-                                Log.d("tag", "ball ramp RAMPDL mitt i 2");
-                                moveX = -20;
-                                moveY = 0;
-                                speedX = speedY;
-                                //lapY = 0;
-                            }
-                            else{
-                                moveY = moveY * -1;
-                            }
+                    Log.d("tag", "ball ramp RAMPDL mitt i");
+                    if (moveX > 0) {
+                        if(i + blockInRowSize <= blockListSize && board.blockList.get(i + blockInRowSize).getSideU() == true) {
+                            Log.d("tag", "ball ramp RAMPDL mitt i 1");
+                            moveX = 0;
+                            moveY = 20;
+                            speedY = speedX;
+                        }else{
+                            moveX = moveX * -1;
                         }
-                   // }
+                    } else if (moveY < 0) {
+                        if(i - 1 >= 0 && board.blockList.get(i - 1).getSideR() == true) {
+                            Log.d("tag", "ball ramp RAMPDL mitt i 2");
+                            moveX = -20;
+                            moveY = 0;
+                            speedX = speedY;
+                            lapGravity = 0;
+                        }
+                        else{
+                            moveY = moveY * -1;
+                        }
+                    }
                     collisionRamp = true;
-                } else {
+                } /*else {
                     if (bollBX == blockBX && bollBY < blockBY && bollBY > blockBY) {
                         //Träff på block höger innersida
                         if (moveY < 0) {
@@ -450,7 +456,7 @@ public class Ball extends ImageView {
                         //}
                         collisionRamp = true;
                     }
-                }
+                }*/
             } else if (thisBlockType == Level.B.RAMPDR) {
                 if (bollAX == blockAX && bollAY == blockAY) {
                     Log.d("tag", "ball ramp RAMPDR mitt i");
@@ -469,14 +475,14 @@ public class Ball extends ImageView {
                             moveX = 20;
                             moveY = 0;
                             speedX = speedY;
-                            //lapY = 0;
+                            lapGravity = 0;
                         }else{
                             moveY = moveY * -1;
                         }
                     }
                     collisionRamp = true;
                 }
-            } else {
+            } /*else {
                 if (bollAX == blockAX && bollAY < blockDY && bollAY > blockAY) {
                     //Träff på block vänstra innersida
                     if (moveY < 0) {
@@ -493,7 +499,7 @@ public class Ball extends ImageView {
                     //}
                     collisionRamp = true;
                 }
-            }
+            }*/
 
             /**
              * Träff på rampens 4 yttersidor sidor uppe, nere, vänster eller höger.

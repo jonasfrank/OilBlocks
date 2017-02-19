@@ -2,6 +2,7 @@ package com.example.jonasfrank.oilblocks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -87,6 +88,7 @@ public class LevelSelect extends AppCompatActivity {
             button.setText(Integer.toString(i + 1));
             button.setTextSize(25);
             button.setTextColor(0xff333333);
+            button.setTypeface(Typeface.SERIF, Typeface.NORMAL);
             button.setPadding(0, 0, 7, 17);
 
             /**

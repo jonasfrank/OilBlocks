@@ -74,7 +74,8 @@
         android:layout_marginLeft="15dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:textColor="#252525"/>
+        android:textColor="#252525"
+        android:fontFamily="serif"/>
 
     <ImageButton
         android:id="@+id/game_stop"

@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 
 public class BlockEmptyDisable extends Block {
 
-    public Level.B blockType = Level.B.EMPTY;
+    public Level.B blockType = Level.B.EMPTYDISABLE;
 
     //Variablar för sidor, if true så är sidan öppen för bollen att rulla.
     public final boolean sideU = true;
@@ -19,7 +19,7 @@ public class BlockEmptyDisable extends Block {
     public BlockEmptyDisable(Context context){
         super(context);
 
-        setImageResource(R.drawable.groundremove);
+        setImageResource(R.drawable.groundempty);
     }
 
     public void blockKlicked(){

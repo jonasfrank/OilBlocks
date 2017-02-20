@@ -66,7 +66,7 @@ public class Ball extends ImageView {
         board = startBoard;
         game = startGame;
 
-        blockListSize = board.blockList.size();
+        blockListSize = board.blockList.size() - 1;
         blockInRowSize = blockNumberInRow;
 
         moveX = startMoveX;
@@ -321,7 +321,7 @@ public class Ball extends ImageView {
                         lapY = 0;
                     } else if (moveY > 0) {
                         Log.d("tag", "ball ramp RAMPUL i och blocktype" + i +" "+ board.blockList.get(i - 1).getSideR() + " " + board.blockList.get(i - 1).getBlockType());
-                        if(i - 1 >= 0 && board.blockList.get(i - 1).getSideR() == true) {
+                        if(i - 1 >= 0 && board.blockList.get(i - 1).getSideR() == true && i % blockInRowSize != 0) {
                             Log.d("tag", "ball ramp RAMPUL mitt i 2");
                             moveX = -20;
                             moveY = 0;
@@ -365,7 +365,7 @@ public class Ball extends ImageView {
                         }
                         lapY = 0;
                     } else if (moveY > 0) {
-                        if(i + 1 <= blockListSize && board.blockList.get(i + 1).getSideL() == true) {
+                        if(i + 1 <= blockListSize && board.blockList.get(i + 1).getSideL() == true && (i + 1) % blockInRowSize != 0) {
                             Log.d("tag", "ball ramp RAMPUR mitt i 2");
                             moveX = 20;
                             moveY = 0;

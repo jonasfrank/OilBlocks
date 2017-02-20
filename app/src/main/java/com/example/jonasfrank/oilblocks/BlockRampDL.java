@@ -8,13 +8,13 @@ import android.content.Context;
 
 public class BlockRampDL extends Block {
 
-    public Level.B blockType = Level.B.RAMPDL;
+    Level.B blockType = Level.B.RAMPDL;
 
     //Variablar för sidor, if true så är sidan öppen för bollen att rulla.
-    public final boolean sideU = false;
-    public final boolean sideR = false;
-    public final boolean sideD = true;
-    public final boolean sideL = true;
+    final boolean sideU = false;
+    final boolean sideR = false;
+    final boolean sideD = true;
+    final boolean sideL = true;
 
     public float ballChangeDirection = 20;
 

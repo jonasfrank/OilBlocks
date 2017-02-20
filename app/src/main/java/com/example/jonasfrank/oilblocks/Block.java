@@ -21,17 +21,17 @@ import static android.R.attr.y;
 abstract class Block extends ImageView {
 
     int blockSize;
-    int levelNumber;
+    int indexNumber;
+
     float pressX;
     float pressY;
     float dx;
     float dy;
-    Level level;
-    Board board;
-    ArrayList blockList;
-    int indexNumber;
     public float x;
     public float y;
+
+    Level level;
+    Board board;
 
     boolean sideU;
     boolean sideR;
@@ -51,9 +51,7 @@ abstract class Block extends ImageView {
 
         blockSize = startScreenWidth / blockNumberInRow;
         setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
-
     }
-
 
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -79,12 +77,11 @@ abstract class Block extends ImageView {
                     case (MotionEvent.ACTION_UP):
                         float releaseX = event.getRawX();
                         float releaseY = event.getRawY();
-                        Log.d("index: ", "" + indexNumber);
+                        Log.d("tag", "index:" + indexNumber);
                         if (indexNumber < 64) {
                             board.swapBlock(releaseX, releaseY, indexNumber);
                         } else {
                             board.swapBlockArray(releaseX, releaseY, this);
-                            Log.d("utility", "dras");
                         }
                         return true;
                     default:
@@ -95,18 +92,8 @@ abstract class Block extends ImageView {
         return true;
     }
 
-
-
-    public int getLevelNumber(){
-        return levelNumber;
-    }
-
     public Level getLevel(){
         return level;
-    }
-
-    public ArrayList getArrayList(){
-        return blockList;
     }
 
     public void setIndexNumber(int startIndexNumber){

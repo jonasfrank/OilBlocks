@@ -7,13 +7,13 @@ import android.view.MotionEvent;
 
 public class BlockSolid extends Block {
 
-    public Level.B blockType = Level.B.SOLID;
+    Level.B blockType = Level.B.SOLID;
 
     //Variablar för sidor, if true så är sidan öppen för bollen att rulla.
-    public final boolean sideU = false;
-    public final boolean sideR = false;
-    public final boolean sideD = false;
-    public final boolean sideL = false;
+    final boolean sideU = false;
+    final boolean sideR = false;
+    final boolean sideD = false;
+    final boolean sideL = false;
 
     public BlockSolid(Context context){
         super(context);

@@ -7,13 +7,13 @@ import android.view.MotionEvent;
 
 public class BlockGoal extends Block {
 
-    public Level.B blockType = Level.B.GOAL;
+    Level.B blockType = Level.B.GOAL;
 
     //Variablar för sidor, if true så är sidan öppen för bollen att rulla.
-    public final boolean sideU = true;
-    public final boolean sideR = false;
-    public final boolean sideD = false;
-    public final boolean sideL = false;
+    final boolean sideU = true;
+    final boolean sideR = false;
+    final boolean sideD = false;
+    final boolean sideL = false;
 
     public BlockGoal(Context context){
         super(context);

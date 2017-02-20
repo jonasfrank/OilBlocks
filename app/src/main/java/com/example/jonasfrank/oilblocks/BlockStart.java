@@ -8,13 +8,13 @@ import android.view.MotionEvent;
 
 public class BlockStart extends Block {
 
-    public Level.B blockType = Level.B.START;
+    Level.B blockType = Level.B.START;
 
     //Variablar för sidor, if true så är sidan öppen för bollen att rulla.
-    public final boolean sideU = true;
-    public final boolean sideR = true;
-    public final boolean sideD = true;
-    public final boolean sideL = true;
+    final boolean sideU = true;
+    final boolean sideR = true;
+    final boolean sideD = true;
+    final boolean sideL = true;
 
     public BlockStart(Context context){
         super(context);

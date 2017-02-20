@@ -10,13 +10,13 @@ import android.util.Log;
 
 public class BlockRampUL extends Block {
 
-    public Level.B blockType = Level.B.RAMPUL;
+    Level.B blockType = Level.B.RAMPUL;
 
     //Variablar för sidor, if true så är sidan öppen för bollen att rulla.
-    public final boolean sideU = true;
-    public final boolean sideR = false;
-    public final boolean sideD = false;
-    public final boolean sideL = true;
+    final boolean sideU = true;
+    final boolean sideR = false;
+    final boolean sideD = false;
+    final boolean sideL = true;
 
     public float ballChangeDirection = 20;
 

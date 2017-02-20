@@ -26,21 +26,25 @@ import java.util.Collections;
 
 public class Board extends RelativeLayout{
 
-    public int screenWidth;
-    public int blockNumberInRow = 8;
-    public int utilityNumberInRow = 6;
-    public int blockSize;
-    public float boundariesHeightDP;
-    public Level level;
-    public Block block;
-    public Ball ball;
-    public int startPos;
-    public float startPosX;
-    public float startPosY;
+    int screenWidth;
+    int blockNumberInRow = 8;
+    int utilityNumberInRow = 6;
+    int blockSize;
+    float boundariesHeightDP;
+
+    Level level;
+    Block block;
+    Ball ball;
+
+    int startPos;
+    float startPosX;
+    float startPosY;
+
     ArrayList<Block> blockList = new ArrayList<Block>();
     ArrayList<Integer> startUtilityList = new ArrayList<Integer>();
     ArrayList<Block> utilityList = new ArrayList<Block>();
 
+    public ArrayList location;
 
     int utilCounter;
     int softCounter;
@@ -69,12 +73,8 @@ public class Board extends RelativeLayout{
     float[] rampDRXY = new float[2];
 
 
-    public ArrayList location;
-
     public Board(Context context){
         super(context);
-
-        Log.d("tag", "Board skapad!! -------");
     }
 
     public void setBoard(Context context, int startScreenWidth, int levelNumber, Ball startBall, Level inLevel){
@@ -140,7 +140,6 @@ public class Board extends RelativeLayout{
             }
         }
 
-
         for (int i = 0; i < level.gameUtility[levelNumber - 1].length; i++) {
 
             Level.B thisUtility = level.gameUtility[levelNumber - 1][i];
@@ -179,12 +178,9 @@ public class Board extends RelativeLayout{
                     break;
             }
 
-            //Log.d("tag", "board list storlek" + startUtilityList.size());
             utilityList.add(block);       //lägger till blocket i arraylisten
             block.setBlock(screenWidth, blockNumberInRow, this);       //"ritar" blocket
-
         }
-
         drawBoard();
     }
 
@@ -203,8 +199,6 @@ public class Board extends RelativeLayout{
                 startUtilityList.add(pic);       //lägger till blocket i arraylisten
             }
         }
-
-        //Log.d("tag", "board startUtilitylist " + startUtilityList.size());
     }
 
     public void drawBoard(){
@@ -234,7 +228,6 @@ public class Board extends RelativeLayout{
 
             addView(thisBlockImg);
 
-
             /*
             *Blocken
             */
@@ -244,11 +237,6 @@ public class Board extends RelativeLayout{
             thisBlock.setX(((startX - 1) * blockSize));
             thisBlock.setY(((startY - 1) * blockSize));
 
-            //thisBlock.setXPos(((startX - 1) * blockSize));
-            //thisBlock.setYPos(((startY - 1) * blockSize));
-            //Log.d("tag", "board blockX " + ((startX - 1) * blockSize));
-            //Log.d("tag", "board blockY " + ((startY - 1) * blockSize));
-            //Log.d("tag2", "blocktype & index: " + blockList.get(i).getBlockType() +  blockList.get(i).indexNumber + "pos x/y: " + blockList.get(i).getX() + "  " + blockList.get(i).getY());
             addView(thisBlock);
 
             Level.B blockType = thisBlock.getBlockType();
@@ -282,8 +270,6 @@ public class Board extends RelativeLayout{
         rampURCounter = 0;
         rampDLCounter = 0;
         rampDRCounter = 0;
-
-
 
         for (int i = 0; i < startUtilityList.size() ; i++) {
             int pic = startUtilityList.get(i);
@@ -320,7 +306,6 @@ public class Board extends RelativeLayout{
                     break;
             }
         }
-
 
         for (int i = 0; i < utilityList.size(); i++) {
             Level.B thisUtilityType = utilityList.get(i).getBlockType();
@@ -449,10 +434,7 @@ public class Board extends RelativeLayout{
         XY[1] = y;
 
         return XY;
-
     }
-
-
 
     public void changeDrawBoard(int indexNumber){
 
@@ -496,7 +478,7 @@ public class Board extends RelativeLayout{
 
             if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
                 if(i != indexNumber && blockList.get(i).getBlockType() == Level.B.EMPTY) {
-                    Log.d("tag", "block denna pos " + i);
+                    //Log.d("tag", "block denna pos " + i);
                     Collections.swap(blockList, indexNumber, i);
 
                     drawBoard();
@@ -508,7 +490,6 @@ public class Board extends RelativeLayout{
                 Block newEmptyBlock = new BlockEmpty(getContext());
                 newEmptyBlock.setBlock(screenWidth, blockNumberInRow, this);
                 blockList.set(indexNumber, newEmptyBlock);
-                Log.d("tag", "indexnr: " + indexNumber);
 
                 drawBoard();
                 break;

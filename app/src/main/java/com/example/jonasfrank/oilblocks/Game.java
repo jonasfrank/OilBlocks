@@ -32,18 +32,20 @@ import static android.R.attr.onClick;
 
 public class Game extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = "com.example.jonasfrank.oilblocks.MESSAGE";
-    public int levelNumber;
-    public int screenWidth;
-    public int blockNumberInRow;
-    public int blockSize;
-    public Board board;
-    public Level level;
-    public Ball ball;
-    public Thread threadMove;
-    public boolean gameInProgress = false;
-    public boolean running = false;
-    public boolean gameIsWon = false;
+    final static String EXTRA_MESSAGE = "com.example.jonasfrank.oilblocks.MESSAGE";
+    int levelNumber;
+    int screenWidth;
+    int blockNumberInRow;
+    int blockSize;
+
+    Board board;
+    Level level;
+    Ball ball;
+    Thread threadMove;
+
+    boolean gameInProgress = false;
+    boolean running = false;
+    boolean gameIsWon = false;
 
     private static final int SPLASH_DURATION = 750;
 

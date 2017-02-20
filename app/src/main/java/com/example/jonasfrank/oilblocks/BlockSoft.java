@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 public class BlockSoft extends Block {
 
-    public Level.B blockType = Level.B.SOFT;
-    public int [] softBlockList = {R.drawable.groundrost1, R.drawable.groundrost2, R.drawable.groundrost3, R.drawable.groundrost4, R.drawable.groundrost5 };
+    Level.B blockType = Level.B.SOFT;
+    int [] softBlockList = {R.drawable.groundrost1, R.drawable.groundrost2, R.drawable.groundrost3, R.drawable.groundrost4, R.drawable.groundrost5 };
 
     //Variablar för sidor, if true så är sidan öppen för bollen att rulla.
-    public final boolean sideU = false;
-    public final boolean sideR = false;
-    public final boolean sideD = false;
-    public final boolean sideL = false;
+    final boolean sideU = false;
+    final boolean sideR = false;
+    final boolean sideD = false;
+    final boolean sideL = false;
 
     public BlockSoft(Context context){
         super(context);

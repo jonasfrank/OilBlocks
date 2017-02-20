@@ -43,32 +43,32 @@ public class BlockSoft extends Block {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (indexNumber <= 63) {
-            if (board.ball.game.getRunning() == false) {
-                int action = MotionEventCompat.getActionMasked(event);
 
-                switch (action) {
+        if (board != null && board.ball != null && board.ball.game != null) {
+            if (indexNumber <= 63) {
 
-                    case (MotionEvent.ACTION_DOWN):
-                        return true;
-                    case (MotionEvent.ACTION_MOVE):
-                        return true;
-                    case (MotionEvent.ACTION_UP):
-                        Log.d("tag", "Blocksoft tryck");
-                        if (board.softCounter >= 0 && board.softCounter < board.maxSoftCounter) {
-                            board.changeDrawBoard(indexNumber);
-                            board.softCounter++;
-                        }
-                        board.drawBoard();
-                        return true;
+                if (board.ball.game.getgameInProgress() == true) {
+                    int action = MotionEventCompat.getActionMasked(event);
 
-                    default:
-                        return super.onTouchEvent(event);
+                    switch (action) {
+
+                        case (MotionEvent.ACTION_DOWN):
+                            return true;
+                        case (MotionEvent.ACTION_UP):
+                            Log.d("tag", "Blocksoft tryck");
+                            if (board.softCounter >= 0 && board.softCounter < board.maxSoftCounter) {
+                                board.changeDrawBoard(indexNumber);
+                                board.softCounter++;
+                            }
+                            board.drawBoard();
+                            return true;
+
+                        default:
+                            return super.onTouchEvent(event);
+                    }
                 }
             }
         }
         return true;
     }
-
-
 }

@@ -39,26 +39,30 @@ public class BlockEmpty extends Block {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (board.ball.game.getRunning() == false) {
 
-            int action = MotionEventCompat.getActionMasked(event);
+        /*if (board == null  ) {
+            Log.d("tag", "BlockEmpty är null ---------------------");
+        }*/
 
-            switch (action) {
+        if (board != null && board.ball != null && board.ball.game != null ) {
+            if (board.ball.game.getgameInProgress() == true) {
+                int action = MotionEventCompat.getActionMasked(event);
 
-                case (MotionEvent.ACTION_DOWN):
-                    return true;
-                case (MotionEvent.ACTION_MOVE):
-                    return true;
-                case (MotionEvent.ACTION_UP):
-                    Log.d("tag", "Blocksoft tryck");
-                    if (board.softCounter > 0 && board.softCounter <= board.maxSoftCounter) {
-                        board.changeDrawBoard(indexNumber);
-                        board.softCounter--;
-                    }
-                    board.drawBoard();
-                    return true;
-                default:
-                    return super.onTouchEvent(event);
+                switch (action) {
+
+                    case (MotionEvent.ACTION_DOWN):
+                        return true;
+                    case (MotionEvent.ACTION_UP):
+                        Log.d("tag", "Blocksoft tryck");
+                        if (board.softCounter > 0 && board.softCounter <= board.maxSoftCounter) {
+                            board.changeDrawBoard(indexNumber);
+                            board.softCounter--;
+                        }
+                        board.drawBoard();
+                        return true;
+                    default:
+                        return super.onTouchEvent(event);
+                }
             }
         }
         return true;

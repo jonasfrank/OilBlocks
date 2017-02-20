@@ -35,34 +35,18 @@ public class LevelSelect extends AppCompatActivity {
         int screenHeight = metrics.heightPixels;
 
         int screenSpace = screenWidth / (levelsInRow + 1);
-        int section = screenSpace * 8;
+
         int square = screenSpace;
         int margin = screenSpace / (levelsInRow + 1);
-        int spacing = (screenWidth - (margin * levelsInRow * 8)) / 2;
 
-        Log.d("tag", "testtestetstetstetste" + margin);
 
 
         DisplayMetrics displayMetrics;
         displayMetrics = this.getResources().getDisplayMetrics();
         double tempDouble = ((600 / displayMetrics.density) + 0.5);
-        float gridMarginTop = (float) tempDouble;
 
         RelativeLayout rLayout = (RelativeLayout) findViewById(R.id.activity_level_select);
-        //RelativeLayout rLayout = (RelativeLayout) findViewById(R.id.level_wraper);
-        //rLayout.setLayoutParams(new FrameLayout.LayoutParams(screenWidth,(levelsInCol * section) + section));
 
-        /*GridLayout grid = new GridLayout(this);
-        grid.setColumnCount(levelsInRow);
-        grid.setRowCount(levelsInRow);
-        grid.setY(gridMarginTop); // Mindre?
-
-
-
-        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams((levelsInRow * section), (levelsInCol * section));
-        params1.setMargins(spacing, spacing, spacing, spacing);
-
-        grid.setLayoutParams(params1);*/
 
 
         for (int i = 0; i < (levelsInRow * levelsInCol); i++) {
@@ -81,10 +65,6 @@ public class LevelSelect extends AppCompatActivity {
                 button.setBackgroundResource(R.drawable.groundsolid);
             }
 
-            //LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(square, square);
-            //params.setMargins(margin, margin, margin, margin);
-            //button.setLayoutParams(params);
-
             button.setText(Integer.toString(i + 1));
             button.setTextSize(25);
             button.setTextColor(0xff333333);
@@ -99,12 +79,10 @@ public class LevelSelect extends AppCompatActivity {
 
             int startY = (int)Math.ceil(startYDouble);
             int startX = startIPosAll - ((startY - 1) * levelsInRow);
-            //square = screenWidth / levelsInRow;
 
             button.setLayoutParams(new FrameLayout.LayoutParams(square, square));
 
             float density = this.getResources().getDisplayMetrics().density;
-            float headerHeightDP = 50 * density;
 
             float blockTotalHeight = (levelsInCol * square) + (levelsInCol * margin);
             float marginTop = (screenHeight - blockTotalHeight) / 2;
@@ -115,7 +93,6 @@ public class LevelSelect extends AppCompatActivity {
 
             rLayout.addView(button);
         }
-        //rLayout.addView(grid);
     }
 
     @Override

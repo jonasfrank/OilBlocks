@@ -18,14 +18,14 @@ import java.util.logging.Handler;
 
 public class Ball extends ImageView {
 
-    public int screenWidth;
-    public float blockSize;
-    public Board board;
-    public Game game;
-    public float startBallX;
-    public float startBallY;
-    public float moveX = 0;
-    public float moveY = 0;
+    int screenWidth;
+    float blockSize;
+    Board board;
+    Game game;
+    float startBallX;
+    float startBallY;
+    float moveX = 0;
+    float moveY = 0;
 
     boolean collisionRamp;
     boolean collisionBooster;
@@ -33,24 +33,21 @@ public class Ball extends ImageView {
     boolean collisionBoundaries;
 
 
-    public float groundFriction = (float) 1.05;
-    public float wallFriction = (float) 1.5;
+    int startMoveX = 0;
+    int startMoveY = 20;
+    int startSpeedX = 0;
+    int startSpeedY = 5;
+    int speedX;
+    int speedY;
+    int lapX;
+    int lapY;
+    int lapGravity;
+    int gameLostDelay;
 
-    public int startMoveX = 0;
-    public int startMoveY = 20;
-    public int startSpeedX = 0;
-    public int startSpeedY = 5;
-    public int speedX;
-    public int speedY;
-    public int lapX;
-    public int lapY;
-    public int lapGravity;
-    public int gameLostDelay;
+    int maxMove = 8;
 
-    public int maxMove = 8;
-
-    public int blockListSize;
-    public int blockInRowSize;
+    int blockListSize;
+    int blockInRowSize;
 
 
 
@@ -61,13 +58,6 @@ public class Ball extends ImageView {
         setImageResource(R.drawable.ball);
     }
 
-    /*public float getSpeedX(){
-        return speedX;
-    }
-
-    public float getSpeedY(){
-        return speedY;
-    }*/
 
     public void setBall(int startScreenWidth, int blockNumberInRow, Board startBoard, Game startGame){
 
@@ -77,7 +67,7 @@ public class Ball extends ImageView {
         game = startGame;
 
         blockListSize = board.blockList.size();
-        blockInRowSize = board.blockNumberInRow;
+        blockInRowSize = blockNumberInRow;
 
         moveX = startMoveX;
         moveY = startMoveY;
@@ -108,9 +98,9 @@ public class Ball extends ImageView {
 
 
     public void ballMove() {
-        //if(moveX != 0) {
-            collisionCheck();
-       // }
+
+        collisionCheck();
+
         lapX++;
         lapY++;
 
@@ -121,7 +111,6 @@ public class Ball extends ImageView {
         /**
          * Bollförflyttning
          */
-        //Log.d("tag", "ball speesd " + speedX + " " + speedY);
 
         if(speedX > maxMove){
             moveX = 0;
@@ -154,8 +143,6 @@ public class Ball extends ImageView {
         if(moveX == 0 && moveY == 0) {
             gameLostDelay++;
             if (gameLostDelay >= 20) {
-                Log.d("Game", "Over");
-
                 game.lostGame(this);
             }
         }
@@ -192,17 +179,15 @@ public class Ball extends ImageView {
             collisionBlock = blockCheck(ballX, ballY, thisBlockType, thisBlockX, thisBlockY, i);
 
             if (collisionBlock == true || collisionRamp == true) {
-                //Log.d("Broken", "Loop" + i);
                 break outerLoop;
             }
             if (collisionBlock == true || collisionRamp == true|| collisionBooster == true) {
-                //Log.d("Broken", "Loop" + i);
                 lapGravity = 0;
             }
 
-            //Om det inte är någon kolletion
+            //Om det inte är någon kollision
             if(i == board.blockList.size() - 1 && (collisionBlock == false && collisionBooster == false && collisionBoundaries == false && collisionRamp == false)){
-                Log.d("tag", "ball ingen kolletion");
+                Log.d("tag", "ball ingen kollision");
                 if(moveY > 0 || moveY == 0) {
                     lapGravity++;
                     if (lapGravity == 5) {
@@ -227,11 +212,8 @@ public class Ball extends ImageView {
             }
         }
 
-
         collisionBoundaries = boundaryCheck(ballX, ballY);
         gameOverCheck();
-
-
     }
 
 
@@ -296,7 +278,6 @@ public class Ball extends ImageView {
 
 
     public boolean rampCheck(float x, float y, Level.B thisBlockType, float thisBlockX, float thisBlockY, int i){
-        Block thisBlock = board.blockList.get(i);
 
         // A,B,C,D representerar ett hörn. A = uppe vänster , B = uppe höger, C = nere vänster, D = nere höger
         float bollAX = x;
@@ -512,7 +493,6 @@ public class Ball extends ImageView {
                         if (thisBlockType == Level.B.RAMPDL || thisBlockType == Level.B.RAMPDR) {
                             Log.d("tag", "ball ramp uppefrån" + thisBlockType);
                             moveY = 0;
-                            //speedX = speedX * (float) groundFriction;
                             collisionBlock = true;
                         }
                     }
@@ -693,60 +673,6 @@ public class Ball extends ImageView {
             float blockDY = thisBlockY + blockSize;
 
             /**
-             * Träff på block på hörnen. När bollen ligger precis i rutan ett steg diagonalt från ett block.
-             */
-            /*if(bollDX == blockAX && bollDY == blockAY){
-                //Träff på block diagonalt uppe vänster
-                if(moveX > 0 && moveY > 0){
-                    if(board.blockList.get(i - 8).getBlockType() == Level.B.EMPTY) {
-                        Log.d("tag", "ball block uppe vänster");
-                    float tempX = moveX * -1;
-                    speedX++;
-                    float tempY = moveY * -1;
-                    moveX = tempY;
-                    moveY = tempX;
-
-
-                        collisionBlock = true;
-                    }
-                }
-            }else if(bollCX == blockBX && bollCY == blockBY){
-                //Träff på block diagonalt uppe höger
-                if(moveX < 0 && moveY > 0){
-                    Log.d("tag", "ball block uppe höger");
-                    float tempX = moveX * -1;
-                    speedX++;
-                    float tempY = moveY * -1;
-                    moveX = tempY * -1;
-                    moveY = tempX * -1;
-                    collisionBlock = true;
-                }
-            }else if(bollBX == blockCX && bollBY == blockCY){
-                //Träff på block diagonalt ner vänster
-                if(moveX > 0 && moveY < 0){
-                    Log.d("tag", "ball block ner vänster");
-                    float tempX = moveX * -1;
-                    speedX++;
-                    float tempY = moveY * -1;
-                    moveX = tempY * -1;
-                    moveY = tempX * -1;
-                    collisionBlock = true;
-                }
-            }else if(bollAX == blockDX && bollAY == blockDY){
-                //Träff på block diagonalt ner höger
-                if(moveX < 0 && moveY < 0){
-                    Log.d("tag", "ball block ner höger");
-                    float tempX = moveX * -1;
-                    speedX++;
-                    float tempY = moveY * -1;
-                    moveX = tempY;
-                    moveY = tempX;
-                    collisionBlock = true;
-                }
-            }*/
-
-
-            /**
              * Träff på blocken 4 sidor uppe, nere, vänster eller höger.
              */
             if(bollAX == blockAX && bollAY == blockAY && thisBlockType == Level.B.GOAL){
@@ -755,7 +681,6 @@ public class Ball extends ImageView {
                 moveY = 0;
 
                 game.wonGame(this);
-                //game.stopBall(this);
                 collisionBlock = true;
 
 
@@ -773,11 +698,6 @@ public class Ball extends ImageView {
                                Log.d("tag", "ball mål");
                                moveX = 0;
                                moveY = 20;
-                            /*if(bollAY == blockAY){
-                                Log.d("tag", "ball mål2");
-                                moveX = 0;
-                                moveY = 0;
-                            }*/
                            }
                        }
                    }

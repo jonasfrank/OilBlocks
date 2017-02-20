@@ -20,27 +20,25 @@ import static android.R.attr.y;
 
 abstract class Block extends ImageView {
 
-    public int screenWidth;
-    public int blockNumberInRow;
-    public int blockSize;
-    public int levelNumber;
-    public float pressX;
-    public float pressY;
-    public float dx;
-    public float dy;
-    public Level level;
-    public ArrayList blockList;
-    public int indexNumber;
-    public Board board;
+    int blockSize;
+    int levelNumber;
+    float pressX;
+    float pressY;
+    float dx;
+    float dy;
+    Level level;
+    Board board;
+    ArrayList blockList;
+    int indexNumber;
     public float x;
     public float y;
 
-    public boolean sideU;
-    public boolean sideR;
-    public boolean sideD;
-    public boolean sideL;
+    boolean sideU;
+    boolean sideR;
+    boolean sideD;
+    boolean sideL;
 
-    public float ballChangeDirection;
+    float ballChangeDirection;
 
 
     public Block(Context context) {
@@ -119,18 +117,6 @@ abstract class Block extends ImageView {
         return ballChangeDirection;
     }
 
-    /*public boolean getSideU(){
-        return sideU;
-    }
-    public boolean getSideR(){
-        return sideR;
-    }
-    public boolean getSideD() { return sideD; }
-    public boolean getSideL(){
-        return sideL;
-    }*/
-
-    abstract void blockKlicked();
     abstract Level.B getBlockType();
     abstract boolean getSideU();
     abstract boolean getSideR();

@@ -24,9 +24,6 @@ public class BlockRampDL extends Block {
         setImageResource(R.drawable.rampdownleft);
     }
 
-    public void blockKlicked(){
-    }
-
     public Level.B getBlockType(){
         return blockType;
     }

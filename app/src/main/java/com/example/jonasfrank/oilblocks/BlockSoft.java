@@ -26,10 +26,6 @@ public class BlockSoft extends Block {
         setImageResource(softBlockList[randomNum]);
     }
 
-    public void blockKlicked(){
-
-    }
-
     public Level.B getBlockType(){
         return blockType;
     }

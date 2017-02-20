@@ -21,10 +21,6 @@ public class BlockGoal extends Block {
         setImageResource(R.drawable.blockgoal);
     }
 
-    public void blockKlicked(){
-        Log.d("tag", "klick på goal");
-    }
-
     public Level.B getBlockType(){
         return blockType;
     }

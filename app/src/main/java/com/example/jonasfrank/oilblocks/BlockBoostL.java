@@ -11,13 +11,13 @@ import android.util.Log;
 
 public class BlockBoostL extends Block {
 
-    public Level.B blockType = Level.B.BOOSTL;
+    Level.B blockType = Level.B.BOOSTL;
 
     //Variablar för sidor, if true så är sidan öppen för bollen att rulla.
-    public final boolean sideU = true;
-    public final boolean sideR = true;
-    public final boolean sideD = true;
-    public final boolean sideL = true;
+    final boolean sideU = true;
+    final boolean sideR = true;
+    final boolean sideD = true;
+    final boolean sideL = true;
 
     public float ballChangeDirection = -20;
 
@@ -25,10 +25,6 @@ public class BlockBoostL extends Block {
         super(context);
 
         setImageResource(R.drawable.boostleft);
-    }
-
-    public void blockKlicked(){
-        Log.d("tag", "klick på booster");
     }
 
     public Level.B getBlockType(){

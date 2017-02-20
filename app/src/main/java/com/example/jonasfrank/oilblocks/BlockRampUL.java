@@ -26,9 +26,6 @@ public class BlockRampUL extends Block {
         setImageResource(R.drawable.rampupleft);
     }
 
-    public void blockKlicked(){
-    }
-
     public Level.B getBlockType(){
         return blockType;
     }

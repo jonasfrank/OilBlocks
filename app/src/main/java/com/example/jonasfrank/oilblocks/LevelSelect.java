@@ -126,11 +126,8 @@ public class LevelSelect extends AppCompatActivity {
 
     public void goToGame(String s) {
 
-            Intent intent = new Intent(this, Game.class);
-            intent.putExtra(EXTRA_MESSAGE, s);
-            startActivity(intent);
-
+        Intent intent = new Intent(this, Game.class);
+        intent.putExtra(EXTRA_MESSAGE, s);
+        startActivity(intent);
     }
-
-
 }

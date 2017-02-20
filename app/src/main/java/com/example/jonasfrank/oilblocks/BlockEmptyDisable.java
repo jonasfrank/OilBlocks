@@ -22,10 +22,6 @@ public class BlockEmptyDisable extends Block {
         setImageResource(R.drawable.groundempty);
     }
 
-    public void blockKlicked(){
-        Log.d("tag", "klick på empty");
-    }
-
     public Level.B getBlockType(){
         return blockType;
     }

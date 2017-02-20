@@ -31,7 +31,6 @@ public class Board extends RelativeLayout{
     public int utilityNumberInRow = 6;
     public int blockSize;
     public float boundariesHeightDP;
-    public int levelNumber;
     public Level level;
     public Block block;
     public Ball ball;
@@ -88,7 +87,6 @@ public class Board extends RelativeLayout{
         //setRowCount(blockNumberInRow);
 
         level = inLevel;
-        //Level level = new Level();
 
         for (int i = 0; i < blockNumberInRow; i++) {
 
@@ -147,8 +145,6 @@ public class Board extends RelativeLayout{
 
             Level.B thisUtility = level.gameUtility[levelNumber - 1][i];
 
-
-
             switch (thisUtility){
                 case SOFT:
                     block = new BlockSoft(context);
@@ -183,13 +179,11 @@ public class Board extends RelativeLayout{
                     break;
             }
 
-
-            Log.d("tag", "board list storlek" + startUtilityList.size());
+            //Log.d("tag", "board list storlek" + startUtilityList.size());
             utilityList.add(block);       //lägger till blocket i arraylisten
             block.setBlock(screenWidth, blockNumberInRow, this);       //"ritar" blocket
 
         }
-
 
         drawBoard();
     }
@@ -204,26 +198,23 @@ public class Board extends RelativeLayout{
                 if(startUtilityList.get(j) == pic){
                     picExist = true ;
                 }
-
             }
             if(picExist == false){
                 startUtilityList.add(pic);       //lägger till blocket i arraylisten
             }
         }
 
-        Log.d("tag", "board startUtilitylist " + startUtilityList.size());
+        //Log.d("tag", "board startUtilitylist " + startUtilityList.size());
     }
 
     public void drawBoard(){
         removeAllViews();
 
         for (int i = 0; i < blockList.size(); i++) {
-            //Log.d("tag", "board drawboard " + blockList.get(i).getBlockType() +  " " + blockList.get(i).indexNumber);
 
             /*
             *Bakgunds bilder
              */
-            //Log.d("tag1", "blocktype & index: " + blockList.get(i).getBlockType() +  blockList.get(i).indexNumber + "pos x/y: " + blockList.get(i).getX() + "  " + blockList.get(i).getY());
             ImageView thisBlockImg = new ImageView(getContext());
             thisBlockImg.setImageResource(R.drawable.groundbackgound);
 
@@ -335,8 +326,6 @@ public class Board extends RelativeLayout{
             Level.B thisUtilityType = utilityList.get(i).getBlockType();
             Block thisUtility = utilityList.get(i);
 
-
-
             switch (thisUtilityType){
                 case SOFT:
 
@@ -406,9 +395,7 @@ public class Board extends RelativeLayout{
                     updateUtilityCounter(rampDRUtilCounter, rampDRCounter);
                     break;
             }
-
         }
-
     }
 
     public void setUtilityCounterHolder(TextView textView, float[] pos) {
@@ -456,7 +443,6 @@ public class Board extends RelativeLayout{
         utilBackground.setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
 
         addView(utilBackground);
-
 
         float[] XY = new float[2];
         XY[0] = x;
@@ -529,9 +515,7 @@ public class Board extends RelativeLayout{
             }else{
                 drawBoard();
             }
-            //Log.d("tag","blocklist index: " + blockList.get(i).getBlockType() + "  " + i);
         }
-
     }
 
     public void swapBlockArray(float releaseX, float releaseY, Block utilityBlock) {
@@ -543,8 +527,6 @@ public class Board extends RelativeLayout{
             if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
                 if (blockList.get(i).getBlockType() == Level.B.EMPTY) {
                     blockList.set(i, utilityBlock);
-
-                    
                     utilityList.remove(utilityBlock);
                     drawBoard();
                     break;
@@ -552,7 +534,6 @@ public class Board extends RelativeLayout{
             }else{
                 drawBoard();
             }
-
         }
     }
 }

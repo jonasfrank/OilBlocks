@@ -22,10 +22,6 @@ public class BlockStart extends Block {
         setImageResource(R.drawable.start);
     }
 
-    public void blockKlicked(){
-        Log.d("tag", "klick på start");
-    }
-
     public Level.B getBlockType(){
         return blockType;
     }

@@ -33,7 +33,8 @@
         android:shadowRadius="0.1"
         android:textColor="#DDDDDD"
         android:layout_centerHorizontal="true"
-        android:text="@string/info_header"/>
+        android:text="@string/info_header"
+        android:fontFamily="serif"/>
     <TextView
         android:id="@+id/info_text"
         android:layout_width="match_parent"

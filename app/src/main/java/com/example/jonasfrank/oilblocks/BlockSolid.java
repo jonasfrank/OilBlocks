@@ -21,10 +21,6 @@ public class BlockSolid extends Block {
         setImageResource(R.drawable.groundsolid);
     }
 
-    public void blockKlicked(){
-        Log.d("tag", "klick på solid");
-    }
-
     public Level.B getBlockType(){
         return blockType;
     }

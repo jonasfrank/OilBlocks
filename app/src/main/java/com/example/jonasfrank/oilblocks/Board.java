@@ -436,6 +436,7 @@ public class Board extends RelativeLayout{
         return XY;
     }
 
+
     public void changeDrawBoard(int indexNumber){
 
        Level.B blockType = blockList.get(indexNumber).getBlockType();

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             clearedStages = 1;
         }
 
-        //clearedStages = 12;
+        //clearedStages = 13;
 
         Handler handler = new Handler();
 

@@ -283,6 +283,7 @@ public class Game extends AppCompatActivity {
 
     public void lostGame(View view) {
         if (gameIsWon == false) {
+            gameInProgress = false;
             running = false;
 
 

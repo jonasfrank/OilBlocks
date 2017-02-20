@@ -54,31 +54,13 @@ abstract class Block extends ImageView {
         blockSize = startScreenWidth / blockNumberInRow;
         setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
 
-        //AbsoluteLayout.LayoutParams param = new AbsoluteLayout.LayoutParams(blockSize, blockSize, x, y);
-        //Log.d("tag", "test" + x + " x " + y);
-        //setLayoutParams(param);
-
-        /*setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                for (int i = 0; i < blockList.size(); i++) {
-
-                }
-
-                board.changeDrawBoard(indexNumber);
-                board.drawBoard();
-                //Log.d("tag", "klick" + getX());
-            }
-        });*/
-
     }
 
 
     public boolean onTouchEvent(MotionEvent event) {
 
         if (board != null && board.ball != null && board.ball.game != null) {
-            if (board.ball.game.getgameInProgress() == true) {
+            if (board.ball.game.getgameInProgress() == false) {
                 int action = MotionEventCompat.getActionMasked(event);
 
                 switch (action) {

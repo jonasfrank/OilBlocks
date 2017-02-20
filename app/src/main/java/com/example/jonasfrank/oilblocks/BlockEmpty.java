@@ -1,6 +1,7 @@
 package com.example.jonasfrank.oilblocks;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -45,12 +46,14 @@ public class BlockEmpty extends Block {
         }*/
 
         if (board != null && board.ball != null && board.ball.game != null ) {
-            if (board.ball.game.getgameInProgress() == true) {
+            if (board.ball.game.getgameInProgress() == false) {
                 int action = MotionEventCompat.getActionMasked(event);
 
                 switch (action) {
 
                     case (MotionEvent.ACTION_DOWN):
+                        return true;
+                    case (MotionEvent.ACTION_MOVE):
                         return true;
                     case (MotionEvent.ACTION_UP):
                         Log.d("tag", "Blocksoft tryck");

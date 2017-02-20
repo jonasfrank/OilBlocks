@@ -47,12 +47,14 @@ public class BlockSoft extends Block {
         if (board != null && board.ball != null && board.ball.game != null) {
             if (indexNumber <= 63) {
 
-                if (board.ball.game.getgameInProgress() == true) {
+                if (board.ball.game.getgameInProgress() == false) {
                     int action = MotionEventCompat.getActionMasked(event);
 
                     switch (action) {
 
                         case (MotionEvent.ACTION_DOWN):
+                            return true;
+                        case (MotionEvent.ACTION_MOVE):
                             return true;
                         case (MotionEvent.ACTION_UP):
                             Log.d("tag", "Blocksoft tryck");

@@ -74,6 +74,8 @@ public class Board extends RelativeLayout{
 
     public Board(Context context){
         super(context);
+
+        Log.d("tag", "Board skapad!! -------");
     }
 
     public void setBoard(Context context, int startScreenWidth, int levelNumber, Ball startBall, Level inLevel){
@@ -216,9 +218,12 @@ public class Board extends RelativeLayout{
         removeAllViews();
 
         for (int i = 0; i < blockList.size(); i++) {
+            //Log.d("tag", "board drawboard " + blockList.get(i).getBlockType() +  " " + blockList.get(i).indexNumber);
+
             /*
             *Bakgunds bilder
              */
+            //Log.d("tag1", "blocktype & index: " + blockList.get(i).getBlockType() +  blockList.get(i).indexNumber + "pos x/y: " + blockList.get(i).getX() + "  " + blockList.get(i).getY());
             ImageView thisBlockImg = new ImageView(getContext());
             thisBlockImg.setImageResource(R.drawable.groundbackgound);
 
@@ -252,7 +257,7 @@ public class Board extends RelativeLayout{
             //thisBlock.setYPos(((startY - 1) * blockSize));
             //Log.d("tag", "board blockX " + ((startX - 1) * blockSize));
             //Log.d("tag", "board blockY " + ((startY - 1) * blockSize));
-
+            //Log.d("tag2", "blocktype & index: " + blockList.get(i).getBlockType() +  blockList.get(i).indexNumber + "pos x/y: " + blockList.get(i).getX() + "  " + blockList.get(i).getY());
             addView(thisBlock);
 
             Level.B blockType = thisBlock.getBlockType();
@@ -401,7 +406,9 @@ public class Board extends RelativeLayout{
                     updateUtilityCounter(rampDRUtilCounter, rampDRCounter);
                     break;
             }
+
         }
+
     }
 
     public void setUtilityCounterHolder(TextView textView, float[] pos) {
@@ -513,12 +520,18 @@ public class Board extends RelativeLayout{
             }else if (releaseY > (blockSize * 8) + boundariesHeightDP){
                 utilityList.add(blockList.get(indexNumber));
                 Block newEmptyBlock = new BlockEmpty(getContext());
+                newEmptyBlock.setBlock(screenWidth, blockNumberInRow, this);
                 blockList.set(indexNumber, newEmptyBlock);
+                Log.d("tag", "indexnr: " + indexNumber);
+
                 drawBoard();
+                break;
             }else{
                 drawBoard();
             }
+            //Log.d("tag","blocklist index: " + blockList.get(i).getBlockType() + "  " + i);
         }
+
     }
 
     public void swapBlockArray(float releaseX, float releaseY, Block utilityBlock) {
@@ -530,6 +543,7 @@ public class Board extends RelativeLayout{
             if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {
                 if (blockList.get(i).getBlockType() == Level.B.EMPTY) {
                     blockList.set(i, utilityBlock);
+
                     
                     utilityList.remove(utilityBlock);
                     drawBoard();

@@ -131,14 +131,14 @@ public class Level {
                     {B.EMPTY,B.EMPTY,B.SOFT,B.SOFT,B.SOFT,B.SOFT,B.SOLID,B.SOLID},
             },
             {       //11
-                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
-                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.START,B.EMPTY,B.EMPTY,B.EMPTY},
-                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
-                    {B.EMPTY,B.EMPTY,B.GOAL,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.START},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
                     {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
+                    {B.GOAL,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY,B.EMPTY},
             },
             {       //12
                     {B.EMPTY,B.EMPTY,B.SOLID,B.SOFT,B.SOFT,B.EMPTY,B.SOFT,B.SOFT},
@@ -253,7 +253,7 @@ public class Level {
             /*15*/{B.SOFT,B.BOOSTR,B.BOOSTL,B.RAMPUL,B.RAMPUL,B.RAMPUR,B.RAMPUR,B.RAMPDR},
             /*16*/{B.SOFT,B.BOOSTR,B.BOOSTR,B.BOOSTL,},
             /*17*/{B.SOFT,B.BOOSTR,B.BOOSTL,B.BOOSTL,B.RAMPUL,B.RAMPUR},
-            /*18*/{B.SOFT,B.BOOSTR,B.BOOSTR,B.BOOSTL,B.BOOSTL,B.RAMPUL,B.RAMPUL,B.RAMPUL,B.RAMPUR,B.RAMPUR,B.RAMPUR,B.RAMPUR,B.RAMPDL,B.RAMPDL,B.RAMPDL,B.RAMPDR,B.RAMPDR,B.RAMPDR,B.RAMPDR},
+            /*18*/{B.SOFT,B.BOOSTR},
             /*19*/{B.SOFT,B.BOOSTL,B.BOOSTL,B.BOOSTL,B.RAMPUL,B.RAMPUR,B.RAMPUR,B.RAMPDR},
             /*20*/{B.SOFT,B.BOOSTR,B.BOOSTL,B.BOOSTR,B.BOOSTL,B.RAMPUL,B.RAMPUL,B.RAMPUR,B.RAMPDL,B.RAMPDL,B.RAMPDR}
     };
@@ -276,7 +276,7 @@ public class Level {
             /*15*/{0,4},
             /*16*/{0,0},
             /*17*/{3,7},
-            /*18*/{0,5},
+            /*18*/{2,3},
             /*19*/{1,1},
             /*20*/{5,15}
     };

@@ -577,31 +577,33 @@ public class Ball extends ImageView {
              * Träff på blocken 2 stolpar.
              */
             if (thisBlockType == Level.B.RAMPUL) {
-                if ((bollDX == blockCX && bollDY > blockCY && bollBY < blockCY) || (bollDX == blockCX && bollDY == blockCY && i + blockInRowSize - 1 <= blockListSize && board.blockList.get(i + blockInRowSize - 1).getSideU() == true && i - blockInRowSize >= 0 && board.blockList.get(i - 1).getBlockType() != Level.B.RAMPDR && board.blockList.get(i - 1).getBlockType() != Level.B.BOOSTR)) {
+                if ((bollDX == blockCX && bollDY > blockCY && bollBY < blockCY) || (bollDX == blockCX && bollDY == blockCY && i + blockInRowSize - 1 <= blockListSize && board.blockList.get(i + blockInRowSize - 1).getSideU() == true && i - blockInRowSize >= 0 && board.blockList.get(i - 1).getSideD() == true && board.blockList.get(i - 1).getBlockType() != Level.B.RAMPDR && board.blockList.get(i - 1).getBlockType() != Level.B.BOOSTR)) {
                     //Träff på block nedre stolpe
                     if (moveX > 0) {
                         Log.d("tag", "ball ramp RAMPUL stolpe nedre");
                         moveX = moveX * -1;
                         speedX++;
+
                         collisionRamp = true;
                     }
                 }
                 if ((bollCY == blockAY && bollDX >= blockBX && bollCX < blockBX)) {
                     //Träff på block högra stolpe
-                    Log.d("tag", "ball ramp RAMPUL stolpe högra moveY " + moveY);
                     if (moveY >= 0 && bollDX != blockBX) {
                         Log.d("tag", "ball ramp RAMPUL stolpe högra");
                         moveY = 0;
+                        collisionRamp = true;
                     } else if(bollDX == blockBX && (moveX > 0 || moveY > 0) && i - blockInRowSize >= 0 && board.blockList.get(i - blockInRowSize).getBlockType() != Level.B.BOOSTR){
                         Log.d("tag", "ball ramp RAMPUL stolpe högra testetstets");
                         moveX = 0;
                         moveY = 20;
+                        collisionRamp = true;
                     }
-                    collisionRamp = true;
+
 
                 }
             } else if (thisBlockType == Level.B.RAMPUR) {
-                if ((bollCX == blockDX && bollCY > blockDY && bollAY < blockDY) || (bollCX == blockDX && bollCY == blockDY && i + blockInRowSize + 1 <= blockListSize && board.blockList.get(i + blockInRowSize + 1).getSideU() == true && i + 1 <= blockListSize && board.blockList.get(i + 1).getBlockType() != Level.B.RAMPDL && board.blockList.get(i + 1).getBlockType() != Level.B.BOOSTL)) {
+                if ((bollCX == blockDX && bollCY > blockDY && bollAY < blockDY) || (bollCX == blockDX && bollCY == blockDY && i + blockInRowSize + 1 <= blockListSize && board.blockList.get(i + blockInRowSize + 1).getSideU() == true && i + 1 <= blockListSize && board.blockList.get(i + 1).getSideD() == true && board.blockList.get(i + 1).getBlockType() != Level.B.RAMPDL && board.blockList.get(i + 1).getBlockType() != Level.B.BOOSTL)) {
                     //Träff på block nedre stolpe
                     if (moveX < 0) {
                         Log.d("tag", "ball ramp RAMPUR stolpe nedre");
@@ -615,12 +617,13 @@ public class Ball extends ImageView {
                     if (moveY >= 0 && bollCX != blockAX) {
                         Log.d("tag", "ball ramp RAMPUR stolpe högra");
                         moveY = 0;
+                        collisionRamp = true;
                     } else if(bollCX == blockAX && (moveX < 0 || moveY > 0) && i - blockInRowSize >= 0 && board.blockList.get(i - blockInRowSize).getBlockType() != Level.B.BOOSTL){
                         Log.d("tag", "ball ramp RAMPUR stolpe högra testetstets");
                         moveX = 0;
                         moveY = 20;
+                        collisionRamp = true;
                     }
-                    collisionRamp = true;
                 }
             }else if (thisBlockType == Level.B.RAMPDL) {
                 if ((bollBX == blockAX && bollDY > blockAY && bollBY < blockAY) || (bollBX == blockAX && bollDY == blockAY && i - 1 >= 0 && board.blockList.get(i - 1).getSideR() == true && board.blockList.get(i - 1).getSideU() == true) && (i - blockInRowSize - 1 >= 0 && board.blockList.get(i - blockInRowSize - 1).getBlockType() != Level.B.BOOSTR)) {

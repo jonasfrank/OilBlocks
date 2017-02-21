@@ -11,7 +11,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:src="@drawable/backgrund4"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:scaleType="centerCrop"
 
         />
 
@@ -28,12 +34,16 @@
         android:id="@+id/level_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/level_header"
         android:textSize="30dp"
-        android:textColor="#000000"
+        android:shadowColor="#343434"
+        android:shadowDx="8"
+        android:shadowDy="5"
+        android:shadowRadius="0.1"
+        android:textColor="#DDDDDD"
         android:fontFamily="serif"
         android:layout_alignParentRight="true"
         />

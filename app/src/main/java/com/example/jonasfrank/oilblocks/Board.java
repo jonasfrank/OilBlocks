@@ -44,7 +44,7 @@ public class Board extends RelativeLayout{
     ArrayList<Integer> startUtilityList = new ArrayList<Integer>();
     ArrayList<Block> utilityList = new ArrayList<Block>();
 
-    public ArrayList location;
+    //public ArrayList location;
 
     int utilCounter;
     int softCounter;
@@ -469,11 +469,12 @@ public class Board extends RelativeLayout{
         }
     }
 
+    int[] location = new int[2];
     public void swapBlock(float releaseX, float releaseY, int indexNumber){
 
         for (int i = 0; i < blockList.size() ; i++) {
 
-            int[] location = new int[2];
+            //int[] location = new int[2];
             blockList.get(i).getLocationInWindow(location);
 
 
@@ -503,7 +504,7 @@ public class Board extends RelativeLayout{
     public void swapBlockArray(float releaseX, float releaseY, Block utilityBlock) {
 
         for (int i = 0; i < blockList.size(); i++) {
-            int[] location = new int[2];
+            //int[] location = new int[2];
             blockList.get(i).getLocationInWindow(location);
 
             if (releaseX >= location[0] && releaseX <= location[0] + blockSize && releaseY >= location[1] && releaseY <= location[1] + blockSize) {

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String MyPREFERENCES = "com.example.jonasfrank.savedatatest.MyPREFERENCES";
+    public static final String MyPREFERENCES = "com.example.jonasfrank.savedata.MyPREFERENCES";
     public static final String CLEARED_STAGES_KEY = "clearedStagesKey";
     public static int clearedStages;
     public static SharedPreferences sharedPreferences;

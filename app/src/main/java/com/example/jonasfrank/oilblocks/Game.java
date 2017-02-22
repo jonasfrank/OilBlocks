@@ -101,42 +101,19 @@ public class Game extends AppCompatActivity {
     public void threads() {
 
 
-        /*new Thread(new Runnable() {
-            public void run() {
-
-
-                while (running) {
-
-                    try {
-                        float sleepSpeedX = ball.getSpeedX();
-                        Thread.sleep((long) sleepSpeedX);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Log.d("game", "tråd  test test test test test v test");
-                    ball.>////////ballMoveX();
-                }
-            }
-        }).start();*/
-
-
-
         threadMove = new Thread() {
             public void run() {
-            while (running) {
+                while (running) {
 
-                // colletion
+                    ball.ballMove();
+                    //Log.d("tag", "game tråd status" + threadMove.getState());
+                    try {
+                        Thread.sleep(10);
 
-                ball.ballMove();
-                //Log.d("tag", "game tråd status" + threadMove.getState());
-                try {
-                    Thread.sleep(10);
-
-                } catch (InterruptedException e) {
-                    Log.d("game", "tråd X");
+                    } catch (InterruptedException e) {
+                        Log.d("game", "tråd X");
+                    }
                 }
-                // move
-            }
             }
         };
     }
@@ -148,7 +125,12 @@ public class Game extends AppCompatActivity {
         running = true;
         gameInProgress = true;
         gameIsWon = false;
-        threadMove.start();
+        if(threadMove.getState() != Thread.State.TERMINATED) {
+            threadMove.start();
+        }else{
+            threads();
+            threadMove.start();
+        }
 
     }
 

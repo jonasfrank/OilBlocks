@@ -338,6 +338,8 @@ public class Ball extends ImageView {
                         if (moveY > 0) {
                             Log.d("tag", "ball ramp RAMPUL inner höger");
                             moveX = 0;
+                        }else{
+                            moveX = moveX * -1;
                         }
                         collisionRamp = true;
                     }
@@ -383,6 +385,8 @@ public class Ball extends ImageView {
                         if (moveY > 0) {
                             Log.d("tag", "ball ramp RAMPUR inner vänster");
                             moveX = 0;
+                        }else{
+                            moveX = moveX * -1;
                         }
                         collisionRamp = true;
                     }
@@ -420,12 +424,14 @@ public class Ball extends ImageView {
                     }
                     collisionRamp = true;
                 } else {
-                    if (bollBX == blockBX && bollBY < blockBY && bollBY > blockBY) {
+                    if (bollBX == blockBX && bollBY > blockBY && bollBY < blockDY) {
                         //Träff på block höger innersida
-                        //if (moveY < 0) {
+                        if (moveY < 0) {
                             Log.d("tag", "ball ramp RAMPDL inner höger");
                             moveX = 0;
-                        //}
+                        }else{
+                            moveX = moveX * -1;
+                        }
                         collisionRamp = true;
                     }
                     if (bollAY == blockAY && bollBX > blockAX && bollBX < blockBX) {
@@ -462,12 +468,14 @@ public class Ball extends ImageView {
                     }
                     collisionRamp = true;
                 }else {
-                    if (bollAX == blockAX && bollAY < blockDY && bollAY > blockAY) {
+                    if (bollAX == blockAX &&bollAY > blockAY && bollAY < blockCY ) {
                         //Träff på block vänstra innersida
-                        //if (moveY < 0) {
+                        if (moveY < 0) {
                             Log.d("tag", "ball ramp RAMPDR inner höger");
                             moveX = 0;
-                        //}
+                        }else{
+                            moveX = moveX * -1;
+                        }
                         collisionRamp = true;
                     }
                     if (bollAY == blockAY && bollAX < blockBX && bollAX > blockAX) {
@@ -508,10 +516,10 @@ public class Ball extends ImageView {
                             && board.blockList.get(i + blockInRowSize).getBlockType() != Level.B.BOOSTR
                             || ((bollBX >= blockCX && bollBX < blockCX + (blockSize / 2))
                                 || ((bollAX <= blockDX && bollAX > blockDX - (blockSize / 2))
-                                && (board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTR)
-                                || (board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTL)))) {
+                                && ((board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTR)
+                                || (board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTL))))) {
 
-                            if (thisBlockType == Level.B.RAMPUL || thisBlockType == Level.B.RAMPUR) {
+                          if (thisBlockType == Level.B.RAMPUL || thisBlockType == Level.B.RAMPUR) {
                             Log.d("tag", "ball ramp underifrån" + thisBlockType);
                             moveY = moveY * -1;
                             collisionBlock = true;
@@ -722,8 +730,8 @@ public class Ball extends ImageView {
                             && board.blockList.get(i + blockInRowSize).getBlockType() != Level.B.BOOSTR
                             || ((bollBX >= blockCX && bollBX < blockCX + (blockSize / 2))
                                 || ((bollAX <= blockDX && bollAX > blockDX - (blockSize / 2))
-                                && (board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTR)
-                                || (board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTL)))) {
+                                && ((board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTR)
+                                || (board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTL))))) {
 
                         Log.d("tag", "ball block underifrån");
                         moveY = moveY * -1;

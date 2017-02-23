@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -76,6 +77,9 @@ public class Game extends AppCompatActivity {
         GridLayout gridLayoutGame = (GridLayout) findViewById(R.id.game_game);
         RelativeLayout relativeLayoutGame = (RelativeLayout) findViewById(R.id.game_ball_layout);
 
+
+
+
         TextView levelTextViewGame = (TextView) findViewById(R.id.game_level);
         levelTextViewGame.setText("Level " + levelNumber);
 
@@ -99,27 +103,6 @@ public class Game extends AppCompatActivity {
 
 
     public void threads() {
-
-
-        /*new Thread(new Runnable() {
-            public void run() {
-
-
-                while (running) {
-
-                    try {
-                        float sleepSpeedX = ball.getSpeedX();
-                        Thread.sleep((long) sleepSpeedX);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Log.d("game", "tråd  test test test test test v test");
-                    ball.>////////ballMoveX();
-                }
-            }
-        }).start();*/
-
-
 
         threadMove = new Thread() {
             public void run() {
@@ -148,6 +131,7 @@ public class Game extends AppCompatActivity {
         running = true;
         gameInProgress = true;
         gameIsWon = false;
+
         threadMove.start();
 
     }

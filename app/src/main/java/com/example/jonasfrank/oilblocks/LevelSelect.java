@@ -2,11 +2,13 @@ package com.example.jonasfrank.oilblocks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import static java.security.AccessController.getContext;
 
 public class LevelSelect extends AppCompatActivity {
 
@@ -65,8 +69,16 @@ public class LevelSelect extends AppCompatActivity {
                 button.setBackgroundResource(R.drawable.groundsolid);
             }
 
+
+           /* Resources resources = this.getResources();
+            DisplayMetrics textSizeDP = resources.getDisplayMetrics();*/
+            //float dp = 25 / ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+
+
+
             button.setText(Integer.toString(i + 1));
-            button.setTextSize(25);
+            button.setTextSize(getResources().getDimension(R.dimen.level_select_button_size));
+            //button.setTextSize(25);
             button.setTextColor(0xff333333);
             button.setTypeface(Typeface.SERIF, Typeface.NORMAL);
             button.setPadding(0, 0, 7, 17);

@@ -38,7 +38,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/level_header"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:shadowColor="#343434"
         android:shadowDx="8"
         android:shadowDy="5"

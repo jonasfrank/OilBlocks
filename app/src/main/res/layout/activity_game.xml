@@ -22,20 +22,17 @@
         android:layout_alignParentStart="true"
         android:scaleType="centerCrop"
         />
-
-
+    <!--
     <ImageView
         android:id="@+id/game_boundaries_top"
         android:layout_width="wrap_content"
         android:layout_height="10dp"
-        android:src="@drawable/boundaries"
         android:alpha="0.7"
         android:scaleType="centerCrop"
         />
-
+-->
     <GridLayout
         android:id="@+id/game_game"
-        android:layout_below="@+id/game_boundaries_top"
         android:layout_above="@+id/game_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +41,6 @@
 
     <RelativeLayout
         android:id="@+id/game_ball_layout"
-        android:layout_below="@+id/game_boundaries_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true">

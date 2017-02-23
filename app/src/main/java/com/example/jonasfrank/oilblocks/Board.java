@@ -220,11 +220,11 @@ public class Board extends RelativeLayout{
             int startY = (int)Math.ceil(startYDouble);
             int startX = startIPosAll - ((startY - 1) * blockNumberInRow);
             blockSize = screenWidth / blockNumberInRow;
-
+            boundariesHeightDP = blockSize / 4;
             thisBlockImg.setLayoutParams(new FrameLayout.LayoutParams(blockSize, blockSize));
 
             thisBlockImg.setX(((startX - 1) * blockSize));
-            thisBlockImg.setY(((startY - 1) * blockSize));
+            thisBlockImg.setY((startY - 1) * blockSize + boundariesHeightDP);
 
             addView(thisBlockImg);
 
@@ -235,7 +235,7 @@ public class Board extends RelativeLayout{
             thisBlock.setIndexNumber(i);     //ger blocket ett index nummer
 
             thisBlock.setX(((startX - 1) * blockSize));
-            thisBlock.setY(((startY - 1) * blockSize));
+            thisBlock.setY((startY - 1) * blockSize + boundariesHeightDP);
 
             addView(thisBlock);
 
@@ -248,15 +248,30 @@ public class Board extends RelativeLayout{
         }
 
         float density = getContext().getResources().getDisplayMetrics().density;
-        boundariesHeightDP = 10 * density;
+
+        //boundariesHeightDP = 10 * density;
+
         //float dp = 10 / density;
+
+        ImageView topBoundaries = new ImageView(getContext());
+        topBoundaries.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int) boundariesHeightDP));
+        topBoundaries.setImageResource(R.drawable.boundaries);
+        topBoundaries.setAlpha((float)0.7);
+        topBoundaries.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        addView(topBoundaries);
+
+        /*ImageView topBoundaries = (ImageView) findViewById(R.id.game_boundaries_top);
+        topBoundaries.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, 104));*/
 
         ImageView bottomBoundaries = new ImageView(getContext());
         bottomBoundaries.setImageResource(R.drawable.boundaries);
-        bottomBoundaries.setY(blockSize * blockNumberInRow);
+        bottomBoundaries.setY(blockSize * blockNumberInRow + boundariesHeightDP);
         bottomBoundaries.setAlpha((float)0.7);
         bottomBoundaries.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, (int)boundariesHeightDP));
         bottomBoundaries.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+
+
 
         addView(bottomBoundaries);
 
@@ -415,10 +430,10 @@ public class Board extends RelativeLayout{
 
         if(utilCounter <= utilityNumberInRow - 1){
             x = (((blockSize * 2) / 7) + (blockSize * utilCounter) + (((blockSize * 2) / 7) * utilCounter));
-            y = (((blockSize * 8) + boundariesHeightDP + boundariesHeightDP));
+            y = (((blockSize * 8) + boundariesHeightDP * 3));
         }else{
             x = (((blockSize * 2) / 7) + (blockSize * (utilCounter - 6)) + (((blockSize * 2) / 7) * (utilCounter - 6)));
-            y = (((blockSize * 8) + boundariesHeightDP + boundariesHeightDP) + blockSize + boundariesHeightDP );
+            y = (((blockSize * 8) + boundariesHeightDP * 4) + blockSize);
         }
 
         utilBackground.setX(x);
@@ -519,4 +534,5 @@ public class Board extends RelativeLayout{
             }
         }
     }
+
 }

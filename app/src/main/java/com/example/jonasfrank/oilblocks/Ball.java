@@ -20,6 +20,7 @@ public class Ball extends ImageView {
 
     int screenWidth;
     float blockSize;
+    float boundariesHeightDP;
     Board board;
     Game game;
     float startBallX;
@@ -65,6 +66,7 @@ public class Ball extends ImageView {
         blockSize = (float) startScreenWidth / blockNumberInRow;
         board = startBoard;
         game = startGame;
+        boundariesHeightDP = board.getBoundariesHeightDP();
 
         blockListSize = board.blockList.size() - 1;
         blockInRowSize = blockNumberInRow;
@@ -795,7 +797,7 @@ public class Ball extends ImageView {
             }
         }
         //Träff av boundaries uppe
-        if (y <= 0) {
+        if (y <= 0 + boundariesHeightDP) {
             if(moveY < 0) {
                 Log.d("tag", "ball boundaries uppe");
                 moveY = moveY * -1;
@@ -803,7 +805,7 @@ public class Ball extends ImageView {
             }
         }
         //Träff av boundaries nere
-        if (y + blockSize >= screenWidth ) {
+        if (y + blockSize >= screenWidth + boundariesHeightDP) {
             if(moveY >= 0) {
                 Log.d("tag", "ball boundaries nere");
                 //speedX = speedX * (float)groundFriction;

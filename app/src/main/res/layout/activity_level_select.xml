@@ -26,7 +26,7 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/logo6"
+        android:src="@drawable/logoname"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"/>
 

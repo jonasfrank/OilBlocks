@@ -28,7 +28,7 @@
         android:layout_width="250dp"
         android:layout_height="180dp"
 
-        android:src="@drawable/logo5_3"
+        android:src="@drawable/logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         />

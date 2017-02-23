@@ -535,4 +535,8 @@ public class Board extends RelativeLayout{
         }
     }
 
+    public float getBoundariesHeightDP(){
+        return boundariesHeightDP;
+    }
+
 }

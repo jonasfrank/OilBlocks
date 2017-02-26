@@ -30,6 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"/>
 
+
     <TextView
         android:id="@+id/level_header"
         android:layout_width="wrap_content"
@@ -47,5 +48,34 @@
         android:fontFamily="serif"
         android:layout_alignParentRight="true"
         />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp">
+
+        <ImageButton
+            android:id="@+id/level_Backwards"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/button_custom_back"
+            android:background="@android:color/transparent"
+            android:onClick="levelBackwards"
+            android:layout_marginRight="20dp"
+            />
+
+        <ImageButton
+            android:id="@+id/level_Forward"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/button_custom_won_next"
+            android:background="@android:color/transparent"
+            android:onClick="levelForward" />
+
+    </LinearLayout>
 
 </RelativeLayout>

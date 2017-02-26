@@ -69,16 +69,15 @@ public class Game extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         running = false;
+        String temp = Integer.toString(levelNumber);
         Intent intent = new Intent(Game.this, LevelSelect.class);
+        intent.putExtra(EXTRA_MESSAGE, temp);
         startActivity(intent);
     }
 
     public void drawBoard() {
         GridLayout gridLayoutGame = (GridLayout) findViewById(R.id.game_game);
         RelativeLayout relativeLayoutGame = (RelativeLayout) findViewById(R.id.game_ball_layout);
-
-
-
 
         TextView levelTextViewGame = (TextView) findViewById(R.id.game_level);
         levelTextViewGame.setText("Level " + levelNumber);
@@ -88,6 +87,7 @@ public class Game extends AppCompatActivity {
         blockSize = screenWidth / blockNumberInRow;
         ball = new Ball(this);          //skapar bollen
         level = new Level();
+        //LevelSelect.getLevel
         board.setBoard(this, screenWidth, levelNumber, ball, level);       //skickar screen bredden till bord
         ball.setBall(screenWidth, blockNumberInRow, board, this);
 
@@ -98,13 +98,7 @@ public class Game extends AppCompatActivity {
 
     }
 
-
-
-
-
     public void threads() {
-
-
 
         threadMove = new Thread() {
             public void run() {
@@ -122,8 +116,6 @@ public class Game extends AppCompatActivity {
             }
         };
     }
-
-
 
     public void playBall(View view) {
         Log.d("tag", "game startBall");
@@ -180,89 +172,88 @@ public class Game extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(levelNumber == level.gameLevel.length){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
-                    builder.setCancelable(false);
-                    View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog_last_stage, null);
-                    ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
-                    ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
+            if(levelNumber == level.gameLevel.length){
+                AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
+                builder.setCancelable(false);
+                View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog_last_stage, null);
+                ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
+                ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
 
-                    menyButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //LevelSelect
-                            Intent intent = new Intent(Game.this, LevelSelect.class);
-                            startActivity(intent);
-                        }
-                    });
+                menyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //LevelSelect
+                        String temp = Integer.toString(levelNumber);
+                        Intent intent = new Intent(Game.this, LevelSelect.class);
+                        intent.putExtra(EXTRA_MESSAGE, temp);
+                        startActivity(intent);
+                    }
+                });
 
-                    reversButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(Game.this, Game.class);
-                            intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
-                            startActivity(intent);
+                reversButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Game.this, Game.class);
+                        intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
+                        startActivity(intent);
 
-                        }
-                    });
-
-
-                    builder.setView(diaView);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
-                }else {
-                    Log.d("game", "won");
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
-                    builder.setCancelable(false);
-                    View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog, null);
-                    TextView textView = (TextView) diaView.findViewById(R.id.wonLevelNum);
-                    textView.setText(Integer.toString(levelNumber));
-                    ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
-                    ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
-                    ImageButton nextButton = (ImageButton) diaView.findViewById(R.id.nextButton);
-
-                    menyButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //LevelSelect
-                            Intent intent = new Intent(Game.this, LevelSelect.class);
-                            startActivity(intent);
-                        }
-                    });
-
-                    reversButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(Game.this, Game.class);
-                            intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
-                            startActivity(intent);
-
-                        }
-                    });
-
-                    nextButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //Next
-                            if (levelNumber < MainActivity.clearedStages) {
-                                Intent intent = new Intent(Game.this, Game.class);
-                                intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber + 1));
-                                startActivity(intent);
-                            }
-
-                        }
-                    });
+                    }
+                });
 
 
-                    builder.setView(diaView);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
+                builder.setView(diaView);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+            }else {
+                Log.d("game", "won");
+                AlertDialog.Builder builder = new AlertDialog.Builder(Game.this);
+                builder.setCancelable(false);
+                View diaView = getLayoutInflater().inflate(R.layout.won_game_dialog, null);
+                TextView textView = (TextView) diaView.findViewById(R.id.wonLevelNum);
+                textView.setText(Integer.toString(levelNumber));
+                ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
+                ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
+                ImageButton nextButton = (ImageButton) diaView.findViewById(R.id.nextButton);
+
+                menyButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    //LevelSelect
+                    String temp = Integer.toString(levelNumber);
+                    Intent intent = new Intent(Game.this, LevelSelect.class);
+                    intent.putExtra(EXTRA_MESSAGE, temp);
+                    startActivity(intent);
+                    }
+                });
+
+                reversButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    Intent intent = new Intent(Game.this, Game.class);
+                    intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
+                    startActivity(intent);
+                    }
+                });
+
+                nextButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    //Next
+                    if (levelNumber < MainActivity.clearedStages) {
+                        Intent intent = new Intent(Game.this, Game.class);
+                        intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber + 1));
+                        startActivity(intent);
+                    }
+                    }
+                });
+
+                builder.setView(diaView);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
             }
         });
-
-
     }
 
     public boolean getRunning() {
@@ -277,34 +268,29 @@ public class Game extends AppCompatActivity {
             gameInProgress = false;
             running = false;
 
-
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Game over!";
-                    int duration = Toast.LENGTH_SHORT;
+                Context context = getApplicationContext();
+                CharSequence text = "Game over!";
+                int duration = Toast.LENGTH_SHORT;
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                    toast.show();
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.show();
 
+                Handler handler = new Handler();
 
-                    Handler handler = new Handler();
+                // run a thread after 2 seconds to start the home screen
+                handler.postDelayed(new Runnable() {
 
-                    // run a thread after 2 seconds to start the home screen
-                    handler.postDelayed(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            ball.restartBall();
-                        }
-                    }, SPLASH_DURATION);
-
+                    @Override
+                    public void run() {
+                        ball.restartBall();
+                    }
+                }, SPLASH_DURATION);
                 }
             });
-
-
         }
     }
 }

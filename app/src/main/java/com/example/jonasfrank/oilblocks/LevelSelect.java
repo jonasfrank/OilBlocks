@@ -139,8 +139,8 @@ public class LevelSelect extends AppCompatActivity {
     }
 
     public void setClearedStagesOnScreen(int i){
-        int setclearedStagesSelectPage = clearedStages / (levelsInCol*levelsInRow);
-        int setlastPlayedStageSelectPage = lastPlayedStage / (levelsInCol*levelsInRow);
+        int setclearedStagesSelectPage = (clearedStages - 1) / (levelsInCol*levelsInRow);
+        int setlastPlayedStageSelectPage = (lastPlayedStage - 1) / (levelsInCol*levelsInRow);
 
         Button thisButton = buttonList.get(i);
         float thisButtonX = thisButton.getX();

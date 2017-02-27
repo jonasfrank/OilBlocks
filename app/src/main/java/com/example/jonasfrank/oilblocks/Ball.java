@@ -669,7 +669,7 @@ public class Ball extends ImageView {
 
     public boolean blockCheck(float x, float y, Level.B thisBlockType, float thisBlockX, float thisBlockY, int i){
 
-        if(thisBlockType == Level.B.SOFT || thisBlockType == Level.B.SOLID || thisBlockType == Level.B.GOAL) {
+        if(thisBlockType == Level.B.SOFT || thisBlockType == Level.B.SOLID || thisBlockType == Level.B.GOAL || thisBlockType == Level.B.SOFTSOLID) {
 
             // A,B,C,D representerar ett hörn. A = uppe vänster , B = uppe höger, C = nere vänster, D = nere höger
             float bollAX = x;

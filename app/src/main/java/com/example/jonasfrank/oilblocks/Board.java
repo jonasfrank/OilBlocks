@@ -49,6 +49,7 @@ public class Board extends RelativeLayout{
     int utilCounter;
     int softCounter;
     int maxSoftCounter;
+    int softsolidCounter;
     int boostRCounter;
     int boostLCounter;
     int rampULCounter;
@@ -57,6 +58,7 @@ public class Board extends RelativeLayout{
     int rampDRCounter;
 
     TextView softUtilCounter = new TextView(getContext());
+    TextView softsolidUtilCounter = new TextView(getContext());
     TextView boostRUtilCounter = new TextView(getContext());
     TextView boostLUtilCounter = new TextView(getContext());
     TextView rampULUtilCounter = new TextView(getContext());
@@ -65,6 +67,7 @@ public class Board extends RelativeLayout{
     TextView rampDRUtilCounter = new TextView(getContext());
 
     float[] softXY = new float[2];
+    float[] softsolidXY = new float[2];
     float[] boostRXY = new float[2];
     float[] boostLXY = new float[2];
     float[] rampULXY = new float[2];
@@ -102,6 +105,9 @@ public class Board extends RelativeLayout{
                         break;
                     case SOFT:
                         block = new BlockSoft(context);
+                        break;
+                    case SOFTSOLID:
+                        block = new BlockSoftSolid(context);
                         break;
                     case SOLID:
                         block = new BlockSolid(context);
@@ -151,6 +157,10 @@ public class Board extends RelativeLayout{
                     softCounter = level.softCount[levelNumber - 1][0];
                     maxSoftCounter = level.softCount[levelNumber - 1][1];
 
+                    break;
+                case SOFTSOLID:
+                    block = new BlockSoftSolid(context);
+                    setUtilityBackgroundList(R.drawable.groundremove, i);
                     break;
                 case BOOSTR:
                     block = new BlockBoostR(context);
@@ -271,14 +281,11 @@ public class Board extends RelativeLayout{
         bottomBoundaries.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
-
-
         addView(bottomBoundaries);
 
 
         utilCounter = 0;
-        //softCounter = 0;
-        //maxSoftCounter = 0;
+        softsolidCounter = 0;
         boostRCounter = 0;
         boostLCounter = 0;
         rampULCounter = 0;
@@ -294,6 +301,10 @@ public class Board extends RelativeLayout{
                 case R.drawable.groundrost1:
                     softXY = XY;
                     setUtilityCounterHolder(softUtilCounter, softXY);
+                    break;
+                case R.drawable.groundremove:
+                    softsolidXY = XY;
+                    setUtilityCounterHolder(softsolidUtilCounter, softsolidXY);
                     break;
                 case R.drawable.boostright:
                     boostRXY = XY;
@@ -336,9 +347,16 @@ public class Board extends RelativeLayout{
                         addView(thisUtility);
                     }
 
-                    //maxSoftCounter++;
-                    //softCounter++;
                     updateUtilityCounter(softUtilCounter, softCounter, maxSoftCounter);
+                    break;
+                case SOFTSOLID:
+                    thisUtility.setX(softsolidXY[0]);
+                    thisUtility.setY(softsolidXY[1]);
+                    thisUtility.setIndexNumber((blockNumberInRow * blockNumberInRow) + i);
+                    addView(thisUtility);
+
+                    softsolidCounter++;
+                    updateUtilityCounter(softsolidUtilCounter, softsolidCounter);
                     break;
                 case BOOSTR:
                     thisUtility.setX(boostRXY[0]);

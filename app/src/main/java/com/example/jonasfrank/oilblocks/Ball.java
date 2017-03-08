@@ -521,10 +521,17 @@ public class Ball extends ImageView {
                                 && ((board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTR)
                                 || (board.blockList.get(i + blockInRowSize).getBlockType() == Level.B.BOOSTL))))) {
 
-                          if (thisBlockType == Level.B.RAMPUL || thisBlockType == Level.B.RAMPUR) {
+                        if (thisBlockType == Level.B.RAMPUL || thisBlockType == Level.B.RAMPUR) {
                             Log.d("tag", "ball ramp underifrån" + thisBlockType);
                             moveY = moveY * -1;
                             collisionBlock = true;
+
+                            if(bollAX == blockCX && bollAY == blockCY
+                                    && (board.blockList.get(i + blockInRowSize - 1).getSideR() == false
+                                    || board.blockList.get(i + blockInRowSize + 1).getSideL() == false)){
+                                Log.d("tag", "ball block underifrån mitt i");
+                                moveX = moveX * -1;
+                            }
                         }
                     }
                 }
@@ -738,6 +745,13 @@ public class Ball extends ImageView {
                         Log.d("tag", "ball block underifrån");
                         moveY = moveY * -1;
                         collisionBlock = true;
+
+                        if(bollAX == blockCX && bollAY == blockCY
+                                && (board.blockList.get(i + blockInRowSize - 1).getSideR() == false
+                                    || board.blockList.get(i + blockInRowSize + 1).getSideL() == false)){
+                            Log.d("tag", "ball block underifrån mitt i");
+                            moveX = moveX * -1;
+                        }
                     }
                 }
 

@@ -48,6 +48,8 @@ public class Game extends AppCompatActivity {
     boolean running = false;
     boolean gameIsWon = false;
 
+    AlertDialog dialog;
+
     private static final int SPLASH_DURATION = 750;
 
     @Override
@@ -119,16 +121,18 @@ public class Game extends AppCompatActivity {
 
     public void playBall(View view) {
         Log.d("tag", "game startBall");
-        running = true;
-        gameInProgress = true;
-        gameIsWon = false;
-        
+        if(gameInProgress == false) {
+            running = true;
+            gameInProgress = true;
+            gameIsWon = false;
 
-        if(threadMove.getState() != Thread.State.TERMINATED) {
-            threadMove.start();
-        }else{
-            threads();
-            threadMove.start();
+
+            if (threadMove.getState() != Thread.State.TERMINATED) {
+                threadMove.start();
+            } else {
+                threads();
+                threadMove.start();
+            }
         }
 
     }
@@ -146,16 +150,19 @@ public class Game extends AppCompatActivity {
     }
 
     public void restartBoard(View view) {
-        Intent intent = new Intent(Game.this, Game.class);
-        intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
+        if(gameInProgress == false){
+            Intent intent = new Intent(Game.this, Game.class);
+            intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+        }
 
     }
 
     public void wonGame(View view) {
         running = false;
         gameIsWon = true;
+
 
         if (MainActivity.clearedStages == levelNumber && MainActivity.clearedStages < level.gameLevel.length) {
             MainActivity.clearedStages++;
@@ -179,6 +186,9 @@ public class Game extends AppCompatActivity {
                 ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
                 ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
 
+                builder.setView(diaView);
+                dialog = builder.create();
+
                 menyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -193,16 +203,15 @@ public class Game extends AppCompatActivity {
                 reversButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Game.this, Game.class);
+                        //Tillbaka till spelet
+                        /*Intent intent = new Intent(Game.this, Game.class);
                         intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
-                        startActivity(intent);
-
+                        startActivity(intent);*/
+                        dialog.cancel();
+                        restartBall(null);
                     }
                 });
 
-
-                builder.setView(diaView);
-                AlertDialog dialog = builder.create();
                 dialog.show();
 
             }else {
@@ -215,6 +224,9 @@ public class Game extends AppCompatActivity {
                 ImageButton menyButton = (ImageButton) diaView.findViewById(R.id.menyButton);
                 ImageButton reversButton = (ImageButton) diaView.findViewById(R.id.reversButton);
                 ImageButton nextButton = (ImageButton) diaView.findViewById(R.id.nextButton);
+
+                builder.setView(diaView);
+                dialog = builder.create();
 
                 menyButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -230,9 +242,12 @@ public class Game extends AppCompatActivity {
                 reversButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                    Intent intent = new Intent(Game.this, Game.class);
-                    intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
-                    startActivity(intent);
+                        //Tillbaka till spelet
+                        /*Intent intent = new Intent(Game.this, Game.class);
+                        intent.putExtra(EXTRA_MESSAGE, String.valueOf(levelNumber));
+                        startActivity(intent);*/
+                        dialog.cancel();
+                        restartBall(null);
                     }
                 });
 
@@ -248,8 +263,6 @@ public class Game extends AppCompatActivity {
                     }
                 });
 
-                builder.setView(diaView);
-                AlertDialog dialog = builder.create();
                 dialog.show();
             }
             }
